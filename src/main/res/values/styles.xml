@@ -1,0 +1,16 @@
+<resources>
+
+    <!-- 全局actionbar标题样式设置 -->
+    <style name="Widget.Edu.ActionBar.Title">
+        <item name="android:textStyle">bold</item>
+        <item name="android:textSize">17sp</item>
+        <item name="android:textColor">#ffffff</item>
+    </style>
+
+
+    <!-- 11版本以下的actionbar样式 -->
+    <style name="Widget.Edu.ActionBar" parent="Widget.AppCompat.ActionBar">
+        <item name="titleTextStyle">@style/Widget.Edu.ActionBar.Title</item>
+    </style>
+
+</resources>

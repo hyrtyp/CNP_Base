@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!-- 14以上的全局样式 -->
+    <style name="Theme.Edu.Sherlock" parent="@style/Theme.Edu.v">
+        <item name="android:actionBarStyle">@style/Widget.Edu.ActionBar</item>
+    </style>
+
+</resources>

@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!-- 11以下的全局样式 -->
+    <style name="Theme.edu.Sherlock" parent="@style/Theme.Base.AppCompat">
+        <item name="android:windowFullscreen">false</item>
+        <item name="android:windowContentOverlay">@null</item>
+        <item name="actionBarStyle">@style/Widget.Edu.ActionBar</item>
+    </style>
+
+</resources>
