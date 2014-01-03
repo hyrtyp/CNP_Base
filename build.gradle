@@ -13,7 +13,7 @@ apply plugin: 'android-library'
 }*/
 
 dependencies {
-    compile 'org.roboguice:roboguice:3.0-alpha-1'
+    compile 'org.roboguice:roboguice:2.0'
     compile 'org.eclipse.mylyn.github:org.eclipse.egit.github.core:2.1.4'
     compile 'org.codehaus.jackson:jackson-mapper-asl:1.9.9'
     compile 'com.octo.android.robospice:robospice-spring-android:1.4.9'
