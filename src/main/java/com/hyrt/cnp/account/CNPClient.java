@@ -1,16 +1,8 @@
 package com.hyrt.cnp.account;
 
-import org.springframework.http.HttpEntity;
-import org.springframework.http.converter.HttpMessageConverter;
-import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
 import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
-import org.springframework.web.client.RestTemplate;
-
 import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
 import static org.eclipse.egit.github.core.client.IGitHubConstants.AUTH_TOKEN;
 
 /**
