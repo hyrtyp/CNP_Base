@@ -21,7 +21,7 @@ public class UserService{
 
     public UserDetail.UserDetailModel getUser(){
         cnpClient.configureRequest();
-        return  getRestTemplate().postForObject("http://api.chinaxueqian.com/user/info",cnpClient.getParams(),UserDetail.UserDetailModel.class);
+        return  getRestTemplate().getForObject("http://api.chinaxueqian.com/user/info?token={token}&uuid={uuid}",UserDetail.UserDetailModel.class,cnpClient.getParamsforGet());
     }
 
     protected RestTemplate getRestTemplate() {

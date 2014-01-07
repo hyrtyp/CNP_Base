@@ -21,15 +21,15 @@ public class CNPClient {
     /**
      * send data argments
      */
-    private String credentials;
     MultiValueMap<String,String> params = new LinkedMultiValueMap<String, String>();
+    HashMap<String,String> paramsforGet = new HashMap<String, String>();
+
+    public HashMap<String, String> getParamsforGet() {
+        return paramsforGet;
+    }
 
     public MultiValueMap<String,String> getParams() {
         return params;
-    }
-
-    public String getCredentials() {
-        return credentials;
     }
 
     /**
@@ -40,12 +40,13 @@ public class CNPClient {
      * @return this client
      */
     public CNPClient setCredentials(final String user, final String password) {
+        paramsforGet.clear();
+        this.params.clear();
         if (user != null && user.length() > 0 && password != null
-                && password.length() > 0)
-            credentials = "username="+user
-                    +"&password="+ password;
-        else
-            credentials = null;
+                && password.length() > 0){
+            params.set("username",user);
+            params.set("password",password);
+        }
         return this;
     }
 
@@ -56,15 +57,17 @@ public class CNPClient {
      * @return this client
      */
     public CNPClient setOAuth2Token(String token) {
+        paramsforGet.clear();
+        this.params.clear();
         if (token != null && token.length() > 0){
-            credentials = AUTH_TOKEN + '=' + token;
+            String credentials = AUTH_TOKEN + '=' + token;
             String[] params = credentials.split("&");
             for(int i=0;i<params.length;i++){
                 String[] param = params[i].split("=");
                 this.params.set(param[0],param[1]);
+                this.paramsforGet.put(param[0],param[1]);
             }
-        }else
-            credentials = null;
+        }
         return this;
     }
 
