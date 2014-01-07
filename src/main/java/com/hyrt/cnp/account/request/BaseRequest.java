@@ -64,7 +64,7 @@ public abstract class BaseRequest extends SpringAndroidSpiceRequest{
         }catch(Exception e){
             e.printStackTrace();
         }
-        return new Base();
+        return null;
     }
 
     public abstract Base run();
