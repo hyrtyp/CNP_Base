@@ -1,8 +1,10 @@
 package com.hyrt.cnp.account.service;
 
 import com.hyrt.cnp.account.CNPClient;
+import com.hyrt.cnp.account.model.BaseTest;
 import com.hyrt.cnp.account.model.UserDetail;
 
+import org.springframework.http.client.HttpComponentsClientHttpRequestFactory;
 import org.springframework.web.client.RestTemplate;
 
 /**
@@ -17,11 +19,13 @@ public class UserService{
         this.cnpClient = cnpClient;
     }
 
-    public UserDetail.UserDetailModel getUser(RestTemplate restTemplate){
+    public UserDetail.UserDetailModel getUser(){
         cnpClient.configureRequest();
-        return restTemplate.getForObject("http://api.chinaxueqian.com/user" +
-                "/info?"+cnpClient.getCredentials(),UserDetail.UserDetailModel.class);
+        return  getRestTemplate().postForObject("http://api.chinaxueqian.com/user/info",cnpClient.getParams(),UserDetail.UserDetailModel.class);
+    }
 
+    protected RestTemplate getRestTemplate() {
+        return new RestTemplate(true, new HttpComponentsClientHttpRequestFactory());
     }
 
 }
