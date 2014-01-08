@@ -5,6 +5,8 @@ import com.hyrt.cnp.account.model.School;
 
 import org.springframework.web.client.RestTemplate;
 
+import java.util.HashMap;
+
 /**
  * Created by GYH on 14-1-3.
  */
@@ -18,8 +20,14 @@ public class SchoolListService {
     //TODO after modify
     public School.Model getSchoolList(RestTemplate restTemplate){
         cnpClient.configureRequest();
-     return restTemplate.getForObject("http://api.chinaxueqian.com/school/search/?"+cnpClient.getCredentials()+"",School.Model.class);
-//        return restTemplate.getForObject("http://api.chinaxueqian.com/school/search/?token=f89412c39110c73ac1ee39fcf07616bd&uuid=237",School.Model.class);
+        HashMap<String, String> params = cnpClient.getParamsforGet();
+        params.put("name","");
+        params.put("property","");
+        params.put("scale","");
+        params.put("city","");
+        return  restTemplate.getForObject("http://api.chinaxueqian.com/school/search/?" +
+                "token={token}&uuid={uuid}&",
+                School.Model.class,params);
     }
 
 }
