@@ -2,7 +2,7 @@
 
     <!-- 14版本以上的actionbar样式 -->
     <style name="Widget.Edu.ActionBar" parent="@android:style/Widget.Holo.Light.ActionBar.Solid">
-        <item name="android:background">#ffffff</item>
+        <item name="android:background">#6cc9ed</item>
         <item name="android:titleTextStyle">@style/Widget.Edu.ActionBar.Title</item>
     </style>
 
