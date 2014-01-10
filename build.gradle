@@ -24,7 +24,7 @@ def repositoryUrl = project.hasProperty('sonatypeUrl') ? sonatypeUrl : 'http://1
 def repositoryUsername = project.hasProperty('sonatypeUsername') ? sonatypeUsername : 'admin'
 def repositoryPassword = project.hasProperty('sonatypePassword') ? sonatypePassword : 'admin123'
 def isReleaseVersion = !version.endsWith('SNAPSHOT')
-def artifact = 'caNoPreschool-base'
+def artifact = 'cnp-base'
 project.ext.set('artifact', artifact)
 
 uploadArchives.dependsOn 'build'
@@ -65,9 +65,9 @@ def getPomConfiguration() {
             }
         }
         scm {
-            url 'https://github.com/hyrtyp/CaNoPreschool_Base.git'
-            connection 'scm:git://github.com/hyrtyp/CaNoPreschool_Base.git'
-            developerConnection 'scm:git@github.com/hyrtyp/CaNoPreschool_Base.git'
+            url 'https://github.com/hyrtyp/CNP_Base.git'
+            connection 'scm:git://github.com/hyrtyp/CNP_Base.git'
+            developerConnection 'scm:git@github.com/hyrtyp/CNP_Base.git'
         }
         developers {
             developer {
