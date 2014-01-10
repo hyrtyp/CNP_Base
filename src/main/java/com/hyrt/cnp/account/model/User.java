@@ -233,6 +233,8 @@ public class User implements Serializable{
 
     public static class UserModel extends Base{
 
+        private static final long serialVersionUID = -1;
+
         private User data;
 
         public User getData() {

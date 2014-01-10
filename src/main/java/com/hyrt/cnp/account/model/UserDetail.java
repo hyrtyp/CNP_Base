@@ -127,6 +127,8 @@ public class UserDetail implements Serializable{
 
     public static class UserDetailModel extends Base{
 
+        private static final long serialVersionUID = -1;
+
         private UserDetail data;
 
         public UserDetail getData() {
