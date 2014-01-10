@@ -12,6 +12,9 @@ import java.lang.ref.SoftReference;
 
 /**
  * Created by yepeng on 14-1-9.
+ *
+ * 所有请求回调继承此父类，可转圈,具体使用例子可参照
+ * https://github.com/hyrtyp/CNP_Account/blob/master/src/main/java/com/hyrt/cnp/account/requestListener/LoginRequestListener.java
  */
 public abstract class BaseRequestListener implements RequestListener {
 
