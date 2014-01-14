@@ -2,4 +2,6 @@
     <color name="base_background_1">#F9F9F9</color>
     <color name="base_background_2">#fff3f3f3</color>
     <color name="text">#1E1E1E</color>
+    <color name="actionbar_bg">#6ecbd9</color>
+    <color name="cnp_text_color">#3f3f3f</color>
 </resources>

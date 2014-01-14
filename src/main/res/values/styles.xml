@@ -13,6 +13,18 @@
         <item name="titleTextStyle">@style/Widget.Edu.ActionBar.Title</item>
     </style>
 
+    <!-- Tab选项标签的样式 -->
+    <style name="MyActionBarTabStyle" parent="android:style/Widget.Holo.Light.ActionBar.TabView">
+        <item name="android:background">@color/actionbar_bg</item>
+
+    </style>
+
+    <!-- Tab选项标签字体的样式 -->
+    <style name="MyActionBarTabTextStyle" parent="android:style/Widget.Holo.Light.ActionBar.TabText">
+        <item name="android:textColor">@color/actionbar_bg</item>
+        <item name="android:textSize">18sp</item>
+    </style>
+
     <style name="Spinner">
         <item name="android:indeterminate">true</item>
         <item name="android:indeterminateDrawable">@drawable/spinner</item>
