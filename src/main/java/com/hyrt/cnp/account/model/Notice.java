@@ -1,17 +1,59 @@
 package com.hyrt.cnp.account.model;
 
+
+import org.codehaus.jackson.annotate.JsonIgnoreProperties;
+
 import java.util.ArrayList;
 
 /**
  * Created by GYH on 14-1-3.
  */
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class Notice {
 
     private int annource_id;
     private String title;
-    private String contetn;
+    private String content;
     private int posttime;
     private String renname;
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Notice notice = (Notice) o;
+
+        if (annource_id != notice.annource_id) return false;
+        if (posttime != notice.posttime) return false;
+        if (content != null ? !content.equals(notice.content) : notice.content != null)
+            return false;
+        if (renname != null ? !renname.equals(notice.renname) : notice.renname != null)
+            return false;
+        if (title != null ? !title.equals(notice.title) : notice.title != null) return false;
+
+        return true;
+    }
+
+    @Override
+    public int hashCode() {
+        int result = annource_id;
+        result = 31 * result + (title != null ? title.hashCode() : 0);
+        result = 31 * result + (content != null ? content.hashCode() : 0);
+        result = 31 * result + posttime;
+        result = 31 * result + (renname != null ? renname.hashCode() : 0);
+        return result;
+    }
+
+    public String getContent() {
+        return content;
+    }
+
+    public void setContent(String content) {
+        this.content = content;
+    }
+
+
 
     public int getAnnource_id() {
         return annource_id;
@@ -30,11 +72,11 @@ public class Notice {
     }
 
     public String getContetn() {
-        return contetn;
+        return content;
     }
 
-    public void setContetn(String contetn) {
-        this.contetn = contetn;
+    public void setContetn(String content) {
+        this.content = content;
     }
 
     public int getPosttime() {
@@ -53,7 +95,41 @@ public class Notice {
         this.renname = renname;
     }
 
-    public static class Model extends Base {
+    public static class Model2 extends Base{
+        private static final long serialVersionUID = -1;
+        private Notice data;
+
+        @Override
+        public boolean equals(Object o) {
+            if (this == o) return true;
+            if (o == null || getClass() != o.getClass()) return false;
+            if (!super.equals(o)) return false;
+
+            Model2 model2 = (Model2) o;
+
+            if (data != null ? !data.equals(model2.data) : model2.data != null) return false;
+
+            return true;
+        }
+
+        @Override
+        public int hashCode() {
+            int result = super.hashCode();
+            result = 31 * result + (data != null ? data.hashCode() : 0);
+            return result;
+        }
+
+        public Notice getData() {
+            return data;
+        }
+
+        public void setData(Notice data) {
+            this.data = data;
+        }
+    }
+
+    public static class Model extends Base{
+        private static final long serialVersionUID = -1;
         private ArrayList<Notice> data;
 
         public ArrayList<Notice> getData() {
@@ -82,6 +158,39 @@ public class Notice {
             int result = super.hashCode();
             result = 31 * result + (data != null ? data.hashCode() : 0);
             return result;
+        }
+    }
+
+    public static class Model3 extends Base{
+        private static final long serialVersionUID = -1;
+        private String data;
+
+        @Override
+        public boolean equals(Object o) {
+            if (this == o) return true;
+            if (o == null || getClass() != o.getClass()) return false;
+            if (!super.equals(o)) return false;
+
+            Model3 model3 = (Model3) o;
+
+            if (data != null ? !data.equals(model3.data) : model3.data != null) return false;
+
+            return true;
+        }
+
+        @Override
+        public int hashCode() {
+            int result = super.hashCode();
+            result = 31 * result + (data != null ? data.hashCode() : 0);
+            return result;
+        }
+
+        public String getData() {
+            return data;
+        }
+
+        public void setData(String data) {
+            this.data = data;
         }
     }
 }
