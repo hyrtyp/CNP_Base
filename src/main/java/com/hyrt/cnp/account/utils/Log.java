@@ -1,4 +1,4 @@
-package com.hyrt.cnp.account;
+package com.hyrt.cnp.account.utils;
 
 import android.os.Environment;
 

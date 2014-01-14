@@ -97,6 +97,11 @@ public abstract class BaseRequestListener implements RequestListener {
 
     public abstract BaseRequestListener start();
 
+    /**
+     * 显示弹出提示
+     * @param titleId
+     * @param contentId
+     */
     protected void showMessage(int titleId,int contentId) {
         if(context != null && context.get() != null){
             AlertDialog dialog = LightAlertDialog.create(context.get());
