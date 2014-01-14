@@ -24,14 +24,14 @@ import static org.eclipse.egit.github.core.client.IGitHubConstants.AUTH_TOKEN;
  */
 public class CNPClient {
 
-    MultiValueMap<String, String> params = new LinkedMultiValueMap<String, String>();
+    MultiValueMap<String, Object> params = new LinkedMultiValueMap<String, Object>();
     HashMap<String, String> paramsforGet = new HashMap<String, String>();
 
     public HashMap<String, String> getParamsforGet() {
         return paramsforGet;
     }
 
-    public MultiValueMap<String, String> getParams() {
+    public MultiValueMap<String, Object> getParams() {
         return params;
     }
 

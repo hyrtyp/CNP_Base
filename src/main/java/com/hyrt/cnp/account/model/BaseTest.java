@@ -5,7 +5,7 @@ import java.io.Serializable;
 /**
  * Created by yepeng on 13-12-11.
  */
-public class BaseTest implements Serializable{
+public class BaseTest extends Base{
 
     private static final long serialVersionUID = -1;
 

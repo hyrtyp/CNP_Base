@@ -97,4 +97,21 @@ public abstract class BaseRequestListener implements RequestListener {
 
     public abstract BaseRequestListener start();
 
+    protected void showMessage(int titleId,int contentId) {
+        if(context != null && context.get() != null){
+            AlertDialog dialog = LightAlertDialog.create(context.get());
+            dialog.setTitle(titleId);
+            dialog.setMessage(context.get().getResources().getString(contentId));
+            dialog.setButton(BUTTON_POSITIVE, getString(android.R.string.ok),
+                    new DialogInterface.OnClickListener() {
+
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            dialog.dismiss();
+                        }
+                    });
+            dialog.show();
+        }
+    }
+
 }
