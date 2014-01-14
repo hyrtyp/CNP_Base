@@ -3,6 +3,9 @@ package  com.hyrt.cnp.account.utils;
 import android.widget.EditText;
 import android.widget.TextView;
 
+/**
+ * textview、edittext工具类
+ */
 public class UITextUtils
 {
 

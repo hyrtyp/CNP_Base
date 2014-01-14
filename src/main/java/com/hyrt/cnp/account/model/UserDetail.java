@@ -9,7 +9,7 @@ public class UserDetail implements Serializable{
 
     private static final long serialVersionUID = -1;
 
-    private String user_id;
+    private int user_id;
     private String renname;
     private String birthday;
     private String sex;
@@ -19,11 +19,11 @@ public class UserDetail implements Serializable{
     private String nursery_id;
     private String nurseryName;
 
-    public String getUser_id() {
+    public int getUser_id() {
         return user_id;
     }
 
-    public void setUser_id(String user_id) {
+    public void setUser_id(int user_id) {
         this.user_id = user_id;
     }
 
@@ -98,30 +98,35 @@ public class UserDetail implements Serializable{
 
         UserDetail that = (UserDetail) o;
 
-        if (!birthday.equals(that.birthday)) return false;
-        if (!bloodType.equals(that.bloodType)) return false;
-        if (!ethnic.equals(that.ethnic)) return false;
-        if (!nationality.equals(that.nationality)) return false;
-        if (!nurseryName.equals(that.nurseryName)) return false;
-        if (!nursery_id.equals(that.nursery_id)) return false;
-        if (!renname.equals(that.renname)) return false;
-        if (!sex.equals(that.sex)) return false;
-        if (!user_id.equals(that.user_id)) return false;
+        if (user_id != that.user_id) return false;
+        if (birthday != null ? !birthday.equals(that.birthday) : that.birthday != null)
+            return false;
+        if (bloodType != null ? !bloodType.equals(that.bloodType) : that.bloodType != null)
+            return false;
+        if (ethnic != null ? !ethnic.equals(that.ethnic) : that.ethnic != null) return false;
+        if (nationality != null ? !nationality.equals(that.nationality) : that.nationality != null)
+            return false;
+        if (nurseryName != null ? !nurseryName.equals(that.nurseryName) : that.nurseryName != null)
+            return false;
+        if (nursery_id != null ? !nursery_id.equals(that.nursery_id) : that.nursery_id != null)
+            return false;
+        if (renname != null ? !renname.equals(that.renname) : that.renname != null) return false;
+        if (sex != null ? !sex.equals(that.sex) : that.sex != null) return false;
 
         return true;
     }
 
     @Override
     public int hashCode() {
-        int result = user_id.hashCode();
-        result = 31 * result + renname.hashCode();
-        result = 31 * result + birthday.hashCode();
-        result = 31 * result + sex.hashCode();
-        result = 31 * result + bloodType.hashCode();
-        result = 31 * result + nationality.hashCode();
-        result = 31 * result + ethnic.hashCode();
-        result = 31 * result + nursery_id.hashCode();
-        result = 31 * result + nurseryName.hashCode();
+        int result = user_id;
+        result = 31 * result + (renname != null ? renname.hashCode() : 0);
+        result = 31 * result + (birthday != null ? birthday.hashCode() : 0);
+        result = 31 * result + (sex != null ? sex.hashCode() : 0);
+        result = 31 * result + (bloodType != null ? bloodType.hashCode() : 0);
+        result = 31 * result + (nationality != null ? nationality.hashCode() : 0);
+        result = 31 * result + (ethnic != null ? ethnic.hashCode() : 0);
+        result = 31 * result + (nursery_id != null ? nursery_id.hashCode() : 0);
+        result = 31 * result + (nurseryName != null ? nurseryName.hashCode() : 0);
         return result;
     }
 

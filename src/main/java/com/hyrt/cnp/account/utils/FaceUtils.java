@@ -19,11 +19,13 @@ public class FaceUtils {
      */
     public static String getAvatar(int uid,String type){
         StringBuilder basePath = new StringBuilder("http://img.chinaxueqian.com/avatartest");
-        float part1 = uid/10000;
-
-        float part2 = uid%10000/1000;
-        return basePath.append("/").append(part1).append("/").append(part2)
-                .append("/").append(uid).append("/").append(type).append(".jpg").toString();
+        Float part1 = (float)uid/(float)10000;
+        Float part2 = (float)uid%(float)10000/(float)1000;
+        Float uppart1 = Float.valueOf((part1.intValue() + 1));
+        Float uppart2 = Float.valueOf((part1.intValue() + 1));
+        return basePath.append("/").append(Float.compare(part1+Float.valueOf(1),uppart1) == 0 ? part1.intValue() : part1.intValue()+1).append("/")
+                .append(Float.compare(part2+Float.valueOf(1),uppart2) == 0 ? part2.intValue() : part2.intValue()+1)
+                .append("/").append(uid).append("_").append(type).append(".jpg").toString();
 
     }
 
