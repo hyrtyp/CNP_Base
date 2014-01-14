@@ -29,6 +29,7 @@ import static android.os.Build.VERSION_CODES.FROYO;
 import static android.os.Build.VERSION_CODES.ICE_CREAM_SANDWICH;
 
 /**
+ * 全局dialog
  * Progress dialog in Holo Light theme
  */
 public class LightProgressDialog extends ProgressDialog {
