@@ -1,5 +1,18 @@
 package com.jingdong.common.frame;
 
+import android.annotation.SuppressLint;
+import android.os.Bundle;
+import android.os.StrictMode;
+import android.support.v7.app.ActionBar;
+import android.support.v7.app.ActionBarActivity;
+import android.view.Gravity;
+import android.view.Menu;
+import android.view.MenuItem;
+import android.view.View;
+import android.view.Window;
+import android.widget.ImageView;
+import android.widget.TextView;
+
 import com.google.inject.Key;
 import com.hyrt.cnp.R;
 import com.jingdong.app.pad.product.ProductListFragment;
@@ -14,15 +27,6 @@ import com.octo.android.robospice.JacksonSpringAndroidSpiceService;
 import com.octo.android.robospice.SpiceManager;
 
 import net.oschina.app.AppContext;
-
-import android.annotation.SuppressLint;
-import android.os.Bundle;
-import android.os.StrictMode;
-import android.support.v7.app.ActionBarActivity;
-import android.view.KeyEvent;
-import android.view.Menu;
-import android.view.MenuItem;
-import android.view.Window;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -40,6 +44,11 @@ public class BaseActivity extends ActionBarActivity implements RoboContext {
     private MyActivity currentMyActivity;
 
     protected HashMap<Key<?>,Object> scopedObjects = new HashMap<Key<?>, Object>();
+
+    protected View viewTitleBar;
+    protected ActionBar actionBar;
+    protected ImageView backimage;
+    protected TextView titletext;
 
     @Override
     public Map<Key<?>, Object> getScopedObjectMap() {
@@ -75,11 +84,6 @@ public class BaseActivity extends ActionBarActivity implements RoboContext {
                 ApplicationManager.back();
         }
         return super.onOptionsItemSelected(item);
-    }
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        return true;
     }
 
     @SuppressLint("NewApi")
@@ -123,6 +127,10 @@ public class BaseActivity extends ActionBarActivity implements RoboContext {
             injector.injectMembersWithoutViews(this);
 
         }
+        actionBar  = getSupportActionBar();
+        actionBar.setDisplayShowTitleEnabled(false);
+        initTitleview();
+        getSupportActionBar().setDisplayShowCustomEnabled(true);
     }
 
     @Override
@@ -190,5 +198,27 @@ public class BaseActivity extends ActionBarActivity implements RoboContext {
         }
         return super.dispatchKeyEvent(event);
     }*/
+/*
+    * 顶部实现布局
+    * */
+   protected void initTitleview(){
+       ActionBar.LayoutParams lp = new ActionBar.LayoutParams(
+               ActionBar.LayoutParams.MATCH_PARENT,
+               ActionBar.LayoutParams.MATCH_PARENT, Gravity.CENTER);
+       viewTitleBar = getLayoutInflater().inflate(R.layout.layout_actionbar_title, null);
+       backimage=(ImageView)viewTitleBar.findViewById(R.id.action_bar_title_back);
+       titletext=(TextView)viewTitleBar.findViewById(R.id.action_bar_title_text);
+       actionBar.setCustomView(viewTitleBar, lp);
+       backimage.setVisibility(View.GONE);
+       actionBar.setIcon(R.drawable.actionbar_title_back);
+   }
 
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        menu.add("")
+                .setIcon(R.drawable.actionbar_right)
+                .setShowAsAction(
+                        MenuItem.SHOW_AS_ACTION_IF_ROOM);
+        return true;
+    }
 }
