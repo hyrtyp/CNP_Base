@@ -10,10 +10,10 @@ import java.util.HashMap;
 /**
  * Created by GYH on 14-1-3.
  */
-public class SchoolListService {
+public class SchoolService {
     private CNPClient cnpClient;
 
-    public SchoolListService(CNPClient cnpClient){
+    public SchoolService(CNPClient cnpClient){
         this.cnpClient = cnpClient;
     }
 

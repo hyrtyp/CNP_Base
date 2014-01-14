@@ -3,13 +3,14 @@ package com.hyrt.cnp.account.model;
 
 import org.codehaus.jackson.annotate.JsonIgnoreProperties;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
 /**
  * Created by GYH on 14-1-3.
  */
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class Notice {
+public class Notice implements Serializable {
 
     private int annource_id;
     private String title;
