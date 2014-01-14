@@ -32,7 +32,7 @@ import static com.hyrt.cnp.account.AccountConstants.ACCOUNT_TYPE;
  */
 public class CNPAccount {
 
-    private static final String TAG = "GitHubAccount";
+    private static final String TAG = "CNPAccount";
 
     private final Account account;
 

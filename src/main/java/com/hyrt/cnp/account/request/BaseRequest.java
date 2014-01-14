@@ -52,7 +52,7 @@ public abstract class BaseRequest extends SpringAndroidSpiceRequest{
                     // successfully updated
                     if (AccountUtils.isUnauthorized(e)
                             && AccountUtils.updateAccount(account, activity))
-                        System.out.println(123);
+                        return run();
                     else
                         throw e;
                 } finally {

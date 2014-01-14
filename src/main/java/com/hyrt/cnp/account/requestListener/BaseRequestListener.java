@@ -3,12 +3,18 @@ package com.hyrt.cnp.account.requestListener;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 
+import com.hyrt.cnp.R;
+import com.hyrt.cnp.account.ui.LightAlertDialog;
 import com.hyrt.cnp.account.ui.LightProgressDialog;
 import com.octo.android.robospice.persistence.exception.SpiceException;
 import com.octo.android.robospice.request.listener.RequestListener;
 
 import java.lang.ref.SoftReference;
+import java.text.MessageFormat;
+
+import static android.content.DialogInterface.BUTTON_POSITIVE;
 
 /**
  * Created by yepeng on 14-1-9.
