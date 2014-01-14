@@ -31,5 +31,11 @@
         <item name="android:indeterminateDuration">2000</item>
         <item name="android:indeterminateOnly">true</item>
     </style>
-
+    <style name="layout_actionbar_title_text">
+        <item name="android:textColor">@color/actionbar_title_text</item>
+        <item name="android:textSize">@dimen/layout_actionbar_title_text_size</item>
+    </style>
+    <style name="layout_actionbar_title_back">
+        <item name="android:layout_marginLeft">@dimen/layout_actionbar_title_back_marginLeft</item>
+    </style>
 </resources>
