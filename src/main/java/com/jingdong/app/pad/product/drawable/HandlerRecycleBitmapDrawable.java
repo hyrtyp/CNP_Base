@@ -11,8 +11,6 @@ import android.graphics.ColorFilter;
 import android.graphics.NinePatch;
 import android.graphics.PaintFlagsDrawFilter;
 import android.graphics.Rect;
-
-import com.hyrt.cnp.R;
 import com.jingdong.common.utils.Log;
 import com.jingdong.common.utils.ui.ExceptionDrawable;
 
@@ -24,7 +22,7 @@ public class HandlerRecycleBitmapDrawable extends ExceptionDrawable {
     private NinePatch np;
 
     public HandlerRecycleBitmapDrawable(Bitmap paramBitmap, Context paramContext) {
-        super(paramContext, paramContext.getString(R.string.app_name));
+        super(paramContext, "");
         setBitmap(paramBitmap);
         this.context = paramContext;
         this.bitmapRect = new Rect();

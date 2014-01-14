@@ -15,9 +15,12 @@
  */
 package com.novoda.imageloader.core.bitmap;
 
+import android.annotation.TargetApi;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.os.Build;
+
 import java.io.*;
 
 import com.jingdong.common.utils.DPIUtil;
@@ -220,6 +223,7 @@ public class BitmapUtil {
 		return bitmap;
 	}
 
+    @TargetApi(Build.VERSION_CODES.HONEYCOMB)
     private static void addInBitmapOptions(BitmapFactory.Options options) {
         // inBitmap only works with mutable bitmaps, so force the decoder to
         // return mutable bitmaps.

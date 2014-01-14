@@ -6,8 +6,13 @@ import com.jingdong.app.pad.product.ProductListFragment;
 import com.jingdong.common.broadcastReceiver.InterfaceBroadcastReceiver;
 import com.jingdong.common.broadcastReceiver.InterfaceBroadcastReceiver.Command;
 import com.jingdong.common.frame.taskStack.ApplicationManager;
+import com.jingdong.common.http.HttpGroup;
+import com.jingdong.common.http.HttpGroupSetting;
 import com.jingdong.common.utils.DPIUtil;
 import com.jingdong.common.utils.Log;
+import com.octo.android.robospice.JacksonSpringAndroidSpiceService;
+import com.octo.android.robospice.SpiceManager;
+
 import net.oschina.app.AppContext;
 
 import android.annotation.SuppressLint;
@@ -23,7 +28,6 @@ import java.util.HashMap;
 import java.util.Map;
 
 import roboguice.RoboGuice;
-import roboguice.event.EventManager;
 import roboguice.inject.RoboInjector;
 import roboguice.util.RoboContext;
 
@@ -40,6 +44,26 @@ public class BaseActivity extends ActionBarActivity implements RoboContext {
     @Override
     public Map<Key<?>, Object> getScopedObjectMap() {
         return scopedObjects;
+    }
+
+    protected SpiceManager spiceManager = new SpiceManager(
+            JacksonSpringAndroidSpiceService.class);
+
+    public HttpGroup getHttpGroupaAsynPool() {
+        return getHttpGroupaAsynPool(HttpGroupSetting.TYPE_JSON);
+    }
+
+    public HttpGroup getHttpGroupaAsynPool(int type) {
+        HttpGroupSetting localHttpGroupSetting = new HttpGroupSetting();
+        localHttpGroupSetting.setType(type);
+        return getHttpGroupaAsynPool(localHttpGroupSetting);
+    }
+
+    public HttpGroup getHttpGroupaAsynPool(
+            final HttpGroupSetting paramHttpGroupSetting) {
+        HttpGroup.HttpGroupaAsynPool localHttpGroupaAsynPool = new HttpGroup.HttpGroupaAsynPool(
+                paramHttpGroupSetting);
+        return localHttpGroupaAsynPool;
     }
 
 
@@ -141,6 +165,18 @@ public class BaseActivity extends ActionBarActivity implements RoboContext {
                 ApplicationManager.go(productListTM);
                 break;
         }
+    }
+
+    @Override
+    protected void onStart() {
+        spiceManager.start(this);
+        super.onStart();
+    }
+
+    @Override
+    protected void onStop() {
+        spiceManager.shouldStop();
+        super.onStop();
     }
 
    /* @Override

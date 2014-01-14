@@ -85,9 +85,9 @@ public class InflateUtil
             httpSetting.setType(HttpGroupSetting.TYPE_IMAGE);
             httpSetting.setPriority(HttpGroupSetting.PRIORITY_IMAGE);
             if(!isRefresh)
-                httpSetting.setCacheMode(HttpSetting.CACHE_MODE_ONLY_CACHE);
-            else
                 httpSetting.setCacheMode(HttpSetting.CACHE_MODE_AUTO);
+            else
+                httpSetting.setCacheMode(HttpSetting.CACHE_MODE_ONLY_NET);
             httpSetting.setListener(new OnAllListener()
             {
                 public void onEnd(HttpResponse paramAnonymousHttpResponse)
