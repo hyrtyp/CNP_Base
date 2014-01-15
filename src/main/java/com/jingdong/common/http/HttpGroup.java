@@ -5,17 +5,28 @@ import android.content.Context;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Bundle;
+
 import com.jingdong.common.frame.IDestroyListener;
 import com.jingdong.common.frame.MyActivity;
 import com.jingdong.common.thread.ThreadPool;
 
-import java.io.*;
-import java.util.*;
 import net.oschina.app.AppContext;
 import net.oschina.app.AppException;
 import net.oschina.app.api.ApiClient;
 import net.oschina.app.bean.Entity;
 import net.oschina.app.common.FileUtils;
+
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InvalidClassException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * 请求网络组辅助类

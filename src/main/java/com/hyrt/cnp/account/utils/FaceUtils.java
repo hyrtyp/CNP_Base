@@ -30,4 +30,14 @@ public class FaceUtils {
     }
 
 
+    public static String getClassRoomImage(int classroomid,String type){
+        StringBuilder basePath = new StringBuilder("http://img.chinaxueqian.com/classroom");
+        Float part1 = (float)classroomid/(float)10000;
+        Float uppart1 = Float.valueOf((part1.intValue() + 1));
+        return basePath.append("/").append(Float.compare(part1+Float.valueOf(1),uppart1) == 0 ? part1.intValue() : part1.intValue()+1).append("/")
+                .append("/").append(classroomid).append("_").append(type).append(".jpg").toString();
+
+    }
+
+
 }
