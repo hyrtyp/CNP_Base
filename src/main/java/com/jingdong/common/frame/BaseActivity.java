@@ -1,6 +1,8 @@
 package com.jingdong.common.frame;
 
 import android.annotation.SuppressLint;
+import android.annotation.TargetApi;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.StrictMode;
 import android.support.v7.app.ActionBar;
@@ -81,7 +83,8 @@ public class BaseActivity extends ActionBarActivity implements RoboContext {
         switch (item.getItemId()) {
             // Respond to the action bar's Up/Home button
             case android.R.id.home:
-                ApplicationManager.back();
+                //ApplicationManager.back();
+                finish();
         }
         return super.onOptionsItemSelected(item);
     }
@@ -129,6 +132,7 @@ public class BaseActivity extends ActionBarActivity implements RoboContext {
         }
         actionBar  = getSupportActionBar();
         actionBar.setDisplayShowTitleEnabled(false);
+        actionBar.setHomeButtonEnabled(true);
         initTitleview();
         getSupportActionBar().setDisplayShowCustomEnabled(true);
     }
@@ -208,17 +212,19 @@ public class BaseActivity extends ActionBarActivity implements RoboContext {
        viewTitleBar = getLayoutInflater().inflate(R.layout.layout_actionbar_title, null);
        backimage=(ImageView)viewTitleBar.findViewById(R.id.action_bar_title_back);
        titletext=(TextView)viewTitleBar.findViewById(R.id.action_bar_title_text);
+       titletext.setText(this.getTitle());
        actionBar.setCustomView(viewTitleBar, lp);
        backimage.setVisibility(View.GONE);
        actionBar.setIcon(R.drawable.actionbar_title_back);
    }
 
+    @TargetApi(Build.VERSION_CODES.HONEYCOMB)
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        menu.add("")
+        menu.add("abc")
                 .setIcon(R.drawable.actionbar_right)
                 .setShowAsAction(
-                        MenuItem.SHOW_AS_ACTION_IF_ROOM);
+                        MenuItem.SHOW_AS_ACTION_ALWAYS);
         return true;
     }
 }

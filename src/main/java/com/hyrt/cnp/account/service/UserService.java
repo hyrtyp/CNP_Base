@@ -43,10 +43,36 @@ public class UserService{
         return result;
     }
 
+    public BaseTest modifyUserPassword(String password,String newPwd,String repeatPwd){
+        cnpClient.configureRequest();
+        MultiValueMap<String, Object> params = cnpClient.getParams();
+        params.set("password",password);
+        params.set("new_pwd",newPwd);
+        params.set("repeat_pwd",repeatPwd);
+        BaseTest result = getRestTemplate().postForObject("http://api.chinaxueqian.com/user/password/", cnpClient.getParams(),BaseTest.class);
+        return result;
+    }
+
 
 
     protected RestTemplate getRestTemplate() {
         return new RestTemplate(true, new HttpComponentsClientHttpRequestFactory());
     }
 
+    public BaseTest modifyUserInfo(String renname, String birthday,String sex, String national, String bloodType) {
+        cnpClient.configureRequest();
+        MultiValueMap<String, Object> params = cnpClient.getParams();
+        if(renname.toString().length() != 0)
+            params.set("renname",renname);
+        if(renname.toString().length() != 0)
+            params.set("birthday",birthday);
+        if(renname.toString().length() != 0)
+            params.set("sex",sex);
+        if(renname.toString().length() != 0)
+            params.set("bloodType",bloodType);
+        if(renname.toString().length() != 0)
+            params.set("nationality",national);
+        BaseTest result = getRestTemplate().postForObject("http://api.chinaxueqian.com/user/edit/", cnpClient.getParams(),BaseTest.class);
+        return result;
+    }
 }
