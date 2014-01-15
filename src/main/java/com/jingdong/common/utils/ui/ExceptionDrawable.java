@@ -1,9 +1,5 @@
 package com.jingdong.common.utils.ui;
 
-import com.hyrt.cnp.R;
-import com.jingdong.common.utils.DPIUtil;
-import com.jingdong.common.utils.Log;
-
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
@@ -13,6 +9,10 @@ import android.graphics.Paint;
 import android.graphics.Rect;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
+
+import com.hyrt.cnp.R;
+import com.jingdong.common.utils.DPIUtil;
+import com.jingdong.common.utils.Log;
 
 /**
  * 自定义异常图片类
@@ -40,7 +40,7 @@ public class ExceptionDrawable extends Drawable {
 		this.text = paramString;
 		if (bitmap != null) {
 			bitmap = ((BitmapDrawable) paramContext.getResources().getDrawable(
-					R.drawable.ic_launcher)).getBitmap();
+					R.drawable.actionbar_right)).getBitmap();
 			width = bitmap.getWidth();
 			height = bitmap.getHeight();
 		}

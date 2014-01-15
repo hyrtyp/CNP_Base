@@ -1,6 +1,8 @@
 package com.hyrt.cnp.account.model;
 
 
+import com.hyrt.cnp.account.utils.FaceUtils;
+
 import org.codehaus.jackson.annotate.JsonIgnoreProperties;
 
 import java.util.ArrayList;
@@ -49,6 +51,11 @@ public class Teacher {
     private String funk;
     private String likeFood;
     private String allergy;
+    private String timagePath;
+
+    public String getImagepath(){
+        return  FaceUtils.getAvatar(user_id, FaceUtils.FACE_BIG);
+    }
 
     public static class Model extends Base{
         private static final long serialVersionUID = -1;

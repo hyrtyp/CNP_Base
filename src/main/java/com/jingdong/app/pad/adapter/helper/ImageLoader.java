@@ -52,7 +52,12 @@ public class ImageLoader implements HttpGroup.OnCommonListener {
 						"load() position -->> "
 								+ this.subViewHolder.getPosition());
 			}
-			subViewHolder.getAdapter().getContext().executeImage(str, this);
+
+            if(subViewHolder.getAdapter().getContext()==null){
+                subViewHolder.getAdapter().getBaseActivity().executeImage(str,this);
+            }else{
+                subViewHolder.getAdapter().getContext().executeImage(str, this);
+            }
 		}
 	}
 

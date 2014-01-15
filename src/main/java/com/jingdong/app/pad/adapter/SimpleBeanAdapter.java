@@ -7,18 +7,17 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.BaseAdapter;
 
-import java.lang.reflect.Method;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Vector;
-
 import com.jingdong.app.pad.adapter.helper.AdapterHelper;
 import com.jingdong.app.pad.adapter.helper.SimpleImageProcessor;
 import com.jingdong.app.pad.adapter.helper.SimpleSubViewBinder;
 import com.jingdong.app.pad.adapter.helper.SubViewBinder;
-import com.jingdong.app.pad.adapter.helper.UIRunnable;
+import com.jingdong.common.frame.BaseActivity;
 import com.jingdong.common.frame.MyActivity;
+
+import java.lang.reflect.Method;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 /**
  * 全局基础适配器
@@ -30,6 +29,7 @@ public class SimpleBeanAdapter extends BaseAdapter {
 
 	// 会占有大量的内存
 	private MyActivity context;
+    private BaseActivity baseActivity;
 	private List data;
 	private int layoutId;
 	private String[] resKeys;
@@ -49,10 +49,24 @@ public class SimpleBeanAdapter extends BaseAdapter {
 		this.resKeys = resKeys;
 		this.reses = reses;
 	}
+    public SimpleBeanAdapter(BaseActivity context, List data, int layoutId,
+                             String[] resKeys, int[] reses) {
+        baseActivity=context;
+        inflater = (LayoutInflater) context
+                .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        this.layoutId = layoutId;
+        this.data = data;
+        this.resKeys = resKeys;
+        this.reses = reses;
+    }
 
 	public MyActivity getContext() {
 		return context;
 	}
+
+    public BaseActivity getBaseActivity(){
+        return baseActivity;
+    }
 
 	@Override
 	public int getCount() {

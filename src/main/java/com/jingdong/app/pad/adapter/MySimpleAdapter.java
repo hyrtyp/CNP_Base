@@ -3,12 +3,15 @@ package com.jingdong.app.pad.adapter;
 import android.graphics.Bitmap;
 import android.view.View;
 import android.view.ViewGroup;
+
+import com.jingdong.common.frame.BaseActivity;
 import com.jingdong.common.frame.IDestroyListener;
+import com.jingdong.common.frame.MyActivity;
 import com.jingdong.common.utils.ImageUtil;
 import com.jingdong.common.utils.Log;
 import com.jingdong.common.utils.cache.GlobalImageCache;
+
 import java.util.List;
-import com.jingdong.common.frame.MyActivity;
 
 /**
  * 全局基本适配器的扩展
@@ -28,13 +31,21 @@ public class MySimpleAdapter extends SimpleBeanAdapter
    * @param resKeys 数据对应id集合
    * @param reses 数据key
    */
-  public MySimpleAdapter(MyActivity paramMyActivity, List data, int resourceId, String[] resKeys, int[] reses)
+  public MySimpleAdapter(MyActivity paramMyActivity, List data, int resourceId, String[] resKeys,
+                         int[] reses)
   {
     super(paramMyActivity, data, resourceId, resKeys, reses);
     paramMyActivity.addDestroyListener(this);
     paramMyActivity.addPauseListener(this);
     paramMyActivity.addResumeListener(this);
   }
+
+    public MySimpleAdapter(BaseActivity paramMyActivity, List data, int resourceId, String[] resKeys,
+                           int[] reses)
+    {
+        super(paramMyActivity, data, resourceId, resKeys, reses);
+
+    }
 
   public void gc()
   {

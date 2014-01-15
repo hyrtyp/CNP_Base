@@ -16,6 +16,15 @@ public class Photo {
     private int isFocus;
     private int pkind;
 
+    public String getImagethpath(){
+        String str= "http://img.chinaxueqian.com/avatartest/"+thpath;
+        return str;
+    }
+    public String getImagepics(){
+        String str= "http://img.chinaxueqian.com/avatartest/"+pics;
+        return str;
+    }
+
     public int getPhotoID() {
         return photoID;
     }

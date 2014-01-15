@@ -1,6 +1,8 @@
 package com.hyrt.cnp.account.model;
 
 
+import com.hyrt.cnp.account.utils.FaceUtils;
+
 import org.codehaus.jackson.annotate.JsonIgnoreProperties;
 
 import java.util.ArrayList;
@@ -13,7 +15,9 @@ public class StarBabay {
     private int user_id;
     private String renname;
     private int nursery_id;
-
+    public String getImagepath(){
+        return  FaceUtils.getAvatar(user_id, FaceUtils.FACE_BIG);
+    }
     public static class Model extends Base{
         private static final long serialVersionUID = -1;
         private ArrayList<StarBabay> data;

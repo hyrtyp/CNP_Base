@@ -21,6 +21,7 @@ import com.jingdong.common.broadcastReceiver.InterfaceBroadcastReceiver.Command;
 import com.jingdong.common.frame.taskStack.ApplicationManager;
 import com.jingdong.common.http.HttpGroup;
 import com.jingdong.common.http.HttpGroupSetting;
+import com.jingdong.common.http.HttpSetting;
 import com.jingdong.common.utils.DPIUtil;
 import com.jingdong.common.utils.Log;
 import com.octo.android.robospice.JacksonSpringAndroidSpiceService;
@@ -55,7 +56,7 @@ public class BaseActivity extends ActionBarActivity implements RoboContext {
         return scopedObjects;
     }
 
-    protected SpiceManager spiceManager = new SpiceManager(
+    public SpiceManager spiceManager = new SpiceManager(
             JacksonSpringAndroidSpiceService.class);
 
     public HttpGroup getHttpGroupaAsynPool() {
@@ -220,5 +221,16 @@ public class BaseActivity extends ActionBarActivity implements RoboContext {
                 .setShowAsAction(
                         MenuItem.SHOW_AS_ACTION_IF_ROOM);
         return true;
+    }
+
+    public void executeImage(String imageUrl, HttpGroup.OnEndListener onEndListener) {
+        HttpGroup httpGroup = getHttpGroupaAsynPool();
+        HttpSetting httpSetting = new HttpSetting();
+        httpSetting.setFinalUrl(imageUrl);
+        httpSetting.setType(HttpGroupSetting.TYPE_IMAGE);
+        httpSetting.setPriority(HttpGroupSetting.PRIORITY_IMAGE);
+        httpSetting.setCacheMode(HttpSetting.CACHE_MODE_ONLY_CACHE);
+        httpSetting.setListener(onEndListener);
+        httpGroup.add(httpSetting);
     }
 }

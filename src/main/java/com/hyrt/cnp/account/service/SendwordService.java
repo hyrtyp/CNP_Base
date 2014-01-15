@@ -18,7 +18,7 @@ public class SendwordService {
     }
 
     //TODO after modify
-    public SendWord.Model getModelData(RestTemplate restTemplate){
+    public SendWord.Model getSendwordData(RestTemplate restTemplate){
 //        cnpClient.configureRequest();
         HashMap<String, String> params = cnpClient.getParamsforGet();
 //        HashMap<String, String> params = new HashMap<String, String>();
