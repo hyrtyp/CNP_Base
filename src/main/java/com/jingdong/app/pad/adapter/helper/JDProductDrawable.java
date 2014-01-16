@@ -1,7 +1,5 @@
 package com.jingdong.app.pad.adapter.helper;
 
-import net.oschina.app.AppContext;
-import android.R.color;
 import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
@@ -16,6 +14,8 @@ import com.jingdong.app.pad.adapter.SimpleBeanAdapter;
 import com.jingdong.common.utils.DPIUtil;
 import com.jingdong.common.utils.Log;
 import com.jingdong.common.utils.cache.GlobalImageCache;
+
+import net.oschina.app.AppContext;
 
 /**
  * 产品图片类，当图片为空时通知SimpleImageProcessor获取图片
@@ -65,13 +65,14 @@ public class JDProductDrawable extends Drawable {
 		this.bitmaPaint.setFilterBitmap(true);
 		if (logoBitmap == null) {
 			logoBitmap = ((BitmapDrawable) this.resources
-					.getDrawable(R.drawable.ic_launcher)).getBitmap();
+					.getDrawable(R.drawable.actionbar_right)).getBitmap();
 			logoBitmapWidth = logoBitmap.getWidth();
 			logoBitmapHeight = logoBitmap.getHeight();
 		}
+        //TODO after modify
 		if (text == null)
-			text = this.resources.getString(R.string.app_name);
-
+            text="";
+//			text = this.resources.getString(R.string.app_name);
 	}
 
 	public JDProductDrawable(

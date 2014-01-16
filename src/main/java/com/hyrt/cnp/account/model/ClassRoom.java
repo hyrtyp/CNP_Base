@@ -1,6 +1,8 @@
 package com.hyrt.cnp.account.model;
 
 
+import com.hyrt.cnp.account.utils.FaceUtils;
+
 import org.codehaus.jackson.annotate.JsonIgnoreProperties;
 
 import java.util.ArrayList;
@@ -23,6 +25,9 @@ public class ClassRoom {
     private String graduation;
     private String signature;
 
+    public String getImagepath(){
+        return FaceUtils.getClassRoomImage(classroomID,FaceUtils.FACE_BIG);
+    }
 
     public static class Model extends Base{
         private static final long serialVersionUID = -1;
