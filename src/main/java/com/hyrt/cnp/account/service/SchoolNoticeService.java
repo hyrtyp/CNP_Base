@@ -18,14 +18,9 @@ public class SchoolNoticeService {
         this.cnpClient = cnpClient;
     }
 
-    //TODO after modify
     public Notice.Model getNoticelistData(RestTemplate restTemplate){
-//        cnpClient.configureRequest();
-//        HashMap<String, String> params = cnpClient.getParamsforGet();
-        HashMap<String, String> params = new HashMap<String, String>();
-        params.put("token", "e1ac72b3cf9902f6db8c88f42728db82");
-        params.put("uuid", "104");
-        params.put("sid","2");
+        cnpClient.configureRequest();
+        HashMap<String, String> params = cnpClient.getParamsforGet();
         return  restTemplate.getForObject("http://api.chinaxueqian.com/school/notice?" +
                 "token={token}&uuid={uuid}&sid={sid}",
                 Notice.Model.class,params);

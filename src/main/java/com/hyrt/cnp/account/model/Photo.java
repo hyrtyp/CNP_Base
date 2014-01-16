@@ -16,12 +16,21 @@ public class Photo {
     private int isFocus;
     private int pkind;
 
+    /**
+     * 获取缩略图
+     * @return
+     */
     public String getImagethpath(){
-        String str= "http://img.chinaxueqian.com/avatartest/"+thpath;
+        String str= "http://img.chinaxueqian.com/"+thpath;
         return str;
     }
+
+    /**
+     * 获取大图
+     * @return
+     */
     public String getImagepics(){
-        String str= "http://img.chinaxueqian.com/avatartest/"+pics;
+        String str= "http://img.chinaxueqian.com/"+pics;
         return str;
     }
 
@@ -90,13 +99,13 @@ public class Photo {
     }
 
     public static class Model extends Base {
+
         private ArrayList<Photo> data;
 
         @Override
         public boolean equals(Object o) {
             if (this == o) return true;
-            if (o == null || getClass() != o.getClass()) return false;
-            if (!super.equals(o)) return false;
+            if (!(o instanceof Model)) return false;
 
             Model model = (Model) o;
 
@@ -107,9 +116,7 @@ public class Photo {
 
         @Override
         public int hashCode() {
-            int result = super.hashCode();
-            result = 31 * result + (data != null ? data.hashCode() : 0);
-            return result;
+            return data != null ? data.hashCode() : 0;
         }
 
         public ArrayList<Photo> getData() {

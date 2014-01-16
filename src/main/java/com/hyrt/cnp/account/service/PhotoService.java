@@ -19,12 +19,8 @@ public class PhotoService {
 
     //TODO after modify
     public Photo.Model getphotolistData(RestTemplate restTemplate){
-//        cnpClient.configureRequest();
-//        HashMap<String, String> params = cnpClient.getParamsforGet();
-        HashMap<String, String> params = new HashMap<String, String>();
-        params.put("token", "e1ac72b3cf9902f6db8c88f42728db82");
-        params.put("uuid", "104");
-        params.put("sid","2");
+        cnpClient.configureRequest();
+        HashMap<String, String> params = cnpClient.getParamsforGet();
         params.put("pkind","1");
         return  restTemplate.getForObject("http://api.chinaxueqian.com/school/photo/?" +
                 "token={token}&uuid={uuid}&sid={sid}&pkind={pkind}",

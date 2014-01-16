@@ -2,9 +2,12 @@ package com.jingdong.common.frame;
 
 import android.annotation.SuppressLint;
 import android.annotation.TargetApi;
+import android.graphics.Bitmap;
+import android.graphics.drawable.BitmapDrawable;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.StrictMode;
+import android.support.v4.view.ViewPager;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarActivity;
 import android.view.Gravity;
@@ -13,11 +16,15 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.Window;
 import android.widget.ImageView;
+import android.widget.PopupWindow;
 import android.widget.TextView;
 
 import com.google.inject.Key;
 import com.hyrt.cnp.R;
+import com.hyrt.cnp.account.utils.FaceUtils;
 import com.jingdong.app.pad.product.ProductListFragment;
+import com.jingdong.app.pad.product.drawable.HandlerRecycleBitmapDrawable;
+import com.jingdong.app.pad.utils.InflateUtil;
 import com.jingdong.common.broadcastReceiver.InterfaceBroadcastReceiver;
 import com.jingdong.common.broadcastReceiver.InterfaceBroadcastReceiver.Command;
 import com.jingdong.common.frame.taskStack.ApplicationManager;
@@ -26,11 +33,13 @@ import com.jingdong.common.http.HttpGroupSetting;
 import com.jingdong.common.http.HttpSetting;
 import com.jingdong.common.utils.DPIUtil;
 import com.jingdong.common.utils.Log;
+import com.jingdong.common.utils.cache.GlobalImageCache;
 import com.octo.android.robospice.JacksonSpringAndroidSpiceService;
 import com.octo.android.robospice.SpiceManager;
 
 import net.oschina.app.AppContext;
 
+import java.lang.ref.WeakReference;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -203,9 +212,11 @@ public class BaseActivity extends ActionBarActivity implements RoboContext {
         }
         return super.dispatchKeyEvent(event);
     }*/
-/*
-    * 顶部实现布局
-    * */
+
+
+    /**
+     * 初始化顶部标题栏
+      */
    protected void initTitleview(){
        ActionBar.LayoutParams lp = new ActionBar.LayoutParams(
                ActionBar.LayoutParams.MATCH_PARENT,
@@ -229,6 +240,11 @@ public class BaseActivity extends ActionBarActivity implements RoboContext {
         return true;
     }
 
+    /**
+     * 获取图片,并附加到视图上
+     * @param imageUrl
+     * @param onEndListener
+     */
     public void executeImage(String imageUrl, HttpGroup.OnEndListener onEndListener) {
         HttpGroup httpGroup = getHttpGroupaAsynPool();
         HttpSetting httpSetting = new HttpSetting();
@@ -238,5 +254,117 @@ public class BaseActivity extends ActionBarActivity implements RoboContext {
         httpSetting.setCacheMode(HttpSetting.CACHE_MODE_ONLY_CACHE);
         httpSetting.setListener(onEndListener);
         httpGroup.add(httpSetting);
+    }
+
+    /**
+     * 显示弹出大图
+     * @param view 窗口view
+     * @param bigImgPath 大图路径
+     */
+    public  void ShowPop(View view,String bigImgPath) {
+        View popView = this.getLayoutInflater().inflate(
+                R.layout.layout_popwindwos, null);
+        final PopupWindow popWin = new PopupWindow(popView, ViewPager.LayoutParams.MATCH_PARENT,
+                ViewPager.LayoutParams.MATCH_PARENT);
+
+        popView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                popWin.dismiss();
+            }
+        });
+        // 需要设置一下此参数，点击外边可消失
+        popWin.setBackgroundDrawable(new BitmapDrawable());
+        //设置点击窗口外边窗口消失
+        popWin.setOutsideTouchable(true);
+        // 设置此参数获得焦点，否则无法点击
+        popWin.setFocusable(true);
+        popWin.showAtLocation(view,
+                Gravity.CENTER, 0, 0);
+
+        ImageView imageview = (ImageView)popView.findViewById(R.id.pop_img);
+        final WeakReference<ImageView> weakImageView = new WeakReference<ImageView>(imageview);
+        HandlerRecycleBitmapDrawable localHandlerRecycleBitmapDrawable = new HandlerRecycleBitmapDrawable(null, this);
+        imageview.setImageDrawable(localHandlerRecycleBitmapDrawable);
+        GlobalImageCache.BitmapDigest localBitmapDigest = new GlobalImageCache.BitmapDigest(bigImgPath);
+        localBitmapDigest.setWidth(imageview.getWidth());
+        localBitmapDigest.setHeight(imageview.getHeight());
+        Bitmap localBitmap = InflateUtil.loadImageWithCache(localBitmapDigest);
+        if (localBitmap == null) {
+            HandlerRecycleBitmapDrawable localHandlerRecycleBitmapDrawable2 = (HandlerRecycleBitmapDrawable) imageview.getDrawable();
+            localHandlerRecycleBitmapDrawable2.setBitmap(null);
+            localHandlerRecycleBitmapDrawable.invalidateSelf();
+            InflateUtil.loadImageWithUrl(getHttpGroupaAsynPool(), localBitmapDigest, new InflateUtil.ImageLoadListener() {
+                public void onError(GlobalImageCache.BitmapDigest paramAnonymousBitmapDigest) {
+                }
+
+                public void onProgress(GlobalImageCache.BitmapDigest paramAnonymousBitmapDigest, int paramAnonymousInt1, int paramAnonymousInt2) {
+                }
+
+                public void onStart(GlobalImageCache.BitmapDigest paramAnonymousBitmapDigest) {
+                }
+
+                public void onSuccess(GlobalImageCache.BitmapDigest paramAnonymousBitmapDigest, Bitmap paramAnonymousBitmap) {
+                    if (weakImageView != null) {
+                        ImageView targetIv = weakImageView.get();
+                        if (targetIv != null) {
+                            HandlerRecycleBitmapDrawable localHandlerRecycleBitmapDrawable = (HandlerRecycleBitmapDrawable) targetIv.getDrawable();
+                            localHandlerRecycleBitmapDrawable.setBitmap(paramAnonymousBitmap);
+                            localHandlerRecycleBitmapDrawable.invalidateSelf();
+
+                        }
+                    }
+                }
+            });
+        } else {
+            localHandlerRecycleBitmapDrawable.setBitmap(localBitmap);
+            localHandlerRecycleBitmapDrawable.invalidateSelf();
+        }
+    }
+
+    /**
+     * 显示详细页面人员头像
+     * @param user_id 人员id
+     * @param imageId imageviewid
+     */
+    protected void showDetailImage(int user_id,int imageId){
+        String facePath = FaceUtils.getAvatar(user_id, FaceUtils.FACE_MIDDLE);
+        ImageView imageView = (ImageView)findViewById(imageId);
+        final WeakReference<ImageView> weakImageView = new WeakReference<ImageView>(imageView);
+        HandlerRecycleBitmapDrawable localHandlerRecycleBitmapDrawable = new HandlerRecycleBitmapDrawable(null, this);
+        imageView.setImageDrawable(localHandlerRecycleBitmapDrawable);
+        GlobalImageCache.BitmapDigest localBitmapDigest = new GlobalImageCache.BitmapDigest(facePath);
+        localBitmapDigest.setWidth(imageView.getWidth());
+        localBitmapDigest.setHeight(imageView.getHeight());
+        Bitmap localBitmap = InflateUtil.loadImageWithCache(localBitmapDigest);
+        if (localBitmap == null) {
+            HandlerRecycleBitmapDrawable localHandlerRecycleBitmapDrawable2 = (HandlerRecycleBitmapDrawable) imageView.getDrawable();
+            localHandlerRecycleBitmapDrawable2.setBitmap(null);
+            localHandlerRecycleBitmapDrawable.invalidateSelf();
+            InflateUtil.loadImageWithUrl(getHttpGroupaAsynPool(), localBitmapDigest,false, new InflateUtil.ImageLoadListener() {
+                public void onError(GlobalImageCache.BitmapDigest paramAnonymousBitmapDigest) {
+                }
+
+                public void onProgress(GlobalImageCache.BitmapDigest paramAnonymousBitmapDigest, int paramAnonymousInt1, int paramAnonymousInt2) {
+                }
+
+                public void onStart(GlobalImageCache.BitmapDigest paramAnonymousBitmapDigest) {
+                }
+
+                public void onSuccess(GlobalImageCache.BitmapDigest paramAnonymousBitmapDigest, Bitmap paramAnonymousBitmap) {
+                    if (weakImageView != null) {
+                        ImageView targetIv = weakImageView.get();
+                        if (targetIv != null) {
+                            HandlerRecycleBitmapDrawable localHandlerRecycleBitmapDrawable = (HandlerRecycleBitmapDrawable) targetIv.getDrawable();
+                            localHandlerRecycleBitmapDrawable.setBitmap(paramAnonymousBitmap);
+                            localHandlerRecycleBitmapDrawable.invalidateSelf();
+                        }
+                    }
+                }
+            });
+        } else {
+            localHandlerRecycleBitmapDrawable.setBitmap(localBitmap);
+            localHandlerRecycleBitmapDrawable.invalidateSelf();
+        }
     }
 }

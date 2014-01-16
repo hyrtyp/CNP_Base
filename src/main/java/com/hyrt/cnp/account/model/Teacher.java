@@ -5,13 +5,17 @@ import com.hyrt.cnp.account.utils.FaceUtils;
 
 import org.codehaus.jackson.annotate.JsonIgnoreProperties;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
 /**
  * Created by GYH on 14-1-4.
  */
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class Teacher {
+public class Teacher implements Serializable {
+
+    private static final long serialVersionUID = -1;
+
     private int user_id;
     private String username;
     private String renname;
@@ -65,8 +69,7 @@ public class Teacher {
         @Override
         public boolean equals(Object o) {
             if (this == o) return true;
-            if (o == null || getClass() != o.getClass()) return false;
-            if (!super.equals(o)) return false;
+            if (!(o instanceof Model)) return false;
 
             Model model = (Model) o;
 
@@ -77,9 +80,7 @@ public class Teacher {
 
         @Override
         public int hashCode() {
-            int result = super.hashCode();
-            result = 31 * result + (data != null ? data.hashCode() : 0);
-            return result;
+            return data != null ? data.hashCode() : 0;
         }
 
         public ArrayList<Teacher> getData() {
@@ -100,8 +101,7 @@ public class Teacher {
         @Override
         public boolean equals(Object o) {
             if (this == o) return true;
-            if (o == null || getClass() != o.getClass()) return false;
-            if (!super.equals(o)) return false;
+            if (!(o instanceof Model2)) return false;
 
             Model2 model2 = (Model2) o;
 
@@ -112,9 +112,7 @@ public class Teacher {
 
         @Override
         public int hashCode() {
-            int result = super.hashCode();
-            result = 31 * result + (data != null ? data.hashCode() : 0);
-            return result;
+            return data != null ? data.hashCode() : 0;
         }
 
         public Teacher getData() {

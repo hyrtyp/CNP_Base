@@ -38,4 +38,11 @@
     <style name="layout_actionbar_title_back">
         <item name="android:layout_marginLeft">@dimen/layout_actionbar_title_back_marginLeft</item>
     </style>
+
+    <style name="cnp_school_layout">
+        <item name="android:layout_marginLeft">@dimen/cnp_school_layout_margin</item>
+        <item name="android:layout_marginRight">@dimen/cnp_school_layout_margin</item>
+        <item name="android:layout_marginTop">@dimen/cnp_school_layout_margin</item>
+    </style>
+
 </resources>

@@ -14,6 +14,8 @@ import com.octo.android.robospice.request.listener.RequestListener;
 import java.lang.ref.SoftReference;
 import java.text.MessageFormat;
 
+import roboguice.RoboGuice;
+
 import static android.content.DialogInterface.BUTTON_POSITIVE;
 
 /**
@@ -36,6 +38,7 @@ public abstract class BaseRequestListener implements RequestListener {
      */
     protected BaseRequestListener(Activity context) {
         this.context = new SoftReference<Activity>(context);
+        RoboGuice.getInjector(context).injectMembers(this);
     }
 
     /**

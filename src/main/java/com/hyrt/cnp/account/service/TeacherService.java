@@ -18,27 +18,23 @@ public class TeacherService {
         this.cnpClient = cnpClient;
     }
 
-    //TODO after modify
+
     public Teacher.Model getStarteacherData(RestTemplate restTemplate){
-//        cnpClient.configureRequest();
+        cnpClient.configureRequest();
         HashMap<String, String> params = cnpClient.getParamsforGet();
-//        HashMap<String, String> params = new HashMap<String, String>();
-        params.put("token", "e1ac72b3cf9902f6db8c88f42728db82");
-        params.put("uuid", "104");
-        params.put("sid","2");
         return  restTemplate.getForObject("http://api.chinaxueqian.com/school/teacher/?" +
                 "token={token}&uuid={uuid}&sid={sid}",
                 Teacher.Model.class, params);
     }
-    public Teacher.Model2 getStarteacherinfoData(RestTemplate restTemplate){
-//        cnpClient.configureRequest();
+
+
+    public Teacher.Model2 getStarteacherinfoData(RestTemplate restTemplate,int userid){
+        cnpClient.configureRequest();
         HashMap<String, String> params = cnpClient.getParamsforGet();
-//        HashMap<String, String> params = new HashMap<String, String>();
-        params.put("token", "e1ac72b3cf9902f6db8c88f42728db82");
-        params.put("uuid", "104");
-        params.put("userid","117");
+        params.put("userid",userid+"");
         return  restTemplate.getForObject("http://api.chinaxueqian.com/school/teacher_info/?" +
                 "token={token}&uuid={uuid}&userid={userid}",
                 Teacher.Model2.class, params);
     }
+
 }
