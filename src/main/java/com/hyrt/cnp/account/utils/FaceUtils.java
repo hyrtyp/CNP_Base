@@ -29,7 +29,12 @@ public class FaceUtils {
 
     }
 
-
+    /**
+     *
+     * @param classroomid 班级id
+     * @param type 图片类型
+     * @return
+     */
     public static String getClassRoomImage(int classroomid,String type){
         StringBuilder basePath = new StringBuilder("http://img.chinaxueqian.com/classroom");
         Float part1 = (float)classroomid/(float)10000;
@@ -39,5 +44,18 @@ public class FaceUtils {
 
     }
 
+    /**
+     *
+     * @param photoid 相册id
+     * @param type 图片类型
+     * @return
+     */
+    public static String getClassroomAblumImage(int photoid,String type){
+        StringBuilder basePath = new StringBuilder("http://img.chinaxueqian.com/OAthumb");
+        Float part1 = (float)photoid/(float)10000;
+        Float uppart1 = Float.valueOf((part1.intValue() + 1));
+        return basePath.append("/").append(Float.compare(part1+Float.valueOf(1),uppart1) == 0 ? part1.intValue() : part1.intValue()+1).append("/")
+                .append("/").append(photoid).append("_").append(type).append(".jpg").toString();
 
+    }
 }

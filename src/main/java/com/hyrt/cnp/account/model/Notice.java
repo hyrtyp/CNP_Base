@@ -132,6 +132,15 @@ public class Notice implements Serializable {
     public static class Model extends Base{
         private static final long serialVersionUID = -1;
         private ArrayList<Notice> data;
+        private String more;
+
+        public String getMore() {
+            return more;
+        }
+
+        public void setMore(String more) {
+            this.more = more;
+        }
 
         public ArrayList<Notice> getData() {
             return data;

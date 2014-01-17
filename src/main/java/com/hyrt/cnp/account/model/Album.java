@@ -1,6 +1,8 @@
 package com.hyrt.cnp.account.model;
 
 
+import com.hyrt.cnp.account.utils.FaceUtils;
+
 import org.codehaus.jackson.annotate.JsonIgnoreProperties;
 
 import java.util.ArrayList;
@@ -20,6 +22,10 @@ public class Album {
     private String posttime;
     private int photo_ID;
     private String photoNums;
+
+    public String getImagepath(){
+       return FaceUtils.getClassroomAblumImage(photo_ID,FaceUtils.FACE_BIG);
+    }
 
     public static class Model extends Base{
         private static final long serialVersionUID = -1;

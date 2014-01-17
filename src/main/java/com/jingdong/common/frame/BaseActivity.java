@@ -136,8 +136,8 @@ public class BaseActivity extends ActionBarActivity implements RoboContext {
             StrictMode.setVmPolicy(new StrictMode.VmPolicy.Builder()
                     .detectLeakedSqlLiteObjects().detectLeakedClosableObjects()
                     .penaltyLog().penaltyDeath().build());
-            final RoboInjector injector = RoboGuice.getInjector(this);
-            injector.injectMembersWithoutViews(this);
+            final RoboInjector injector = RoboGuice.getInjector(this.getApplicationContext());
+            injector.injectMembers(this);
 
         }
         actionBar  = getSupportActionBar();
@@ -155,8 +155,18 @@ public class BaseActivity extends ActionBarActivity implements RoboContext {
 
     @Override
     protected void onDestroy() {
-        super.onDestroy();
-        AppContext.getInstance().setBaseActivity(null);
+        try {
+            RoboGuice.destroyInjector(this);
+        }finally {
+            super.onDestroy();
+            AppContext.getInstance().setBaseActivity(null);
+        }
+    }
+
+    @Override
+    public void onSupportContentChanged() {
+        super.onSupportContentChanged();
+        RoboGuice.getInjector(this).injectViewMembers(this);
     }
 
     public MyActivity getCurrentMyActivity() {
