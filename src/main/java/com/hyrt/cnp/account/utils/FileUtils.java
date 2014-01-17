@@ -8,6 +8,7 @@ import java.io.IOException;
 import java.io.InputStream;
 
 import android.content.Context;
+import android.net.Uri;
 import android.os.Environment;
 import android.os.StatFs;
 import android.util.Log;
@@ -88,12 +89,18 @@ public class FileUtils
 	
 	public static File createFile( String folderPath, String fileName )
 	{
-		File destDir = new File(folderPath);
-		if (!destDir.exists()) 
-		{
-			destDir.mkdirs();
-		}
-		return new File(folderPath,  fileName + fileName );
+        boolean sdCardExist = Environment.getExternalStorageState().equals(android.os.Environment.MEDIA_MOUNTED);
+        if (sdCardExist) {
+            folderPath = Environment.getExternalStorageDirectory() + File.separator + folderPath + File.separator;
+            File destDir = new File(folderPath);
+            if (!destDir.exists())
+            {
+                destDir.mkdirs();
+            }
+            return new File(folderPath,  fileName);
+        }else{
+            return null;
+        }
 	}
 	
 	/**
