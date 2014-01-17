@@ -145,6 +145,7 @@ public class BaseActivity extends ActionBarActivity implements RoboContext {
         actionBar.setHomeButtonEnabled(true);
         initTitleview();
         getSupportActionBar().setDisplayShowCustomEnabled(true);
+
     }
 
     @Override

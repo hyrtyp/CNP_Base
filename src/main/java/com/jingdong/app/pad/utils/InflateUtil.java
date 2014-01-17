@@ -69,13 +69,12 @@ public class InflateUtil
   }
 
   public static void loadImageWithUrl(HttpGroup paramHttpGroup, BitmapDigest paramBitmapDigest, ImageLoadListener paramImageLoadListener)
-  {
-    loadImageWithUrl(paramHttpGroup, paramBitmapDigest, true, paramImageLoadListener);
+  {    loadImageWithUrl(paramHttpGroup, paramBitmapDigest, true, paramImageLoadListener);
   }
 
   public static void loadImageWithUrl(HttpGroup paramHttpGroup, final BitmapDigest paramBitmapDigest, boolean isRefresh,final ImageLoadListener paramImageLoadListener)
   {
-    if (paramBitmapDigest != null){
+   if (paramBitmapDigest != null){
         Bitmap localBitmap = loadImageWithCache(paramBitmapDigest);
         if ((localBitmap != null) && !(localBitmap.isRecycled())){
             paramImageLoadListener.onSuccess(paramBitmapDigest, localBitmap);
