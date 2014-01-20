@@ -104,7 +104,7 @@ public class BaseActivity extends ActionBarActivity implements RoboContext {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         requestWindowFeature(Window.FEATURE_INDETERMINATE_PROGRESS);
-        if (Log.D) {
+        if (true) {
             Log.d("MainActivity",
                     " -->> this.getResources().getDisplayMetrics().density:"
                             + getResources().getDisplayMetrics().density);
