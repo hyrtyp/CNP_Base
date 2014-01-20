@@ -16,7 +16,6 @@
     <!-- Tab选项标签的样式 -->
     <style name="MyActionBarTabStyle" parent="android:style/Widget.Holo.ActionBar.TabView">
         <item name="android:background">@drawable/actionbar_tab_bg2</item>
-
     </style>
 
     <!-- Tab选项标签字体的样式 -->
