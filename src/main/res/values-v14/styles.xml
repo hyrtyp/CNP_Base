@@ -5,7 +5,4 @@
         <item name="android:background">@color/actionbar_bg</item>
         <item name="android:titleTextStyle">@style/Widget.Edu.ActionBar.Title</item>
     </style>
-
-
-
 </resources>

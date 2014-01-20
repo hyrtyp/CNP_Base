@@ -7,5 +7,17 @@
 
     <string name="picupload_title">请选择上传方式</string>
     <string name="camera_upload">照相上传</string>
-    <string name="local_upload">相册上传</string>
+    <string name="classroombabay">班级成员</string>
+    <string name="classroomnotice">班级公告</string>
+    <string name="dayrecipe">今日食谱</string>
+    <string name="classroomphoto">班级相册</string>
+    <string name="classroomname">向日葵小班</string>
+    <string name="schoolinfo">园所介绍</string>
+    <string name="myschool">我的幼儿园</string>
+    <string name="schoolword">园长寄语</string>
+    <string name="schoolphoto">活动剪辑</string>
+    <string name="starteacher">明星教师</string>
+    <string name="starbabay">明星宝宝</string>
+    <string name="classroomsetting">班级设置</string>
+    <string name="weekrecipe">每周食谱</string>
 </resources>

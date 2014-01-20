@@ -5,6 +5,7 @@
     <style name="Theme.Edu.Sherlock" parent="@style/Theme.Edu.v">
         <item name="android:actionBarStyle">@style/Widget.Edu.ActionBar</item>
         <item name="android:actionBarTabTextStyle">@style/MyActionBarTabTextStyle</item>
+        <item name="android:actionBarTabStyle">@style/MyActionBarTabStyle</item>
     </style>
 
 </resources>

@@ -40,7 +40,7 @@ public class RecipeInfoService {
         params.put("token", "e1ac72b3cf9902f6db8c88f42728db82");
         params.put("uuid", "104");
         params.put("sid","2");
-        params.put("time","2013-11-22");
+        params.put("time",time);
         return  restTemplate.getForObject("http://api.chinaxueqian.com/school/recipe_info/?" +
                 "token={token}&uuid={uuid}&sid={sid}&time={time}",
                 RecipeInfo.Model.class, params);
