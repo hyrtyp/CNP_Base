@@ -14,6 +14,7 @@ import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewGroup;
 import android.view.Window;
 import android.widget.ImageView;
 import android.widget.PopupWindow;
@@ -102,6 +103,8 @@ public class BaseActivity extends ActionBarActivity implements RoboContext {
     @SuppressLint("NewApi")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        final RoboInjector injector = RoboGuice.getInjector(this.getApplicationContext());
+        injector.injectMembers(this);
         super.onCreate(savedInstanceState);
         requestWindowFeature(Window.FEATURE_INDETERMINATE_PROGRESS);
         if (true) {
@@ -136,15 +139,15 @@ public class BaseActivity extends ActionBarActivity implements RoboContext {
             StrictMode.setVmPolicy(new StrictMode.VmPolicy.Builder()
                     .detectLeakedSqlLiteObjects().detectLeakedClosableObjects()
                     .penaltyLog().penaltyDeath().build());
-            final RoboInjector injector = RoboGuice.getInjector(this.getApplicationContext());
-            injector.injectMembers(this);
 
         }
-        actionBar  = getSupportActionBar();
-        actionBar.setDisplayShowTitleEnabled(false);
-        actionBar.setHomeButtonEnabled(true);
-        initTitleview();
-        getSupportActionBar().setDisplayShowCustomEnabled(true);
+        if(!(this.getLocalClassName().contains("FullscreenActivity"))){
+            actionBar  = getSupportActionBar();
+            actionBar.setDisplayShowTitleEnabled(false);
+            actionBar.setHomeButtonEnabled(true);
+            initTitleview();
+            getSupportActionBar().setDisplayShowCustomEnabled(true);
+        }
 
     }
 
@@ -165,8 +168,30 @@ public class BaseActivity extends ActionBarActivity implements RoboContext {
     }
 
     @Override
-    public void onSupportContentChanged() {
-        super.onSupportContentChanged();
+    public void setContentView(int layoutResID) {
+        super.setContentView(layoutResID);
+        contentViewChanged();
+    }
+
+    @Override
+    public void setContentView(View view) {
+        super.setContentView(view);
+        contentViewChanged();
+    }
+
+    @Override
+    public void setContentView(View view, ViewGroup.LayoutParams params) {
+        super.setContentView(view, params);
+        contentViewChanged();
+    }
+
+    @Override
+    public void addContentView(View view, ViewGroup.LayoutParams params) {
+        super.addContentView(view, params);
+        contentViewChanged();
+    }
+
+    private void contentViewChanged() {
         RoboGuice.getInjector(this).injectViewMembers(this);
     }
 
@@ -292,67 +317,28 @@ public class BaseActivity extends ActionBarActivity implements RoboContext {
         popWin.setFocusable(true);
         popWin.showAtLocation(view,
                 Gravity.CENTER, 0, 0);
-
         ImageView imageview = (ImageView)popView.findViewById(R.id.pop_img);
-        final WeakReference<ImageView> weakImageView = new WeakReference<ImageView>(imageview);
-        HandlerRecycleBitmapDrawable localHandlerRecycleBitmapDrawable = new HandlerRecycleBitmapDrawable(null, this);
-        imageview.setImageDrawable(localHandlerRecycleBitmapDrawable);
-        GlobalImageCache.BitmapDigest localBitmapDigest = new GlobalImageCache.BitmapDigest(bigImgPath);
-        localBitmapDigest.setWidth(imageview.getWidth());
-        localBitmapDigest.setHeight(imageview.getHeight());
-        Bitmap localBitmap = InflateUtil.loadImageWithCache(localBitmapDigest);
-        if (localBitmap == null) {
-            HandlerRecycleBitmapDrawable localHandlerRecycleBitmapDrawable2 = (HandlerRecycleBitmapDrawable) imageview.getDrawable();
-            localHandlerRecycleBitmapDrawable2.setBitmap(null);
-            localHandlerRecycleBitmapDrawable.invalidateSelf();
-            InflateUtil.loadImageWithUrl(getHttpGroupaAsynPool(), localBitmapDigest, new InflateUtil.ImageLoadListener() {
-                public void onError(GlobalImageCache.BitmapDigest paramAnonymousBitmapDigest) {
-                }
-
-                public void onProgress(GlobalImageCache.BitmapDigest paramAnonymousBitmapDigest, int paramAnonymousInt1, int paramAnonymousInt2) {
-                }
-
-                public void onStart(GlobalImageCache.BitmapDigest paramAnonymousBitmapDigest) {
-                }
-
-                public void onSuccess(GlobalImageCache.BitmapDigest paramAnonymousBitmapDigest, Bitmap paramAnonymousBitmap) {
-                    if (weakImageView != null) {
-                        ImageView targetIv = weakImageView.get();
-                        if (targetIv != null) {
-                            HandlerRecycleBitmapDrawable localHandlerRecycleBitmapDrawable = (HandlerRecycleBitmapDrawable) targetIv.getDrawable();
-                            localHandlerRecycleBitmapDrawable.setBitmap(paramAnonymousBitmap);
-                            localHandlerRecycleBitmapDrawable.invalidateSelf();
-
-                        }
-                    }
-                }
-            });
-        } else {
-            localHandlerRecycleBitmapDrawable.setBitmap(localBitmap);
-            localHandlerRecycleBitmapDrawable.invalidateSelf();
-        }
+        showDetailImage(bigImgPath,imageview,false);
     }
 
     /**
      * 显示详细页面人员头像
-     * @param user_id 人员id
-     * @param imageId imageviewid
+     * facePath 头像图片地址
+     * targetView 图片显示元素
      */
-    protected void showDetailImage(int user_id,int imageId){
-        String facePath = FaceUtils.getAvatar(user_id, FaceUtils.FACE_MIDDLE);
-        ImageView imageView = (ImageView)findViewById(imageId);
-        final WeakReference<ImageView> weakImageView = new WeakReference<ImageView>(imageView);
+    protected GlobalImageCache.BitmapDigest showDetailImage(String facePath,final ImageView targetView,boolean isrefresh){
+        final WeakReference<ImageView> weakImageView = new WeakReference<ImageView>(targetView);
         HandlerRecycleBitmapDrawable localHandlerRecycleBitmapDrawable = new HandlerRecycleBitmapDrawable(null, this);
-        imageView.setImageDrawable(localHandlerRecycleBitmapDrawable);
+        targetView.setImageDrawable(localHandlerRecycleBitmapDrawable);
         GlobalImageCache.BitmapDigest localBitmapDigest = new GlobalImageCache.BitmapDigest(facePath);
-        localBitmapDigest.setWidth(imageView.getWidth());
-        localBitmapDigest.setHeight(imageView.getHeight());
+        localBitmapDigest.setWidth(targetView.getWidth());
+        localBitmapDigest.setHeight(targetView.getHeight());
         Bitmap localBitmap = InflateUtil.loadImageWithCache(localBitmapDigest);
         if (localBitmap == null) {
-            HandlerRecycleBitmapDrawable localHandlerRecycleBitmapDrawable2 = (HandlerRecycleBitmapDrawable) imageView.getDrawable();
+            HandlerRecycleBitmapDrawable localHandlerRecycleBitmapDrawable2 = (HandlerRecycleBitmapDrawable) targetView.getDrawable();
             localHandlerRecycleBitmapDrawable2.setBitmap(null);
             localHandlerRecycleBitmapDrawable.invalidateSelf();
-            InflateUtil.loadImageWithUrl(getHttpGroupaAsynPool(), localBitmapDigest,false, new InflateUtil.ImageLoadListener() {
+            InflateUtil.loadImageWithUrl(getHttpGroupaAsynPool(), localBitmapDigest,isrefresh, new InflateUtil.ImageLoadListener() {
                 public void onError(GlobalImageCache.BitmapDigest paramAnonymousBitmapDigest) {
                 }
 
@@ -377,5 +363,6 @@ public class BaseActivity extends ActionBarActivity implements RoboContext {
             localHandlerRecycleBitmapDrawable.setBitmap(localBitmap);
             localHandlerRecycleBitmapDrawable.invalidateSelf();
         }
+        return localBitmapDigest;
     }
 }

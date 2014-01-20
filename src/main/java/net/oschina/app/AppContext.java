@@ -12,6 +12,8 @@ import com.jingdong.common.frame.BaseActivity;
 import com.jingdong.common.frame.IMyActivity;
 import com.jingdong.common.utils.DPIUtil;
 
+import roboguice.RoboGuice;
+
 /**
  * 全局应用程序类：用于保存和调用全局应用配置及访问网络数据
  * 
