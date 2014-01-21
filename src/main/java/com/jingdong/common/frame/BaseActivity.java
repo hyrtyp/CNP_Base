@@ -22,7 +22,6 @@ import android.widget.TextView;
 
 import com.google.inject.Key;
 import com.hyrt.cnp.R;
-import com.hyrt.cnp.account.utils.FaceUtils;
 import com.jingdong.app.pad.product.ProductListFragment;
 import com.jingdong.app.pad.product.drawable.HandlerRecycleBitmapDrawable;
 import com.jingdong.app.pad.utils.InflateUtil;
@@ -269,10 +268,14 @@ public class BaseActivity extends ActionBarActivity implements RoboContext {
     @TargetApi(Build.VERSION_CODES.HONEYCOMB)
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        menu.add("abc")
-                .setIcon(R.drawable.actionbar_right)
-                .setShowAsAction(
-                        MenuItem.SHOW_AS_ACTION_ALWAYS);
+
+        if(!this.getTitle().equals("转发动态")){
+            menu.add("abc")
+                    .setIcon(R.drawable.actionbar_right)
+                    .setShowAsAction(
+                            MenuItem.SHOW_AS_ACTION_ALWAYS);
+        }
+
         return true;
     }
 
