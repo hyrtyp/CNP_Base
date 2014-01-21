@@ -7,4 +7,5 @@
 
     <dimen name="cnp_school_pop_img_height">230dp</dimen>
     <dimen name="cnp_school_layout_margin">9dp</dimen>
+
 </resources>

@@ -30,12 +30,12 @@ public class SchoolNoticeService {
     * 获取班级公告列表
     * */
     public Notice.Model getClassroomNoticelistData(RestTemplate restTemplate){
-//        cnpClient.configureRequest();
-//        HashMap<String, String> params = cnpClient.getParamsforGet();
-        HashMap<String, String> params = new HashMap<String, String>();
-        params.put("token", "e1ac72b3cf9902f6db8c88f42728db82");
-        params.put("uuid", "104");
-        params.put("cid","117");
+        cnpClient.configureRequest();
+        HashMap<String, String> params = cnpClient.getParamsforGet();
+//        HashMap<String, String> params = new HashMap<String, String>();
+//        params.put("token", "e1ac72b3cf9902f6db8c88f42728db82");
+//        params.put("uuid", "104");
+//        params.put("cid","117");
         return  restTemplate.getForObject("http://api.chinaxueqian.com/classroom/notice/?" +
                 "token={token}&uuid={uuid}&cid={cid}",
                 Notice.Model.class,params);
