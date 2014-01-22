@@ -1,11 +1,12 @@
 package com.hyrt.cnp.account.model;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
 /**
  * Created by GYH on 14-1-3.
  */
-public class Photo {
+public class Photo implements Serializable {
 
     private int photoID;
     private int paId;
@@ -15,6 +16,12 @@ public class Photo {
     private String introduce;
     private int isFocus;
     private int pkind;
+    //用户id
+    private int userID;
+    //幼儿园id
+    private int nurseryID;
+    //班级id
+    private int classroomID;
 
     /**
      * 获取缩略图
@@ -32,6 +39,30 @@ public class Photo {
     public String getImagepics(){
         String str= "http://img.chinaxueqian.com/"+pics;
         return str;
+    }
+
+    public int getUserID() {
+        return userID;
+    }
+
+    public void setUserID(int userID) {
+        this.userID = userID;
+    }
+
+    public int getNurseryID() {
+        return nurseryID;
+    }
+
+    public void setNurseryID(int nurseryID) {
+        this.nurseryID = nurseryID;
+    }
+
+    public int getClassroomID() {
+        return classroomID;
+    }
+
+    public void setClassroomID(int classroomID) {
+        this.classroomID = classroomID;
     }
 
     public int getPhotoID() {

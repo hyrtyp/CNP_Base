@@ -5,13 +5,14 @@ import com.hyrt.cnp.account.utils.FaceUtils;
 
 import org.codehaus.jackson.annotate.JsonIgnoreProperties;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
 /**
  * Created by GYH on 14-1-5.
  */
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class Album {
+public class Album implements Serializable {
     private int paId;
     private String albumName;
     private int classroomId;
