@@ -8,4 +8,11 @@
     <dimen name="cnp_school_pop_img_height">230dp</dimen>
     <dimen name="cnp_school_layout_margin">9dp</dimen>
 
+    <!--元素之间的间距-->
+    <dimen name="view_margin">15dp</dimen>
+    <dimen name="view_margin_small">9dp</dimen>
+    <dimen name="view_margin_smallest">3dp</dimen>
+    <!--容器控件的外间距-->
+    <dimen name="container_margin">9dp</dimen>
+
 </resources>
