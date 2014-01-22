@@ -44,6 +44,54 @@
         <item name="android:layout_marginTop">@dimen/cnp_school_layout_margin</item>
     </style>
 
+    <style name="demo1">
+        <item name="android:layout_alignParentRight">true</item>
+    </style>
 
+
+   <!-- 基本字体样式-->
+    <style name="base_tv">
+        <item name="android:layout_marginLeft">@dimen/view_margin</item>
+        <item name="android:layout_marginRight">@dimen/view_margin</item>
+        <item name="android:layout_marginTop">@dimen/view_margin</item>
+    </style>
+
+    <!--大字体样式-->
+    <style name="large_tv" parent="base_tv">
+        <item name="android:textAppearance">?android:attr/textAppearanceLarge</item>
+        <item name="android:textColor">@android:color/black</item>
+    </style>
+
+    <!--普通字体样式-->
+    <style name="medium_tv" parent="base_tv">
+        <item name="android:textAppearance">?android:attr/textAppearanceMedium</item>
+        <item name="android:textColor">@android:color/black</item>
+    </style>
+
+
+    <!--小字体样式-->
+    <style name="small_tv_1" parent="base_tv">
+        <item name="android:textAppearance">?android:attr/textAppearanceSmall</item>
+        <item name="android:textColor">@android:color/black</item>
+    </style>
+
+    <!--灰色小字体样式-->
+    <style name="small_tv" parent="base_tv">
+        <item name="android:textAppearance">?android:attr/textAppearanceSmall</item>
+        <item name="android:textColor">@android:color/secondary_text_dark</item>
+    </style>
+
+    <!--容器视图样式-->
+    <style name="container_view">
+        <item name="android:layout_margin">@dimen/container_margin</item>
+        <item name="android:padding">@dimen/container_margin</item>
+    </style>
+
+    <!--头像样式-->
+    <style name="face_iv">
+        <item name="android:layout_height">150dp</item>
+        <item name="android:layout_width">150dp</item>
+        <item name="android:src">@drawable/image_test4</item>
+    </style>
 
 </resources>
