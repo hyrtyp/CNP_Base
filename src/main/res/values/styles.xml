@@ -94,4 +94,12 @@
         <item name="android:src">@drawable/image_test4</item>
     </style>
 
+    <style name="small_FaceIv">
+        <item name="android:layout_width">76.5dp</item>
+        <item name="android:layout_height">76.5dp</item>
+        <item name="android:paddingRight">2.7dp</item>
+        <item name="android:paddingBottom">2.75dp</item>
+        <item name="android:paddingTop">0.25dp</item>
+        <item name="android:background">@drawable/iv_bg</item>
+    </style>
 </resources>

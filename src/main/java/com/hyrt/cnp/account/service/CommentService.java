@@ -3,6 +3,8 @@ package com.hyrt.cnp.account.service;
 import com.hyrt.cnp.account.CNPClient;
 import com.hyrt.cnp.account.model.Comment;
 
+import org.springframework.http.client.HttpComponentsClientHttpRequestFactory;
+import org.springframework.util.MultiValueMap;
 import org.springframework.web.client.RestTemplate;
 
 import java.util.HashMap;
@@ -30,28 +32,28 @@ public class CommentService {
     }
 
     //TODO after modify  album
-    public Comment.Model3 addCommentData(RestTemplate restTemplate,Comment comment){
+    public Comment.Model3 addCommentData(Comment comment){
         cnpClient.configureRequest();
-        HashMap<String, String> params = cnpClient.getParamsforGet();
-        params.put("infoID", comment.getInfoID()+"");
-        params.put("infoTitle", comment.getInfoTitle());
-        params.put("infoUserId",comment.getInfoUserId()+"");
-        params.put("infoNurseryId",comment.getInfoNurseryId()+"");
-        params.put("infoClassroomId",comment.getInfoClassroomId()+"");
-        params.put("siteid",comment.getSiteid());
-        params.put("url",comment.getUrl());
-        params.put("lstatus",comment.getLstatus());
-        params.put("content",comment.getContent());
-        params.put("reply",comment.getReply());
-        params.put("recontent",comment.getRecontent());
-        params.put("reuserId",comment.getReuserId());
-        params.put("reusername",comment.getReusername());
-        params.put("redate",comment.getRedate());
-        return  restTemplate.getForObject("http://api.chinaxueqian.com/classroom/comment_add/?" +
-                "token={token}&uuid={uuid}&infoID={infoID}&infoTitle={infoTitle}&infoUserId={infoUserId}&infoNurseryId={infoNurseryId}" +
-                "&infoClassroomId={infoClassroomId}&siteid={siteid}&url={url}&lstatus={lstatus}" +
-                "&content={content}&reply={reply}&recontent={recontent}&reuserId={reuserId}" +
-                "&reusername={reusername}&redate={redate}",
-                Comment.Model3.class, params);
+        MultiValueMap<String,Object> params = cnpClient.getParams();
+        params.set("did", comment.getInfoID()+"");
+        params.set("title", comment.getInfoTitle());
+        params.set("userid", comment.get_id() + "");
+        params.set("nid", comment.getInfoNurseryId() + "");
+        params.set("infocid", comment.getInfoClassroomId() + "");
+        params.set("siteid", comment.getSiteid());
+        params.set("url", comment.getUrl());
+        params.set("lstatus", comment.getLstatus());
+        params.set("con", comment.getContent());
+        params.set("reply", comment.getReply());
+        params.set("rcon", comment.getRecontent());
+        params.set("ruid", comment.getReuserId());
+        params.set("rename", comment.getReusername());
+        params.set("redate", comment.getRedate());
+        return  getRestTemplate().postForObject(
+                "http://api.chinaxueqian.com/classroom/comment_add", params, Comment.Model3.class);
+    }
+
+    protected RestTemplate getRestTemplate() {
+        return new RestTemplate(true, new HttpComponentsClientHttpRequestFactory());
     }
 }

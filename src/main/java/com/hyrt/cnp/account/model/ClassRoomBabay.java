@@ -5,13 +5,14 @@ import com.hyrt.cnp.account.utils.FaceUtils;
 
 import org.codehaus.jackson.annotate.JsonIgnoreProperties;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
 /**
  * Created by GYH on 14-1-6.
  */
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class ClassRoomBabay {
+public class ClassRoomBabay implements Serializable {
     private int user_id;
     private String renname;
     private String logo;
