@@ -43,6 +43,15 @@ public class UserService{
         return result;
     }
 
+    public BaseTest modifyUserFaceBackground(File faceFile){
+        cnpClient.configureRequest();
+        MultiValueMap<String, Object> params = cnpClient.getParams();
+        Resource face = new FileSystemResource(faceFile);
+        params.set("file", face);
+        BaseTest result = getRestTemplate().postForObject("http://api.chinaxueqian.com/user/setback/", cnpClient.getParams(),BaseTest.class);
+        return result;
+    }
+
     public BaseTest modifyUserPassword(String password,String newPwd,String repeatPwd){
         cnpClient.configureRequest();
         MultiValueMap<String, Object> params = cnpClient.getParams();
