@@ -10,6 +10,7 @@ public class FaceUtils {
     public static final String FACE_SMALL = "small";
     public static final String FACE_BIG = "big";
     public static final String FACE_MIDDLE = "middle";
+    public static final String FACE_BG = "bg";
 
     /**
      *

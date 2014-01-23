@@ -25,6 +25,7 @@ public class PhotoUpload {
 
     private BaseActivity baseActivity;
     private Uri uri;
+
     //private static PhotoUpload instance;
 
     /**
@@ -56,6 +57,26 @@ public class PhotoUpload {
         intent.putExtra("aspectX", 1);
         intent.putExtra("aspectY", 1);
         intent.putExtra("outputX", 200);
+        intent.putExtra("outputY", 200);
+        intent.putExtra("scale", true);
+        intent.putExtra("return-data", true);
+        intent.putExtra("outputFormat", Bitmap.CompressFormat.JPEG.toString());
+        intent.putExtra("noFaceDetection", true); // no face detection
+        baseActivity.startActivityForResult(intent,PHOTO_ZOOM);
+    }
+
+    /**
+     * 长图片图片剪切功能,需要在活动中监听forresult方法
+     * @param paramUri 图片所在资源路径
+     */
+    public void startRangPhotoZoom(Uri paramUri){
+        Intent intent = new Intent("com.android.camera.action.CROP");
+        intent.setDataAndType(paramUri, "image/*");
+        intent.putExtra("crop","true");
+        intent.putExtra("crop", "true");
+        intent.putExtra("aspectX", 7);
+        intent.putExtra("aspectY", 4);
+        intent.putExtra("outputX", 350);
         intent.putExtra("outputY", 200);
         intent.putExtra("scale", true);
         intent.putExtra("return-data", true);
