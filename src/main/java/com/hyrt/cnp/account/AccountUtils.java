@@ -201,7 +201,7 @@ public class AccountUtils {
 
             while ((accounts = getAccounts(manager)).length == 0) {
                 if (loggable)
-                    Log.d(TAG, "No GitHub accounts for activity=" + activity);
+                    Log.d(TAG, "No CNP accounts for activity=" + activity);
 
                 Bundle result = manager.addAccount(ACCOUNT_TYPE, null, null,
                         null, activity, null, null).getResult();

@@ -24,6 +24,7 @@ import android.widget.TextView;
 import com.google.inject.Key;
 import com.hyrt.cnp.R;
 import com.hyrt.cnp.account.utils.FaceUtils;
+import com.hyrt.cnp.service.MyService;
 import com.jingdong.app.pad.product.ProductListFragment;
 import com.jingdong.app.pad.product.drawable.HandlerRecycleBitmapDrawable;
 import com.jingdong.app.pad.utils.InflateUtil;
@@ -70,7 +71,7 @@ public class BaseActivity extends ActionBarActivity implements RoboContext {
     }
 
     public SpiceManager spiceManager = new SpiceManager(
-            JacksonSpringAndroidSpiceService.class);
+            MyService.class);
 
     public HttpGroup getHttpGroupaAsynPool() {
         return getHttpGroupaAsynPool(HttpGroupSetting.TYPE_JSON);

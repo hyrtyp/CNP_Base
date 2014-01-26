@@ -38,7 +38,6 @@ public abstract class BaseRequestListener implements RequestListener {
      */
     protected BaseRequestListener(Activity context) {
         this.context = new SoftReference<Activity>(context);
-        RoboGuice.getInjector(context).injectMembers(this);
     }
 
     /**

@@ -2,6 +2,7 @@ package com.hyrt.cnp.account.request;
 
 import android.accounts.Account;
 import android.accounts.AccountManager;
+import android.accounts.AccountsException;
 import android.app.Activity;
 import android.content.Context;
 
@@ -10,6 +11,9 @@ import com.hyrt.cnp.account.AccountScope;
 import com.hyrt.cnp.account.AccountUtils;
 import com.hyrt.cnp.account.model.Base;
 import com.octo.android.robospice.request.springandroid.SpringAndroidSpiceRequest;
+
+import java.io.IOException;
+
 import roboguice.RoboGuice;
 import roboguice.inject.ContextScope;
 
@@ -39,14 +43,22 @@ public abstract class BaseRequest extends SpringAndroidSpiceRequest{
 
     @Override
     public Base loadDataFromNetwork() throws Exception {
+        Base base = null;
         try{
             final AccountManager manager = AccountManager.get(activity);
-            final Account account = AccountUtils.getAccount(manager, activity);
+            final Account account;
+            try {
+                account = AccountUtils.getAccount(manager, activity);
+            } catch (IOException e) {
+                return null;
+            } catch (AccountsException e) {
+                return null;
+            }
             accountScope.enterWith(account, manager);
             try {
                 contextScope.enter(activity);
                 try {
-                    return run();
+                    base = run();
                 } catch (Exception e) {
                     // Retry task if authentication failure occurs and account is
                     // successfully updated
@@ -64,7 +76,7 @@ public abstract class BaseRequest extends SpringAndroidSpiceRequest{
         }catch(Exception e){
             e.printStackTrace();
         }
-        return null;
+        return base;
     }
 
     public abstract Base run();
