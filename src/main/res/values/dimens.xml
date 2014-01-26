@@ -15,4 +15,10 @@
     <!--容器控件的外间距-->
     <dimen name="container_margin">9dp</dimen>
 
+    <!--图片的大小-->
+    <dimen name="imageview_biggest">270dp</dimen>
+    <dimen name="imageview_big">170dp</dimen>
+    <dimen name="imageview_medium">110dp</dimen>
+    <dimen name="imageview_small">90dp</dimen>
+    <dimen name="imageview_smallest">80dp</dimen>
 </resources>

@@ -1,6 +1,7 @@
 package com.hyrt.cnp.account.service;
 
 import com.hyrt.cnp.account.CNPClient;
+import com.hyrt.cnp.account.model.Recipe;
 import com.hyrt.cnp.account.model.RecipeInfo;
 
 import org.springframework.web.client.RestTemplate;
@@ -19,11 +20,11 @@ public class RecipeInfoService {
     }
 
     //TODO after modify
-    public RecipeInfo.Model2 getRecipeWeekData(RestTemplate restTemplate){
+    public RecipeInfo.Model2 getRecipeWeekData(RestTemplate restTemplate,Recipe recipe){
         cnpClient.configureRequest();
         HashMap<String, String> params = cnpClient.getParamsforGet();
-        params.put("year","2013");
-        params.put("week","25");
+        params.put("year",recipe.getYears());
+        params.put("week",recipe.getWeekd());
         return  restTemplate.getForObject("http://api.chinaxueqian.com/school/week_recipe?"+
                 "token={token}&uuid={uuid}&sid={sid}&year={year}&week={week}",
                 RecipeInfo.Model2.class, params);
@@ -34,12 +35,8 @@ public class RecipeInfoService {
      * */
     //TODO after modify
     public RecipeInfo.Model getRecipeDayData(RestTemplate restTemplate,String time){
-//        cnpClient.configureRequest();
-//        HashMap<String, String> params = cnpClient.getParamsforGet();
-        HashMap<String, String> params = new HashMap<String, String>();
-        params.put("token", "e1ac72b3cf9902f6db8c88f42728db82");
-        params.put("uuid", "104");
-        params.put("sid","2");
+        cnpClient.configureRequest();
+        HashMap<String, String> params = cnpClient.getParamsforGet();
         params.put("time",time);
         return  restTemplate.getForObject("http://api.chinaxueqian.com/school/recipe_info/?" +
                 "token={token}&uuid={uuid}&sid={sid}&time={time}",

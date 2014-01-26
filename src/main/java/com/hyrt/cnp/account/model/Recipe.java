@@ -3,13 +3,14 @@ package com.hyrt.cnp.account.model;
 
 import org.codehaus.jackson.annotate.JsonIgnoreProperties;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
 /**
  * Created by GYH on 14-1-4.
  */
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class Recipe {
+public class Recipe implements Serializable {
     private String total;
     private String posttime;
     private String nurseryID;

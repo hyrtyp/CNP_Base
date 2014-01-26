@@ -5,13 +5,14 @@ import com.hyrt.cnp.account.utils.FaceUtils;
 
 import org.codehaus.jackson.annotate.JsonIgnoreProperties;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
 /**
  * Created by GYH on 14-1-5.
  */
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class Album {
+public class Album implements Serializable {
     private int paId;
     private String albumName;
     private int classroomId;
@@ -22,6 +23,105 @@ public class Album {
     private String posttime;
     private int photo_ID;
     private String photoNums;
+
+    private int nurseryId;
+    private String nurseryName;
+    private int user_id;
+    private String authShell;
+    private String thpath;
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Album album = (Album) o;
+
+        if (classroomId != album.classroomId) return false;
+        if (nurseryId != album.nurseryId) return false;
+        if (paId != album.paId) return false;
+        if (photo_ID != album.photo_ID) return false;
+        if (user_id != album.user_id) return false;
+        if (aType != null ? !aType.equals(album.aType) : album.aType != null) return false;
+        if (albumDesc != null ? !albumDesc.equals(album.albumDesc) : album.albumDesc != null)
+            return false;
+        if (albumName != null ? !albumName.equals(album.albumName) : album.albumName != null)
+            return false;
+        if (authShell != null ? !authShell.equals(album.authShell) : album.authShell != null)
+            return false;
+        if (classroomName != null ? !classroomName.equals(album.classroomName) : album.classroomName != null)
+            return false;
+        if (nurseryName != null ? !nurseryName.equals(album.nurseryName) : album.nurseryName != null)
+            return false;
+        if (photoNums != null ? !photoNums.equals(album.photoNums) : album.photoNums != null)
+            return false;
+        if (pkind != null ? !pkind.equals(album.pkind) : album.pkind != null) return false;
+        if (posttime != null ? !posttime.equals(album.posttime) : album.posttime != null)
+            return false;
+        if (thpath != null ? !thpath.equals(album.thpath) : album.thpath != null) return false;
+
+        return true;
+    }
+
+    @Override
+    public int hashCode() {
+        int result = paId;
+        result = 31 * result + (albumName != null ? albumName.hashCode() : 0);
+        result = 31 * result + classroomId;
+        result = 31 * result + (classroomName != null ? classroomName.hashCode() : 0);
+        result = 31 * result + (aType != null ? aType.hashCode() : 0);
+        result = 31 * result + (pkind != null ? pkind.hashCode() : 0);
+        result = 31 * result + (albumDesc != null ? albumDesc.hashCode() : 0);
+        result = 31 * result + (posttime != null ? posttime.hashCode() : 0);
+        result = 31 * result + photo_ID;
+        result = 31 * result + (photoNums != null ? photoNums.hashCode() : 0);
+        result = 31 * result + nurseryId;
+        result = 31 * result + (nurseryName != null ? nurseryName.hashCode() : 0);
+        result = 31 * result + user_id;
+        result = 31 * result + (authShell != null ? authShell.hashCode() : 0);
+        result = 31 * result + (thpath != null ? thpath.hashCode() : 0);
+        return result;
+    }
+
+    public int getNurseryId() {
+        return nurseryId;
+    }
+
+    public void setNurseryId(int nurseryId) {
+        this.nurseryId = nurseryId;
+    }
+
+    public String getNurseryName() {
+        return nurseryName;
+    }
+
+    public void setNurseryName(String nurseryName) {
+        this.nurseryName = nurseryName;
+    }
+
+    public int getUser_id() {
+        return user_id;
+    }
+
+    public void setUser_id(int user_id) {
+        this.user_id = user_id;
+    }
+
+    public String getAuthShell() {
+        return authShell;
+    }
+
+    public void setAuthShell(String authShell) {
+        this.authShell = authShell;
+    }
+
+    public String getThpath() {
+        return thpath;
+    }
+
+    public void setThpath(String thpath) {
+        this.thpath = thpath;
+    }
 
     public String getImagepath(){
        return FaceUtils.getClassroomAblumImage(photo_ID,FaceUtils.FACE_BIG);
@@ -59,47 +159,6 @@ public class Album {
         public void setData(ArrayList<Album> data) {
             this.data = data;
         }
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-
-        Album album = (Album) o;
-
-        if (classroomId != album.classroomId) return false;
-        if (paId != album.paId) return false;
-        if (photo_ID != album.photo_ID) return false;
-        if (aType != null ? !aType.equals(album.aType) : album.aType != null) return false;
-        if (albumDesc != null ? !albumDesc.equals(album.albumDesc) : album.albumDesc != null)
-            return false;
-        if (albumName != null ? !albumName.equals(album.albumName) : album.albumName != null)
-            return false;
-        if (classroomName != null ? !classroomName.equals(album.classroomName) : album.classroomName != null)
-            return false;
-        if (photoNums != null ? !photoNums.equals(album.photoNums) : album.photoNums != null)
-            return false;
-        if (pkind != null ? !pkind.equals(album.pkind) : album.pkind != null) return false;
-        if (posttime != null ? !posttime.equals(album.posttime) : album.posttime != null)
-            return false;
-
-        return true;
-    }
-
-    @Override
-    public int hashCode() {
-        int result = paId;
-        result = 31 * result + (albumName != null ? albumName.hashCode() : 0);
-        result = 31 * result + classroomId;
-        result = 31 * result + (classroomName != null ? classroomName.hashCode() : 0);
-        result = 31 * result + (aType != null ? aType.hashCode() : 0);
-        result = 31 * result + (pkind != null ? pkind.hashCode() : 0);
-        result = 31 * result + (albumDesc != null ? albumDesc.hashCode() : 0);
-        result = 31 * result + (posttime != null ? posttime.hashCode() : 0);
-        result = 31 * result + photo_ID;
-        result = 31 * result + (photoNums != null ? photoNums.hashCode() : 0);
-        return result;
     }
 
     public int getPaId() {

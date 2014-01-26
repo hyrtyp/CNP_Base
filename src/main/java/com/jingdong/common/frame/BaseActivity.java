@@ -109,7 +109,7 @@ public class BaseActivity extends ActionBarActivity implements RoboContext {
         injector.injectMembers(this);
         super.onCreate(savedInstanceState);
         requestWindowFeature(Window.FEATURE_INDETERMINATE_PROGRESS);
-        if (Log.D) {
+        if (true) {
             Log.d("MainActivity",
                     " -->> this.getResources().getDisplayMetrics().density:"
                             + getResources().getDisplayMetrics().density);
@@ -271,10 +271,14 @@ public class BaseActivity extends ActionBarActivity implements RoboContext {
     @TargetApi(Build.VERSION_CODES.HONEYCOMB)
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        menu.add("abc")
-                .setIcon(R.drawable.actionbar_right)
-                .setShowAsAction(
-                        MenuItem.SHOW_AS_ACTION_ALWAYS);
+
+        if(!this.getTitle().equals("转发动态")){
+            menu.add("abc")
+                    .setIcon(R.drawable.actionbar_right)
+                    .setShowAsAction(
+                            MenuItem.SHOW_AS_ACTION_ALWAYS);
+        }
+
         return true;
     }
 

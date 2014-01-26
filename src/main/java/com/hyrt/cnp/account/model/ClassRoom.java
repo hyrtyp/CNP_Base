@@ -5,13 +5,14 @@ import com.hyrt.cnp.account.utils.FaceUtils;
 
 import org.codehaus.jackson.annotate.JsonIgnoreProperties;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
 /**
  * Created by GYH on 14-1-4.
  */
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class ClassRoom {
+public class ClassRoom implements Serializable {
     private int classroomID;
     private String roomname;
     private String grade;

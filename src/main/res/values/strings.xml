@@ -11,6 +11,7 @@
     <string name="classroomnotice">班级公告</string>
     <string name="dayrecipe">今日食谱</string>
     <string name="classroomphoto">班级相册</string>
+    <string name="classroomphotoinfo">班级专辑</string>
     <string name="classroomname">向日葵小班</string>
     <string name="schoolinfo">园所介绍</string>
     <string name="myschool">我的幼儿园</string>
@@ -20,4 +21,8 @@
     <string name="starbabay">明星宝宝</string>
     <string name="classroomsetting">班级设置</string>
     <string name="weekrecipe">每周食谱</string>
+    <string name="babayword">童言稚语</string>
+    <string name="setcommit">发评论</string>
+    <string name="setzfcommit">转发动态</string>
+
 </resources>
