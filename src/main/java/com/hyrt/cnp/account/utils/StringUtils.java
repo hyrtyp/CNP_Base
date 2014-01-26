@@ -208,4 +208,58 @@ public class StringUtils
 			return defValue;
 		}
 	}
-}
+    /**
+     * 判断当前日期是星期几
+     *
+     * @param pTime 修要判断的时间
+     * @return dayForWeek 判断结果
+     * @Exception 发生异常
+     */
+    public static int dayForWeek(String pTime) throws Exception {
+        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+        Calendar c = Calendar.getInstance();
+        c.setTime(format.parse(pTime));
+        int dayForWeek = 0;
+        if(c.get(Calendar.DAY_OF_WEEK) == 1){
+            dayForWeek = 7;
+        }else{
+            dayForWeek = c.get(Calendar.DAY_OF_WEEK) - 1;
+        }
+        return dayForWeek;
+    }
+
+
+
+    //TODO stimeforday
+    /**
+     * 将毫秒数转换为时间
+     * yyyy-MM-dd
+     * */
+
+    public static String StimeForday(String stime)throws Exception{
+        Date date = new Date(stime);
+        if(date == null) {
+            return "Unknown";
+        }
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+        String days=sdf.format(date);
+        return days;
+    }
+
+    //TODO stimeforday2
+    /**
+     * 将毫秒数转换为时间
+     * yyyy-MM-dd HH:mm:ss
+     * */
+
+    public static String StimeForday2(String stime)throws Exception{
+        Date date = new Date(stime);
+        if(date == null) {
+            return "Unknown";
+        }
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        String days=sdf.format(date);
+        return days;
+    }
+
+ }

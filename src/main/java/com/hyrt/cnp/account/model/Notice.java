@@ -1,6 +1,8 @@
 package com.hyrt.cnp.account.model;
 
 
+import com.hyrt.cnp.account.utils.StringUtils;
+
 import org.codehaus.jackson.annotate.JsonIgnoreProperties;
 
 import java.io.Serializable;
@@ -78,6 +80,15 @@ public class Notice implements Serializable {
 
     public void setContetn(String content) {
         this.content = content;
+    }
+
+    public String getPosttime2(){
+        try {
+            return StringUtils.StimeForday(posttime+"");
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
     }
 
     public int getPosttime() {

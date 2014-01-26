@@ -20,7 +20,7 @@ public class CommentService {
         this.cnpClient = cnpClient;
     }
 
-    //TODO after modify  album
+    //TODO after modify  commentlist
     public Comment.Model getCommentlistData(RestTemplate restTemplate,String infoid,String siteid){
         cnpClient.configureRequest();
         HashMap<String, String> params = cnpClient.getParamsforGet();
@@ -36,6 +36,28 @@ public class CommentService {
         cnpClient.configureRequest();
         MultiValueMap<String,Object> params = cnpClient.getParams();
         params.set("did", comment.getInfoID()+"");
+        params.set("title", comment.getInfoTitle());
+        params.set("userid", comment.get_id() + "");
+        params.set("nid", comment.getInfoNurseryId() + "");
+        params.set("infocid", comment.getInfoClassroomId() + "");
+        params.set("siteid", comment.getSiteid());
+        params.set("url", comment.getUrl());
+        params.set("lstatus", comment.getLstatus());
+        params.set("con", comment.getContent());
+        params.set("reply", comment.getReply());
+        params.set("rcon", comment.getRecontent());
+        params.set("ruid", comment.getReuserId());
+        params.set("rename", comment.getReusername());
+        params.set("redate", comment.getRedate());
+        return  getRestTemplate().postForObject(
+                "http://api.chinaxueqian.com/classroom/comment_add", params, Comment.Model3.class);
+    }
+
+    //TODO after modify  adddynamicCommentData
+    public Comment.Model3 adddynamicCommentData(Comment comment){
+        cnpClient.configureRequest();
+        MultiValueMap<String,Object> params = cnpClient.getParams();
+        params.set("did", comment.getInfoid2()+"");
         params.set("title", comment.getInfoTitle());
         params.set("userid", comment.get_id() + "");
         params.set("nid", comment.getInfoNurseryId() + "");

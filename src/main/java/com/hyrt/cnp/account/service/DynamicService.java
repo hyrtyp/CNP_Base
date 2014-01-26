@@ -3,6 +3,8 @@ package com.hyrt.cnp.account.service;
 import com.hyrt.cnp.account.CNPClient;
 import com.hyrt.cnp.account.model.Dynamic;
 
+import org.springframework.http.client.HttpComponentsClientHttpRequestFactory;
+import org.springframework.util.MultiValueMap;
 import org.springframework.web.client.RestTemplate;
 
 import java.util.HashMap;
@@ -18,29 +20,38 @@ public class DynamicService {
         this.cnpClient = cnpClient;
     }
 
-    //TODO after modify  album
+    //TODO after modify  babayDynamic uid
     public Dynamic.Model getBabayDynamicData(RestTemplate restTemplate,String uid){
         cnpClient.configureRequest();
         HashMap<String, String> params = cnpClient.getParamsforGet();
-//        HashMap<String, String> params = new HashMap<String, String>();
-//        params.put("token", "e1ac72b3cf9902f6db8c88f42728db82");
-//        params.put("uuid", "104");
-        params.put("uid","222");
+        params.put("uid",uid);
         return  restTemplate.getForObject("http://api.chinaxueqian.com/home/dynamic_user/?" +
                 "token={token}&uuid={uuid}&uid={uid}",
                 Dynamic.Model.class, params);
     }
 
-    //TODO after modify  album
     public Dynamic.Model getBabaywordData(RestTemplate restTemplate,String uid){
         cnpClient.configureRequest();
         HashMap<String, String> params = cnpClient.getParamsforGet();
-//        HashMap<String, String> params = new HashMap<String, String>();
-//        params.put("token", "e1ac72b3cf9902f6db8c88f42728db82");
-//        params.put("uuid", "104");
-        params.put("uid","222");
+        params.put("uid",uid);
         return  restTemplate.getForObject("http://api.chinaxueqian.com/home/dynamic_my?" +
                 "token={token}&uuid={uuid}&uid={uid}",
                 Dynamic.Model.class, params);
+    }
+
+
+    public Dynamic.Model3 adddynamiczfData(Dynamic dynamic){
+        cnpClient.configureRequest();
+        MultiValueMap<String,Object> params = cnpClient.getParams();
+        params.set("did", dynamic.get_id());
+        params.set("content", dynamic.getContent());
+
+        Dynamic.Model3 result = getRestTemplate().postForObject(
+                "http://api.chinaxueqian.com/home/dynamic_tran/", params, Dynamic.Model3.class);
+        return result;
+    }
+
+    protected RestTemplate getRestTemplate() {
+        return new RestTemplate(true, new HttpComponentsClientHttpRequestFactory());
     }
 }

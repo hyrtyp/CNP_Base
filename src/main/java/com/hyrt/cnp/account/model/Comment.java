@@ -34,6 +34,87 @@ public class Comment {
     private String reuserId;
     private String reusername;
     private String redate;
+    private String infoid2;
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Comment comment = (Comment) o;
+
+        if (infoClassroomId != comment.infoClassroomId) return false;
+        if (infoID != comment.infoID) return false;
+        if (infoNurseryId != comment.infoNurseryId) return false;
+        if (infoUserId != comment.infoUserId) return false;
+        if (nursery_id != comment.nursery_id) return false;
+        if (userGroup != comment.userGroup) return false;
+        if (userid != comment.userid) return false;
+        if (_id != null ? !_id.equals(comment._id) : comment._id != null) return false;
+        if (content != null ? !content.equals(comment.content) : comment.content != null)
+            return false;
+        if (creatdate != null ? !creatdate.equals(comment.creatdate) : comment.creatdate != null)
+            return false;
+        if (infoTitle != null ? !infoTitle.equals(comment.infoTitle) : comment.infoTitle != null)
+            return false;
+        if (infoid2 != null ? !infoid2.equals(comment.infoid2) : comment.infoid2 != null)
+            return false;
+        if (ip != null ? !ip.equals(comment.ip) : comment.ip != null) return false;
+        if (lstatus != null ? !lstatus.equals(comment.lstatus) : comment.lstatus != null)
+            return false;
+        if (nursery_name != null ? !nursery_name.equals(comment.nursery_name) : comment.nursery_name != null)
+            return false;
+        if (recontent != null ? !recontent.equals(comment.recontent) : comment.recontent != null)
+            return false;
+        if (redate != null ? !redate.equals(comment.redate) : comment.redate != null) return false;
+        if (reply != null ? !reply.equals(comment.reply) : comment.reply != null) return false;
+        if (reuserId != null ? !reuserId.equals(comment.reuserId) : comment.reuserId != null)
+            return false;
+        if (reusername != null ? !reusername.equals(comment.reusername) : comment.reusername != null)
+            return false;
+        if (siteid != null ? !siteid.equals(comment.siteid) : comment.siteid != null) return false;
+        if (url != null ? !url.equals(comment.url) : comment.url != null) return false;
+        if (username != null ? !username.equals(comment.username) : comment.username != null)
+            return false;
+
+        return true;
+    }
+
+    @Override
+    public int hashCode() {
+        int result = _id != null ? _id.hashCode() : 0;
+        result = 31 * result + infoID;
+        result = 31 * result + (infoTitle != null ? infoTitle.hashCode() : 0);
+        result = 31 * result + infoUserId;
+        result = 31 * result + infoNurseryId;
+        result = 31 * result + infoClassroomId;
+        result = 31 * result + (siteid != null ? siteid.hashCode() : 0);
+        result = 31 * result + (url != null ? url.hashCode() : 0);
+        result = 31 * result + userid;
+        result = 31 * result + (username != null ? username.hashCode() : 0);
+        result = 31 * result + nursery_id;
+        result = 31 * result + (nursery_name != null ? nursery_name.hashCode() : 0);
+        result = 31 * result + userGroup;
+        result = 31 * result + (creatdate != null ? creatdate.hashCode() : 0);
+        result = 31 * result + (ip != null ? ip.hashCode() : 0);
+        result = 31 * result + (lstatus != null ? lstatus.hashCode() : 0);
+        result = 31 * result + (content != null ? content.hashCode() : 0);
+        result = 31 * result + (reply != null ? reply.hashCode() : 0);
+        result = 31 * result + (recontent != null ? recontent.hashCode() : 0);
+        result = 31 * result + (reuserId != null ? reuserId.hashCode() : 0);
+        result = 31 * result + (reusername != null ? reusername.hashCode() : 0);
+        result = 31 * result + (redate != null ? redate.hashCode() : 0);
+        result = 31 * result + (infoid2 != null ? infoid2.hashCode() : 0);
+        return result;
+    }
+
+    public String getInfoid2() {
+        return infoid2;
+    }
+
+    public void setInfoid2(String infoid2) {
+        this.infoid2 = infoid2;
+    }
 
     public String getphotoImage(){
         return  FaceUtils.getAvatar(userid, FaceUtils.FACE_BIG);
@@ -150,75 +231,6 @@ public class Comment {
         }
     }
 
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-
-        Comment comment = (Comment) o;
-
-        if (infoClassroomId != comment.infoClassroomId) return false;
-        if (infoID != comment.infoID) return false;
-        if (infoNurseryId != comment.infoNurseryId) return false;
-        if (infoUserId != comment.infoUserId) return false;
-        if (nursery_id != comment.nursery_id) return false;
-        if (userGroup != comment.userGroup) return false;
-        if (userid != comment.userid) return false;
-        if (_id != null ? !_id.equals(comment._id) : comment._id != null) return false;
-        if (content != null ? !content.equals(comment.content) : comment.content != null)
-            return false;
-        if (creatdate != null ? !creatdate.equals(comment.creatdate) : comment.creatdate != null)
-            return false;
-        if (infoTitle != null ? !infoTitle.equals(comment.infoTitle) : comment.infoTitle != null)
-            return false;
-        if (ip != null ? !ip.equals(comment.ip) : comment.ip != null) return false;
-        if (lstatus != null ? !lstatus.equals(comment.lstatus) : comment.lstatus != null)
-            return false;
-        if (nursery_name != null ? !nursery_name.equals(comment.nursery_name) : comment.nursery_name != null)
-            return false;
-        if (recontent != null ? !recontent.equals(comment.recontent) : comment.recontent != null)
-            return false;
-        if (redate != null ? !redate.equals(comment.redate) : comment.redate != null) return false;
-        if (reply != null ? !reply.equals(comment.reply) : comment.reply != null) return false;
-        if (reuserId != null ? !reuserId.equals(comment.reuserId) : comment.reuserId != null)
-            return false;
-        if (reusername != null ? !reusername.equals(comment.reusername) : comment.reusername != null)
-            return false;
-        if (siteid != null ? !siteid.equals(comment.siteid) : comment.siteid != null) return false;
-        if (url != null ? !url.equals(comment.url) : comment.url != null) return false;
-        if (username != null ? !username.equals(comment.username) : comment.username != null)
-            return false;
-
-        return true;
-    }
-
-    @Override
-    public int hashCode() {
-        int result = _id != null ? _id.hashCode() : 0;
-        result = 31 * result + infoID;
-        result = 31 * result + (infoTitle != null ? infoTitle.hashCode() : 0);
-        result = 31 * result + infoUserId;
-        result = 31 * result + infoNurseryId;
-        result = 31 * result + infoClassroomId;
-        result = 31 * result + (siteid != null ? siteid.hashCode() : 0);
-        result = 31 * result + (url != null ? url.hashCode() : 0);
-        result = 31 * result + userid;
-        result = 31 * result + (username != null ? username.hashCode() : 0);
-        result = 31 * result + nursery_id;
-        result = 31 * result + (nursery_name != null ? nursery_name.hashCode() : 0);
-        result = 31 * result + userGroup;
-        result = 31 * result + (creatdate != null ? creatdate.hashCode() : 0);
-        result = 31 * result + (ip != null ? ip.hashCode() : 0);
-        result = 31 * result + (lstatus != null ? lstatus.hashCode() : 0);
-        result = 31 * result + (content != null ? content.hashCode() : 0);
-        result = 31 * result + (reply != null ? reply.hashCode() : 0);
-        result = 31 * result + (recontent != null ? recontent.hashCode() : 0);
-        result = 31 * result + (reuserId != null ? reuserId.hashCode() : 0);
-        result = 31 * result + (reusername != null ? reusername.hashCode() : 0);
-        result = 31 * result + (redate != null ? redate.hashCode() : 0);
-        return result;
-    }
 
     public String get_id() {
         return _id;
