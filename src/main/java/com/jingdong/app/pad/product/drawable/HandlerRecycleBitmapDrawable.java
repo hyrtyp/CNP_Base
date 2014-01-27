@@ -35,7 +35,7 @@ public class HandlerRecycleBitmapDrawable extends ExceptionDrawable {
         if ((this.bitmap != null) && (!this.bitmap.isRecycled()))
             try {
                 Rect localRect = copyBounds();
-                localRect.set(2 + localRect.left, 2 + localRect.top, -2 + localRect.right, -4 + localRect.bottom);
+                localRect.set(localRect.left, localRect.top, localRect.right, localRect.bottom);
                 this.bitmapRect.set(0, 0, this.bitmap.getWidth(), this.bitmap.getHeight());
                 paramCanvas.drawBitmap(this.bitmap, this.bitmapRect, localRect, this.paint);
             } catch (Throwable localThrowable) {

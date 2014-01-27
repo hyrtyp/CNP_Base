@@ -102,4 +102,13 @@
         <item name="android:paddingTop">0.25dp</item>
 
     </style>
+
+    <style name="FaceIv">
+        <item name="android:layout_width">76.5dp</item>
+        <item name="android:layout_height">76.5dp</item>
+        <item name="android:padding">1dp</item>
+        <item name="android:background">@drawable/shape_sendword_line</item>
+        <item name="android:layout_marginRight">25dp</item>
+    </style>
+
 </resources>

@@ -2,8 +2,8 @@
 <resources>
 
     <string-array name="upload_type">
-        <item>相册上传</item>
-        <item>照相上传</item>
+        <item>选择相册</item>
+        <item>相机拍摄</item>
     </string-array>
 
 </resources>
