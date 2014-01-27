@@ -7,10 +7,10 @@
     android:id="@+id/pop_view"
     android:gravity="center"
     android:background="#e0000000">
-    <ImageView
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/cnp_school_pop_img_height"
-        style="@style/cnp_school_layout"
+
+    <uk.co.senab.photoview.PhotoView
         android:id="@+id/pop_img"
-        />
+        android:layout_width="fill_parent"
+        android:layout_height="300dp" />
+
 </LinearLayout>

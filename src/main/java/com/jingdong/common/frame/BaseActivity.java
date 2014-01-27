@@ -49,6 +49,7 @@ import java.util.Map;
 import roboguice.RoboGuice;
 import roboguice.inject.RoboInjector;
 import roboguice.util.RoboContext;
+import uk.co.senab.photoview.PhotoView;
 
 /**
  * 应用程序Activity的基类
@@ -303,7 +304,7 @@ public class BaseActivity extends ActionBarActivity implements RoboContext {
      * @param view 窗口view
      * @param bigImgPath 大图路径
      */
-    public  void ShowPop(View view,String bigImgPath) {
+    public  void showPop(View view,String bigImgPath) {
         View popView = this.getLayoutInflater().inflate(
                 R.layout.layout_popwindwos, null);
         final PopupWindow popWin = new PopupWindow(popView, ViewPager.LayoutParams.MATCH_PARENT,
