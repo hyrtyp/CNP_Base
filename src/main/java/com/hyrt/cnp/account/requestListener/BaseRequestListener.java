@@ -112,6 +112,7 @@ public abstract class BaseRequestListener implements RequestListener {
                             dialog.dismiss();
                         }
                     });
+            if(context.get()!=null&&!context.get().isFinishing())
             dialog.show();
         }
     }
