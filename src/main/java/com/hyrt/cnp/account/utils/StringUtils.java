@@ -246,19 +246,16 @@ public class StringUtils
         return days;
     }
 
-    //TODO stimeforday2
     /**
      * 将毫秒数转换为时间
      * yyyy-MM-dd HH:mm:ss
      * */
 
-    public static String StimeForday2(String stime)throws Exception{
-        Date date = new Date(stime);
-        if(date == null) {
-            return "Unknown";
-        }
+    public static String millTimeToNormalTime(String stime)throws Exception{
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTimeInMillis(Integer.parseInt(stime));
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-        String days=sdf.format(date);
+        String days=sdf.format(calendar.getTime());
         return days;
     }
 
