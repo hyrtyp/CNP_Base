@@ -16,14 +16,12 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
-import android.view.WindowManager;
 import android.widget.ImageView;
 import android.widget.PopupWindow;
 import android.widget.TextView;
 
 import com.google.inject.Key;
 import com.hyrt.cnp.R;
-import com.hyrt.cnp.account.utils.FaceUtils;
 import com.hyrt.cnp.service.MyService;
 import com.jingdong.app.pad.product.ProductListFragment;
 import com.jingdong.app.pad.product.drawable.HandlerRecycleBitmapDrawable;
@@ -37,7 +35,6 @@ import com.jingdong.common.http.HttpSetting;
 import com.jingdong.common.utils.DPIUtil;
 import com.jingdong.common.utils.Log;
 import com.jingdong.common.utils.cache.GlobalImageCache;
-import com.octo.android.robospice.JacksonSpringAndroidSpiceService;
 import com.octo.android.robospice.SpiceManager;
 
 import net.oschina.app.AppContext;

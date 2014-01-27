@@ -38,7 +38,7 @@ public class ExceptionDrawable extends Drawable {
 		this.paint.setTextAlign(Paint.Align.CENTER);
 		this.paint.setAntiAlias(true);
 		this.text = paramString;
-		if (bitmap != null) {
+		if (bitmap ==null) {
 			bitmap = ((BitmapDrawable) paramContext.getResources().getDrawable(
 					R.drawable.actionbar_right)).getBitmap();
 			width = bitmap.getWidth();

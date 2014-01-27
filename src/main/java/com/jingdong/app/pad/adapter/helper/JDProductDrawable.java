@@ -6,6 +6,7 @@ import android.graphics.Canvas;
 import android.graphics.ColorFilter;
 import android.graphics.Paint;
 import android.graphics.Rect;
+import android.graphics.RectF;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 
@@ -65,9 +66,9 @@ public class JDProductDrawable extends Drawable {
 		this.bitmaPaint.setFilterBitmap(true);
 		if (logoBitmap == null) {
 			logoBitmap = ((BitmapDrawable) this.resources
-					.getDrawable(R.drawable.actionbar_right)).getBitmap();
-			logoBitmapWidth = logoBitmap.getWidth();
-			logoBitmapHeight = logoBitmap.getHeight();
+					.getDrawable(R.drawable.spinner_inner)).getBitmap();
+			logoBitmapWidth = digest.getWidth();
+			logoBitmapHeight = digest.getHeight();
 		}
         //TODO after modify
 		if (text == null)
@@ -84,10 +85,12 @@ public class JDProductDrawable extends Drawable {
 
 	private void drawException(Canvas paramCanvas, int centerX, int centerY) {
 		paramCanvas.drawText(text, centerX, centerY, this.paint);
-		if (logoBitmap != null)
-			paramCanvas.drawBitmap(logoBitmap, centerX - logoBitmapWidth / 2,
-					centerY - logoBitmapHeight / 2 + DPIUtil.dip2px(10.0F),
-					this.paint);
+		if (logoBitmap != null){
+            RectF rectF = new RectF(centerX/4,centerY/4,centerX*7/4,centerY*7/4);
+            paramCanvas.drawBitmap(logoBitmap, null,
+                    rectF,
+                    this.paint);
+        }
 	}
 
 	public void draw(Canvas paramCanvas) {
