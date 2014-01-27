@@ -25,8 +25,11 @@ public class PhotoUpload {
 
     private BaseActivity baseActivity;
     private Uri uri;
+    private boolean isRang;
 
-    //private static PhotoUpload instance;
+    public void setRang(boolean isRang) {
+        this.isRang = isRang;
+    }
 
     /**
      *
@@ -37,13 +40,6 @@ public class PhotoUpload {
         this.baseActivity = baseActivity;
         this.uri = uri;
     }
-
-   /* public static PhotoUpload getInstance(BaseActivity baseActivity){
-        if(instance == null){
-            instance = new PhotoUpload(baseActivity);
-        }
-        return instance;
-    }*/
 
     /**
      * 图片剪切功能,需要在活动中监听forresult方法
@@ -60,7 +56,7 @@ public class PhotoUpload {
         intent.putExtra("outputY", 200);
         intent.putExtra("scale", true);
         intent.putExtra("return-data", true);
-        intent.putExtra("outputFormat", Bitmap.CompressFormat.JPEG.toString());
+        intent.putExtra("outputFormat", Bitmap.CompressFormat.PNG.toString());
         intent.putExtra("noFaceDetection", true); // no face detection
         baseActivity.startActivityForResult(intent,PHOTO_ZOOM);
     }
@@ -80,7 +76,7 @@ public class PhotoUpload {
         intent.putExtra("outputY", 200);
         intent.putExtra("scale", true);
         intent.putExtra("return-data", true);
-        intent.putExtra("outputFormat", Bitmap.CompressFormat.JPEG.toString());
+        intent.putExtra("outputFormat", Bitmap.CompressFormat.PNG.toString());
         intent.putExtra("noFaceDetection", true); // no face detection
         baseActivity.startActivityForResult(intent,PHOTO_ZOOM);
     }
@@ -125,13 +121,20 @@ public class PhotoUpload {
         Intent intent = new Intent(Intent.ACTION_GET_CONTENT, null);
         intent.setType("image/*");
         intent.putExtra("crop", "true");
-        intent.putExtra("aspectX", 1);
-        intent.putExtra("aspectY", 1);
-        intent.putExtra("outputX", 200);
-        intent.putExtra("outputY", 200);
+        if(isRang){
+            intent.putExtra("aspectX", 7);
+            intent.putExtra("aspectY", 4);
+            intent.putExtra("outputX", 350);
+            intent.putExtra("outputY", 200);
+        }else{
+            intent.putExtra("aspectX", 1);
+            intent.putExtra("aspectY", 1);
+            intent.putExtra("outputX", 200);
+            intent.putExtra("outputY", 200);
+        }
         intent.putExtra("scale", true);
         intent.putExtra("return-data", true);
-        intent.putExtra("outputFormat", Bitmap.CompressFormat.JPEG.toString());
+        intent.putExtra("outputFormat", Bitmap.CompressFormat.PNG.toString());
         intent.putExtra("noFaceDetection", true); // no face detection
         baseActivity.startActivityForResult(intent, PhotoUpload.PHOTO_ZOOM);
     }

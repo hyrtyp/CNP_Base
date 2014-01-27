@@ -6,7 +6,7 @@
     <string name="action_settings">Settings</string>
 
     <string name="picupload_title">请选择上传方式</string>
-    <string name="camera_upload">照相上传</string>
+    <string name="camera_upload">相机拍摄</string>
     <string name="classroombabay">班级成员</string>
     <string name="classroomnotice">班级公告</string>
     <string name="dayrecipe">今日食谱</string>
