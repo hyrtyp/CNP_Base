@@ -34,10 +34,10 @@ public class PhotoService {
     /**
      * 获取班级相册图片
      * */
-    //TODO after modify albumphotolist
     public Photo.Model getClassroomAlbumphotolistData(RestTemplate restTemplate,int paid){
         cnpClient.configureRequest();
         HashMap<String, String> params = cnpClient.getParamsforGet();
+//        params.put("cid","117");
         params.put("paid",paid+"");
         return  restTemplate.getForObject("http://api.chinaxueqian.com/classroom/photo_album/?" +
                 "token={token}&uuid={uuid}&cid={cid}&paid={paid}",

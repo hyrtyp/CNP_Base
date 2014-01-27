@@ -15,6 +15,7 @@ public class BabyInfo {
     private String sex;
     private String birthday;
     private String ethnic;
+    private String jobdate;
 
     public static class Model extends Base{
         private static final long serialVersionUID = -1;
@@ -61,6 +62,8 @@ public class BabyInfo {
             return false;
         if (ethnic != null ? !ethnic.equals(babyInfo.ethnic) : babyInfo.ethnic != null)
             return false;
+        if (jobdate != null ? !jobdate.equals(babyInfo.jobdate) : babyInfo.jobdate != null)
+            return false;
         if (nurseryName != null ? !nurseryName.equals(babyInfo.nurseryName) : babyInfo.nurseryName != null)
             return false;
         if (renname != null ? !renname.equals(babyInfo.renname) : babyInfo.renname != null)
@@ -83,7 +86,16 @@ public class BabyInfo {
         result = 31 * result + (sex != null ? sex.hashCode() : 0);
         result = 31 * result + (birthday != null ? birthday.hashCode() : 0);
         result = 31 * result + (ethnic != null ? ethnic.hashCode() : 0);
+        result = 31 * result + (jobdate != null ? jobdate.hashCode() : 0);
         return result;
+    }
+
+    public String getJobdate() {
+        return jobdate;
+    }
+
+    public void setJobdate(String jobdate) {
+        this.jobdate = jobdate;
     }
 
     public int getUser_id() {

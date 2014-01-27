@@ -1,6 +1,8 @@
 package com.hyrt.cnp.account.model;
 
 
+import com.hyrt.cnp.account.utils.StringUtils;
+
 import org.codehaus.jackson.annotate.JsonIgnoreProperties;
 
 import java.util.ArrayList;
@@ -170,6 +172,14 @@ public class RecipeInfo {
 
     public String getRecipeDate() {
         return recipeDate;
+    }
+    public String getRecipeDate2() {
+        try {
+            return StringUtils.millTimeToNormalTime2(recipeDate+"");
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return "";
     }
 
     public void setRecipeDate(String recipeDate) {

@@ -1,6 +1,8 @@
 package com.hyrt.cnp.account.model;
 
 
+import com.hyrt.cnp.account.utils.StringUtils;
+
 import org.codehaus.jackson.annotate.JsonIgnoreProperties;
 
 import java.io.Serializable;
@@ -18,6 +20,7 @@ public class Recipe implements Serializable {
     private String years;
     private String starttime;
     private String endtime;
+
 
 
     public static class Model extends Base{
@@ -86,6 +89,15 @@ public class Recipe implements Serializable {
         result = 31 * result + (starttime != null ? starttime.hashCode() : 0);
         result = 31 * result + (endtime != null ? endtime.hashCode() : 0);
         return result;
+    }
+
+    public String getPosttime2(){
+        try {
+            return StringUtils.millTimeToNormalTime(posttime+"");
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return "";
     }
 
     public String getTotal() {

@@ -2,6 +2,7 @@ package com.hyrt.cnp.account.model;
 
 
 import com.hyrt.cnp.account.utils.FaceUtils;
+import com.hyrt.cnp.account.utils.StringUtils;
 
 import org.codehaus.jackson.annotate.JsonIgnoreProperties;
 
@@ -315,6 +316,23 @@ public class Dynamic implements Serializable {
 
     public void setIsTran(int isTran) {
         this.isTran = isTran;
+    }
+
+    public String getPosttime2() {
+        try {
+            return StringUtils.millTimeToNormalTime2(posttime);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return "";
+    }
+    public String getPosttime3() {
+        try {
+            return StringUtils.friendly_time(StringUtils.millTimeToNormalTime(posttime));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return "";
     }
 
     public String getPosttime() {

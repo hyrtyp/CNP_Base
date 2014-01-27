@@ -84,7 +84,7 @@ public class Notice implements Serializable {
 
     public String getPosttime2(){
         try {
-            return StringUtils.StimeForday(posttime+"");
+            return StringUtils.millTimeToNormalTime2(posttime+"");
         } catch (Exception e) {
             e.printStackTrace();
         }

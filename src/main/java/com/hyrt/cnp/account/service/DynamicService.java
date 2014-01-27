@@ -20,11 +20,11 @@ public class DynamicService {
         this.cnpClient = cnpClient;
     }
 
-    //TODO after modify  babayDynamic uid
     public Dynamic.Model getBabayDynamicData(RestTemplate restTemplate,String uid){
         cnpClient.configureRequest();
         HashMap<String, String> params = cnpClient.getParamsforGet();
         params.put("uid",uid);
+//        params.put("uid","222");
         return  restTemplate.getForObject("http://api.chinaxueqian.com/home/dynamic_user/?" +
                 "token={token}&uuid={uuid}&uid={uid}",
                 Dynamic.Model.class, params);

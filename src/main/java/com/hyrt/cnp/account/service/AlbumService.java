@@ -18,20 +18,20 @@ public class AlbumService {
         this.cnpClient = cnpClient;
     }
 
-    //TODO after modify  album
     public Album.Model getAlbumData(RestTemplate restTemplate){
         cnpClient.configureRequest();
         HashMap<String, String> params = cnpClient.getParamsforGet();
+//        params.put("cid","117");
         return  restTemplate.getForObject("http://api.chinaxueqian.com/classroom/album/?" +
                 "token={token}&uuid={uuid}&cid={cid}",
                 Album.Model.class, params);
     }
 
-    //TODO after modify  album
     public Album.Model getBabayAlbumData(RestTemplate restTemplate,String uid){
         cnpClient.configureRequest();
         HashMap<String, String> params = cnpClient.getParamsforGet();
         params.put("uid",uid);
+//        params.put("uid","222");
         return  restTemplate.getForObject(
                 "http://api.chinaxueqian.com/home/album_list?"+
                 "token={token}&uuid={uuid}&uid={uid}",Album.Model.class, params);

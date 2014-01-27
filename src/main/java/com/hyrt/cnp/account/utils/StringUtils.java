@@ -230,22 +230,6 @@ public class StringUtils
 
 
 
-    //TODO stimeforday
-    /**
-     * 将毫秒数转换为时间
-     * yyyy-MM-dd
-     * */
-
-    public static String StimeForday(String stime)throws Exception{
-        Date date = new Date(stime);
-        if(date == null) {
-            return "Unknown";
-        }
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-        String days=sdf.format(date);
-        return days;
-    }
-
     /**
      * 将毫秒数转换为时间
      * yyyy-MM-dd HH:mm:ss
@@ -255,6 +239,19 @@ public class StringUtils
         Calendar calendar = Calendar.getInstance();
         calendar.setTimeInMillis(Integer.parseInt(stime));
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        String days=sdf.format(calendar.getTime());
+        return days;
+    }
+
+    /**
+     * 将毫秒数转换为时间
+     * yyyy-MM-dd HH:mm:ss
+     * */
+
+    public static String millTimeToNormalTime2(String stime)throws Exception{
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTimeInMillis(Integer.parseInt(stime));
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
         String days=sdf.format(calendar.getTime());
         return days;
     }
