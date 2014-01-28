@@ -313,6 +313,7 @@ public class BaseActivity extends ActionBarActivity implements RoboContext {
                 popWin.dismiss();
             }
         });
+
         // 需要设置一下此参数，点击外边可消失
         popWin.setBackgroundDrawable(new BitmapDrawable());
         //设置点击窗口外边窗口消失
@@ -321,9 +322,60 @@ public class BaseActivity extends ActionBarActivity implements RoboContext {
         popWin.setFocusable(true);
         popWin.showAtLocation(view,
                 Gravity.CENTER, 0, 0);
-        ImageView imageview = (ImageView)popView.findViewById(R.id.pop_img);
-        showDetailImage(bigImgPath,imageview,false);
+        final ImageView imageview = (ImageView)popView.findViewById(R.id.pop_img);
+       /* popView.findViewById(R.id.scroll_iv).setOnClickListener(new View.OnClickListener() {
+
+            private boolean isRotation;
+
+            @Override
+            public void onClick(View v) {
+                if(!isRotation){
+                    ((PhotoView)imageview).setPhotoViewRotation(90);
+                }else{
+                    ((PhotoView)imageview).setPhotoViewRotation(0);
+                }
+                isRotation = !isRotation;
+            }
+        });*/
+        showDetailImage1(bigImgPath, imageview, false);
     }
+
+    /**
+     * 显示详细页面人员头像
+     * facePath 头像图片地址
+     * targetView 图片显示元素
+     */
+    protected GlobalImageCache.BitmapDigest showDetailImage1(String facePath,final ImageView targetView,boolean isrefresh){
+        final WeakReference<ImageView> weakImageView = new WeakReference<ImageView>(targetView);
+        GlobalImageCache.BitmapDigest localBitmapDigest = new GlobalImageCache.BitmapDigest(facePath);
+
+        localBitmapDigest.setWidth(targetView.getWidth());
+        localBitmapDigest.setHeight(targetView.getHeight());
+        Bitmap localBitmap = InflateUtil.loadImageWithCache(localBitmapDigest);
+        if (localBitmap == null) {
+            InflateUtil.loadImageWithUrl(getHttpGroupaAsynPool(), localBitmapDigest,isrefresh, new InflateUtil.ImageLoadListener() {
+                public void onError(GlobalImageCache.BitmapDigest paramAnonymousBitmapDigest) {
+                }
+
+                public void onProgress(GlobalImageCache.BitmapDigest paramAnonymousBitmapDigest, int paramAnonymousInt1, int paramAnonymousInt2) {
+                }
+
+                public void onStart(GlobalImageCache.BitmapDigest paramAnonymousBitmapDigest) {
+                }
+
+                public void onSuccess(GlobalImageCache.BitmapDigest paramAnonymousBitmapDigest, Bitmap paramAnonymousBitmap) {
+                    if (weakImageView != null && weakImageView.get() != null) {
+                        ImageView targetIv = weakImageView.get();
+                        targetIv.setImageBitmap(paramAnonymousBitmap);
+                    }
+                }
+            });
+        } else {
+            targetView.setImageBitmap(localBitmap);
+        }
+        return localBitmapDigest;
+    }
+
 
     /**
      * 显示详细页面人员头像
@@ -353,7 +405,7 @@ public class BaseActivity extends ActionBarActivity implements RoboContext {
                 }
 
                 public void onSuccess(GlobalImageCache.BitmapDigest paramAnonymousBitmapDigest, Bitmap paramAnonymousBitmap) {
-                    if (weakImageView != null) {
+                    if (weakImageView != null  && weakImageView.get() != null)  {
                         ImageView targetIv = weakImageView.get();
                         if (targetIv != null) {
                             HandlerRecycleBitmapDrawable localHandlerRecycleBitmapDrawable = (HandlerRecycleBitmapDrawable) targetIv.getDrawable();
@@ -369,4 +421,6 @@ public class BaseActivity extends ActionBarActivity implements RoboContext {
         }
         return localBitmapDigest;
     }
+
+
 }

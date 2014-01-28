@@ -7,6 +7,7 @@ import android.graphics.Color;
 import android.graphics.ColorFilter;
 import android.graphics.Paint;
 import android.graphics.Rect;
+import android.graphics.RectF;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 
@@ -20,9 +21,9 @@ import com.jingdong.common.utils.Log;
  *
  */
 public class ExceptionDrawable extends Drawable {
-	private static Bitmap bitmap = null;
-	private static int height;
-	private static int width;
+	private Bitmap bitmap = null;
+	private int height;
+	private int width;
 	protected Paint paint = new Paint();
 	private final String text;
 
@@ -40,7 +41,7 @@ public class ExceptionDrawable extends Drawable {
 		this.text = paramString;
 		if (bitmap ==null) {
 			bitmap = ((BitmapDrawable) paramContext.getResources().getDrawable(
-					R.drawable.actionbar_right)).getBitmap();
+					R.drawable.spinner_inner)).getBitmap();
 			width = bitmap.getWidth();
 			height = bitmap.getHeight();
 		}
@@ -48,6 +49,8 @@ public class ExceptionDrawable extends Drawable {
 
 	public void draw(Canvas paramCanvas) {
 		Rect localRect = getBounds();
+        int centerX = localRect.centerX();
+        int centerY = localRect.centerY();
 		if (Log.D) {
 			Log.d(ExceptionDrawable.class.getSimpleName(),
 					"draw bounds.width()-->> " + localRect.width());
@@ -61,8 +64,12 @@ public class ExceptionDrawable extends Drawable {
 		float x = localRect.right - localRect.width() / 2;
 		float y = localRect.bottom - localRect.height() / 2;
 		paramCanvas.drawText(this.text, x, y, this.paint);
-		if (bitmap != null)
-			paramCanvas.drawBitmap(bitmap, x - width / 2, y - height / 2 + DPIUtil.dip2px(10.0F), this.paint);
+		if (bitmap != null){
+            RectF rectF = new RectF(centerX/4,centerY/4,centerX*7/4,centerY*7/4);
+            paramCanvas.drawBitmap(bitmap, null,
+                    rectF,
+                    this.paint);
+        }
 	}
 
 	public int getOpacity() {
