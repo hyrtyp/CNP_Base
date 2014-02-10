@@ -53,21 +53,21 @@ public class Dynamic implements Serializable {
         if(sPicAry.size()>1){
             return "http://img.chinaxueqian.com/"+sPicAry.get(1);
         }else{
-            return "";
+            return null;
         }
     }
     public String getsPicAry2(){
         if(sPicAry.size()>2){
             return "http://img.chinaxueqian.com/"+sPicAry.get(2);
         }else{
-            return "";
+            return null;
         }
     }
     public String getsPicAry0(){
         if(sPicAry.size()>0){
             return "http://img.chinaxueqian.com/"+sPicAry.get(0);
         }else{
-            return "";
+            return null;
         }
     }
 

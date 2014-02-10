@@ -23,10 +23,20 @@ public class DynamicService {
     public Dynamic.Model getBabayDynamicData(RestTemplate restTemplate,String uid){
         cnpClient.configureRequest();
         HashMap<String, String> params = cnpClient.getParamsforGet();
-        params.put("uid",uid);
-//        params.put("uid","222");
+//        params.put("uid",uid);
+        params.put("uid","222");
         return  restTemplate.getForObject("http://api.chinaxueqian.com/home/dynamic_user/?" +
                 "token={token}&uuid={uuid}&uid={uid}",
+                Dynamic.Model.class, params);
+    }
+    public Dynamic.Model getBabayDynamicMoreData(RestTemplate restTemplate,String uid,String more){
+        cnpClient.configureRequest();
+        HashMap<String, String> params = cnpClient.getParamsforGet();
+//        params.put("uid",uid);
+        params.put("uid","222");
+        params.put("more",more);
+        return  restTemplate.getForObject("http://api.chinaxueqian.com/home/dynamic_user/?" +
+                "token={token}&uuid={uuid}&uid={uid}&more={more}",
                 Dynamic.Model.class, params);
     }
 
