@@ -18,7 +18,6 @@ public class ClassRoomService {
         this.cnpClient = cnpClient;
     }
 
-    //TODO after modify
     public ClassRoom.Model getClassRoomListData(RestTemplate restTemplate){
         cnpClient.configureRequest();
         HashMap<String, String> params = cnpClient.getParamsforGet();
@@ -27,7 +26,6 @@ public class ClassRoomService {
                 ClassRoom.Model.class, params);
     }
 
-    //TODO after modify
     public ClassRoom.Model2 getClassRoomInfoData1(RestTemplate restTemplate){
         cnpClient.configureRequest();
         HashMap<String, String> params = cnpClient.getParamsforGet();

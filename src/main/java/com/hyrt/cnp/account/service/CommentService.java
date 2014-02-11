@@ -20,7 +20,6 @@ public class CommentService {
         this.cnpClient = cnpClient;
     }
 
-    //TODO after modify  commentlist
     public Comment.Model getCommentlistData(RestTemplate restTemplate,String infoid,String siteid){
         cnpClient.configureRequest();
         HashMap<String, String> params = cnpClient.getParamsforGet();
@@ -31,11 +30,10 @@ public class CommentService {
                 Comment.Model.class,params);
     }
 
-    //TODO after modify  album
     public Comment.Model3 addCommentData(Comment comment){
         cnpClient.configureRequest();
         MultiValueMap<String,Object> params = cnpClient.getParams();
-        params.set("did", comment.getInfoID()+"");
+        params.set("infoid", comment.getInfoID()+"");
         params.set("title", comment.getInfoTitle());
         params.set("userid", comment.get_id() + "");
         params.set("nid", comment.getInfoNurseryId() + "");
@@ -53,7 +51,6 @@ public class CommentService {
                 "http://api.chinaxueqian.com/classroom/comment_add", params, Comment.Model3.class);
     }
 
-    //TODO after modify  adddynamicCommentData
     public Comment.Model3 adddynamicCommentData(Comment comment){
         cnpClient.configureRequest();
         MultiValueMap<String,Object> params = cnpClient.getParams();

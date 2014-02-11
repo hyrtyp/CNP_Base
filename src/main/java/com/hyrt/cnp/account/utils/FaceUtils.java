@@ -47,6 +47,21 @@ public class FaceUtils {
 
     /**
      *
+     * @param nid 学校id
+     * @param type 图片类型
+     * @return
+     */
+    public static String getSchoolImage(int nid,String type){
+        StringBuilder basePath = new StringBuilder("http://img.chinaxueqian.com/nursery");
+        Float part1 = (float)nid/(float)1000;
+        Float uppart1 = Float.valueOf((part1.intValue() + 1));
+        return basePath.append("/").append(Float.compare(part1+Float.valueOf(1),uppart1) == 0 ?part1.intValue() : part1.intValue()+1).append("/")
+                .append("/").append(nid).append(".jpg").toString();
+
+    }
+
+    /**
+     *
      * @param photoid 相册id
      * @param type 图片类型
      * @return

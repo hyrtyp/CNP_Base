@@ -20,6 +20,7 @@ public class DynamicService {
         this.cnpClient = cnpClient;
     }
 
+    //TODO MODIFY UID
     public Dynamic.Model getBabayDynamicData(RestTemplate restTemplate,String uid){
         cnpClient.configureRequest();
         HashMap<String, String> params = cnpClient.getParamsforGet();

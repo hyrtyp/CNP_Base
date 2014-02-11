@@ -17,7 +17,6 @@ public class AlbumService {
     public AlbumService(CNPClient cnpClient){
         this.cnpClient = cnpClient;
     }
-
     public Album.Model getAlbumData(RestTemplate restTemplate){
         cnpClient.configureRequest();
         HashMap<String, String> params = cnpClient.getParamsforGet();
