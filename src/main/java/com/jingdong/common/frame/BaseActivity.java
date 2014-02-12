@@ -348,7 +348,6 @@ public class BaseActivity extends ActionBarActivity implements RoboContext {
     protected GlobalImageCache.BitmapDigest showDetailImage1(String facePath,final ImageView targetView,boolean isrefresh){
         final WeakReference<ImageView> weakImageView = new WeakReference<ImageView>(targetView);
         GlobalImageCache.BitmapDigest localBitmapDigest = new GlobalImageCache.BitmapDigest(facePath);
-
         localBitmapDigest.setWidth(targetView.getWidth());
         localBitmapDigest.setHeight(targetView.getHeight());
         Bitmap localBitmap = InflateUtil.loadImageWithCache(localBitmapDigest);
