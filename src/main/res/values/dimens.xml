@@ -12,6 +12,7 @@
     <dimen name="view_margin">15dp</dimen>
     <dimen name="view_margin_small">9dp</dimen>
     <dimen name="view_margin_smallest">3dp</dimen>
+    <dimen name="view_bottom_margin">50dp</dimen>
     <!--容器控件的外间距-->
     <dimen name="container_margin">9dp</dimen>
 
