@@ -18,6 +18,67 @@ public class UserDetail implements Serializable{
     private String ethnic;
     private String nursery_id;
     private String nurseryName;
+    private String logo;
+    private String back;
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        UserDetail that = (UserDetail) o;
+
+        if (user_id != that.user_id) return false;
+        if (back != null ? !back.equals(that.back) : that.back != null) return false;
+        if (birthday != null ? !birthday.equals(that.birthday) : that.birthday != null)
+            return false;
+        if (bloodType != null ? !bloodType.equals(that.bloodType) : that.bloodType != null)
+            return false;
+        if (ethnic != null ? !ethnic.equals(that.ethnic) : that.ethnic != null) return false;
+        if (logo != null ? !logo.equals(that.logo) : that.logo != null) return false;
+        if (nationality != null ? !nationality.equals(that.nationality) : that.nationality != null)
+            return false;
+        if (nurseryName != null ? !nurseryName.equals(that.nurseryName) : that.nurseryName != null)
+            return false;
+        if (nursery_id != null ? !nursery_id.equals(that.nursery_id) : that.nursery_id != null)
+            return false;
+        if (renname != null ? !renname.equals(that.renname) : that.renname != null) return false;
+        if (sex != null ? !sex.equals(that.sex) : that.sex != null) return false;
+
+        return true;
+    }
+
+    @Override
+    public int hashCode() {
+        int result = user_id;
+        result = 31 * result + (renname != null ? renname.hashCode() : 0);
+        result = 31 * result + (birthday != null ? birthday.hashCode() : 0);
+        result = 31 * result + (sex != null ? sex.hashCode() : 0);
+        result = 31 * result + (bloodType != null ? bloodType.hashCode() : 0);
+        result = 31 * result + (nationality != null ? nationality.hashCode() : 0);
+        result = 31 * result + (ethnic != null ? ethnic.hashCode() : 0);
+        result = 31 * result + (nursery_id != null ? nursery_id.hashCode() : 0);
+        result = 31 * result + (nurseryName != null ? nurseryName.hashCode() : 0);
+        result = 31 * result + (logo != null ? logo.hashCode() : 0);
+        result = 31 * result + (back != null ? back.hashCode() : 0);
+        return result;
+    }
+
+    public String getBack() {
+        return back;
+    }
+
+    public void setBack(String back) {
+        this.back = back;
+    }
+
+    public String getLogo() {
+        return logo;
+    }
+
+    public void setLogo(String logo) {
+        this.logo = logo;
+    }
 
     public int getUser_id() {
         return user_id;
@@ -89,45 +150,6 @@ public class UserDetail implements Serializable{
 
     public void setNurseryName(String nurseryName) {
         this.nurseryName = nurseryName;
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (!(o instanceof UserDetail)) return false;
-
-        UserDetail that = (UserDetail) o;
-
-        if (user_id != that.user_id) return false;
-        if (birthday != null ? !birthday.equals(that.birthday) : that.birthday != null)
-            return false;
-        if (bloodType != null ? !bloodType.equals(that.bloodType) : that.bloodType != null)
-            return false;
-        if (ethnic != null ? !ethnic.equals(that.ethnic) : that.ethnic != null) return false;
-        if (nationality != null ? !nationality.equals(that.nationality) : that.nationality != null)
-            return false;
-        if (nurseryName != null ? !nurseryName.equals(that.nurseryName) : that.nurseryName != null)
-            return false;
-        if (nursery_id != null ? !nursery_id.equals(that.nursery_id) : that.nursery_id != null)
-            return false;
-        if (renname != null ? !renname.equals(that.renname) : that.renname != null) return false;
-        if (sex != null ? !sex.equals(that.sex) : that.sex != null) return false;
-
-        return true;
-    }
-
-    @Override
-    public int hashCode() {
-        int result = user_id;
-        result = 31 * result + (renname != null ? renname.hashCode() : 0);
-        result = 31 * result + (birthday != null ? birthday.hashCode() : 0);
-        result = 31 * result + (sex != null ? sex.hashCode() : 0);
-        result = 31 * result + (bloodType != null ? bloodType.hashCode() : 0);
-        result = 31 * result + (nationality != null ? nationality.hashCode() : 0);
-        result = 31 * result + (ethnic != null ? ethnic.hashCode() : 0);
-        result = 31 * result + (nursery_id != null ? nursery_id.hashCode() : 0);
-        result = 31 * result + (nurseryName != null ? nurseryName.hashCode() : 0);
-        return result;
     }
 
     public static class UserDetailModel extends Base{

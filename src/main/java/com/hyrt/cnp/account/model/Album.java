@@ -211,7 +211,7 @@ public class Album implements Serializable {
     }
 
     public String getAlbumDesc() {
-        return albumDesc;
+        return "照片描述："+albumDesc;
     }
 
     public void setAlbumDesc(String albumDesc) {
@@ -224,7 +224,7 @@ public class Album implements Serializable {
 
     public String getPosttime2(){
         try {
-            return StringUtils.millTimeToNormalTime2(posttime + "");
+            return "时间："+StringUtils.millTimeToNormalTime2(posttime + "");
         } catch (Exception e) {
             e.printStackTrace();
         }
