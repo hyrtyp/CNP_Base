@@ -21,7 +21,6 @@ public class PhotoService {
      * 获取学校图片
      * */
 
-    //TODO after modify
     public Photo.Model getphotolistData(RestTemplate restTemplate,String pkind){
         cnpClient.configureRequest();
         HashMap<String, String> params = cnpClient.getParamsforGet();
@@ -34,7 +33,8 @@ public class PhotoService {
     /**
      * 获取班级相册图片
      * */
-    public Photo.Model getClassroomAlbumphotolistData(RestTemplate restTemplate,int paid){
+    //TODO MODIFY CID
+     public Photo.Model getClassroomAlbumphotolistData(RestTemplate restTemplate,int paid){
         cnpClient.configureRequest();
         HashMap<String, String> params = cnpClient.getParamsforGet();
 //        params.put("cid","117");

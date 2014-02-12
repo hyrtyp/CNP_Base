@@ -2,6 +2,7 @@ package com.hyrt.cnp.account.model;
 
 
 import com.hyrt.cnp.account.utils.FaceUtils;
+import com.hyrt.cnp.account.utils.StringUtils;
 
 import org.codehaus.jackson.annotate.JsonIgnoreProperties;
 
@@ -404,6 +405,14 @@ public class Comment {
         return redate;
     }
 
+    public String getRedate2(){
+        try {
+            return StringUtils.millTimeToNormalTime2(redate + "");
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
     public void setRedate(String redate) {
         this.redate = redate;
     }

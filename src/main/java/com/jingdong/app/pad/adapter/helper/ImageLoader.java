@@ -104,7 +104,9 @@ public class ImageLoader implements HttpGroup.OnCommonListener {
 			Log.d(ImageLoader.class.getSimpleName(), "onError() position -->> "
 					+ this.subViewHolder.getPosition());
 		this.imageState.failure();
-		this.imageProcessor.show(this.subViewHolder, this.imageState);
+        if(subViewHolder.getAdapter().getCount()>subViewHolder.getPosition()){
+            this.imageProcessor.show(this.subViewHolder, this.imageState);
+        }
 		gc();
 	}
 

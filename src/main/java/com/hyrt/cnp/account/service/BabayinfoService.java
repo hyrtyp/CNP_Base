@@ -18,7 +18,6 @@ public class BabayinfoService {
         this.cnpClient = cnpClient;
     }
 
-    //TODO after modify  babayinfo
     public BabyInfo.Model getBabayinfoData(RestTemplate restTemplate,String userid){
         cnpClient.configureRequest();
         HashMap<String, String> params = cnpClient.getParamsforGet();

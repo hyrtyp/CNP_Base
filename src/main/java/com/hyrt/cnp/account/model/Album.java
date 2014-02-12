@@ -2,6 +2,7 @@ package com.hyrt.cnp.account.model;
 
 
 import com.hyrt.cnp.account.utils.FaceUtils;
+import com.hyrt.cnp.account.utils.StringUtils;
 
 import org.codehaus.jackson.annotate.JsonIgnoreProperties;
 
@@ -221,6 +222,14 @@ public class Album implements Serializable {
         return posttime;
     }
 
+    public String getPosttime2(){
+        try {
+            return StringUtils.millTimeToNormalTime2(posttime + "");
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
     public void setPosttime(String posttime) {
         this.posttime = posttime;
     }
