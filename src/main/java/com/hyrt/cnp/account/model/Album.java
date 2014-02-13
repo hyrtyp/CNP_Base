@@ -125,7 +125,7 @@ public class Album implements Serializable {
     }
 
     public String getImagepath(){
-       return FaceUtils.getClassroomAblumImage(photo_ID,FaceUtils.FACE_BIG);
+       return FaceUtils.getClassroomAblumImage(paId,FaceUtils.FACE_BIG);
     }
 
     public static class Model extends Base{
