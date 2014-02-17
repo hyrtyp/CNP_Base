@@ -70,8 +70,9 @@ public class FaceUtils {
         StringBuilder basePath = new StringBuilder("http://img.chinaxueqian.com/OAthumb");
         Float part1 = (float)photoid/(float)10000;
         Float uppart1 = Float.valueOf((part1.intValue() + 1));
-        return basePath.append("/").append(Float.compare(part1+Float.valueOf(1),uppart1) == 0 ? part1.intValue() : part1.intValue()+1).append("/")
-                .append("/").append(photoid).append("_").append(type).append(".jpg").toString();
+        String imagepath=basePath.append("/").append(Float.compare(part1+Float.valueOf(1),uppart1) == 0 ? part1.intValue() : part1.intValue()+1).append("/")
+                .append("/").append(photoid).append(".jpg").toString();
+        return imagepath;
 
     }
 }
