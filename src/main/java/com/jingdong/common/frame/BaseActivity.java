@@ -15,7 +15,6 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.Window;
 import android.widget.ImageView;
 import android.widget.PopupWindow;
 import android.widget.TextView;
@@ -46,7 +45,6 @@ import java.util.Map;
 import roboguice.RoboGuice;
 import roboguice.inject.RoboInjector;
 import roboguice.util.RoboContext;
-import uk.co.senab.photoview.PhotoView;
 
 /**
  * 应用程序Activity的基类
@@ -106,7 +104,6 @@ public class BaseActivity extends ActionBarActivity implements RoboContext {
         final RoboInjector injector = RoboGuice.getInjector(this.getApplicationContext());
         injector.injectMembers(this);
         super.onCreate(savedInstanceState);
-        requestWindowFeature(Window.FEATURE_INDETERMINATE_PROGRESS);
         if (true) {
             Log.d("MainActivity",
                     " -->> this.getResources().getDisplayMetrics().density:"
