@@ -3,19 +3,16 @@ package com.hyrt.cnp.account.service;
 import com.hyrt.cnp.account.CNPClient;
 import com.hyrt.cnp.account.model.BaseTest;
 import com.hyrt.cnp.account.model.UserDetail;
+import com.hyrt.cnp.account.model.UtilVar;
 
-import org.springframework.core.io.ByteArrayResource;
-import org.springframework.core.io.ClassPathResource;
 import org.springframework.core.io.FileSystemResource;
-import org.springframework.core.io.InputStreamResource;
 import org.springframework.core.io.Resource;
 import org.springframework.http.client.HttpComponentsClientHttpRequestFactory;
-import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
 import org.springframework.web.client.RestTemplate;
 
 import java.io.File;
-import java.io.InputStream;
+import java.util.HashMap;
 
 /**
  * Created by yepeng on 13-12-11.
@@ -27,6 +24,14 @@ public class UserService{
 
     public UserService(CNPClient cnpClient){
         this.cnpClient = cnpClient;
+    }
+
+    public UtilVar getUtilvar(String name){
+        cnpClient.configureRequest();
+        HashMap<String, String> params = cnpClient.getParamsforGet();
+        params.put("name",name);
+        return  getRestTemplate().getForObject("http://api.chinaxueqian.com/var/get_var?name={name}",
+                UtilVar.class, params);
     }
 
     public UserDetail.UserDetailModel getUser(){
@@ -68,7 +73,7 @@ public class UserService{
         return new RestTemplate(true, new HttpComponentsClientHttpRequestFactory());
     }
 
-    public BaseTest modifyUserInfo(String renname, String birthday,String sex, String national, String bloodType) {
+    public BaseTest modifyUserInfo(String renname, String birthday,String sex, String national, String bloodType,String ethnic) {
         cnpClient.configureRequest();
         MultiValueMap<String, Object> params = cnpClient.getParams();
         if(renname.toString().length() != 0)
@@ -81,6 +86,8 @@ public class UserService{
             params.set("bloodType",bloodType);
         if(renname.toString().length() != 0)
             params.set("nationality",national);
+        if(renname.toString().length() != 0)
+            params.set("ethnic",ethnic);
         BaseTest result = getRestTemplate().postForObject("http://api.chinaxueqian.com/user/edit/", cnpClient.getParams(),BaseTest.class);
         return result;
     }

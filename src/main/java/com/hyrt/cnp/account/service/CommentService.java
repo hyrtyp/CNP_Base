@@ -54,7 +54,7 @@ public class CommentService {
     public Comment.Model3 adddynamicCommentData(Comment comment){
         cnpClient.configureRequest();
         MultiValueMap<String,Object> params = cnpClient.getParams();
-        params.set("did", comment.getInfoid2()+"");
+        params.set("infoid", comment.getInfoid2()+"");
         params.set("title", comment.getInfoTitle());
         params.set("userid", comment.get_id() + "");
         params.set("nid", comment.getInfoNurseryId() + "");
