@@ -16,6 +16,8 @@ public class BabyInfo {
     private String birthday;
     private String ethnic;
     private String jobdate;
+    private String bloodType;
+    private String nationality;
 
     public static class Model extends Base{
         private static final long serialVersionUID = -1;
@@ -48,6 +50,14 @@ public class BabyInfo {
         }
     }
 
+    public String getBloodType() {
+        return bloodType;
+    }
+
+    public void setBloodType(String bloodType) {
+        this.bloodType = bloodType;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -60,9 +70,13 @@ public class BabyInfo {
         if (user_id != babyInfo.user_id) return false;
         if (birthday != null ? !birthday.equals(babyInfo.birthday) : babyInfo.birthday != null)
             return false;
+        if (bloodType != null ? !bloodType.equals(babyInfo.bloodType) : babyInfo.bloodType != null)
+            return false;
         if (ethnic != null ? !ethnic.equals(babyInfo.ethnic) : babyInfo.ethnic != null)
             return false;
         if (jobdate != null ? !jobdate.equals(babyInfo.jobdate) : babyInfo.jobdate != null)
+            return false;
+        if (nationality != null ? !nationality.equals(babyInfo.nationality) : babyInfo.nationality != null)
             return false;
         if (nurseryName != null ? !nurseryName.equals(babyInfo.nurseryName) : babyInfo.nurseryName != null)
             return false;
@@ -87,7 +101,17 @@ public class BabyInfo {
         result = 31 * result + (birthday != null ? birthday.hashCode() : 0);
         result = 31 * result + (ethnic != null ? ethnic.hashCode() : 0);
         result = 31 * result + (jobdate != null ? jobdate.hashCode() : 0);
+        result = 31 * result + (bloodType != null ? bloodType.hashCode() : 0);
+        result = 31 * result + (nationality != null ? nationality.hashCode() : 0);
         return result;
+    }
+
+    public String getNationality() {
+        return nationality;
+    }
+
+    public void setNationality(String nationality) {
+        this.nationality = nationality;
     }
 
     public String getJobdate() {

@@ -4,22 +4,24 @@
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
     android:id="@+id/pop_view"
-    android:background="#e0000000">
+    android:background="#e0000000"
+    >
     
     <ImageView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:padding="@dimen/view_margin_small"
-        android:visibility="gone"
         android:id="@+id/scroll_iv"
-        android:layout_marginTop="30dp"
-        android:src="@drawable/shortcuts_icon_history_hl"/>
+        android:src="@drawable/spinner_inner"
+        android:layout_centerInParent="true"
+        />
 
 
     <uk.co.senab.photoview.PhotoView
         android:id="@+id/pop_img"
         android:layout_width="match_parent"
         android:layout_centerInParent="true"
-        android:layout_height="match_parent" />
+        android:layout_height="match_parent"
+        />
 
 </RelativeLayout>
