@@ -7,7 +7,6 @@ import android.graphics.drawable.BitmapDrawable;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.StrictMode;
-import android.support.v4.view.ViewPager;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarActivity;
 import android.view.Gravity;
@@ -17,6 +16,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.PopupWindow;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.google.inject.Key;
@@ -301,25 +301,24 @@ public class BaseActivity extends ActionBarActivity implements RoboContext {
     public  void showPop(View view,String bigImgPath) {
         View popView = this.getLayoutInflater().inflate(
                 R.layout.layout_popwindwos, null);
-        final PopupWindow popWin = new PopupWindow(popView, ViewPager.LayoutParams.MATCH_PARENT,
-                ViewPager.LayoutParams.MATCH_PARENT);
-
-        popView.setOnClickListener(new View.OnClickListener() {
+        final PopupWindow popWin = new PopupWindow(popView, RelativeLayout.LayoutParams.MATCH_PARENT,
+                RelativeLayout.LayoutParams.MATCH_PARENT);
+        ImageView imageback=(ImageView)popView.findViewById(R.id.imageback);
+        imageback.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 popWin.dismiss();
             }
         });
-
         // 需要设置一下此参数，点击外边可消失
         popWin.setBackgroundDrawable(new BitmapDrawable());
         //设置点击窗口外边窗口消失
         popWin.setOutsideTouchable(true);
         // 设置此参数获得焦点，否则无法点击
         popWin.setFocusable(true);
-        popWin.showAtLocation(view,
-                Gravity.CENTER, 0, 0);
-        final ImageView imageview = (ImageView)popView.findViewById(R.id.pop_img);
+        popWin.setTouchable(true);
+        popWin.showAtLocation(view,Gravity.CENTER, 0, 0);
+        ImageView imageview = (ImageView)popView.findViewById(R.id.pop_img);
        /* popView.findViewById(R.id.scroll_iv).setOnClickListener(new View.OnClickListener() {
 
             private boolean isRotation;
