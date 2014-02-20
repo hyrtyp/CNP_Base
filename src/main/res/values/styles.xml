@@ -82,7 +82,7 @@
     <!--灰色小字体样式-->
     <style name="small_tv" parent="base_tv">
         <item name="android:textAppearance">?android:attr/textAppearanceSmall</item>
-        <item name="android:textColor">#80bebebe</item>
+        <item name="android:textColor">#474747</item>
     </style>
 
     <style name="small_tv_2" parent="base_tv">

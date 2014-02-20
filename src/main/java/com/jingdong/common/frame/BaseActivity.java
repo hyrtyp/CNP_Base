@@ -2,6 +2,7 @@ package com.jingdong.common.frame;
 
 import android.annotation.SuppressLint;
 import android.annotation.TargetApi;
+import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
 import android.os.Build;
@@ -22,6 +23,8 @@ import android.widget.TextView;
 import com.google.inject.Key;
 import com.hyrt.cnp.R;
 import com.hyrt.cnp.service.MyService;
+import com.hyrt.cnp.view.HackyViewPager;
+import com.hyrt.cnp.view.ImageAdapter;
 import com.jingdong.app.pad.product.ProductListFragment;
 import com.jingdong.app.pad.product.drawable.HandlerRecycleBitmapDrawable;
 import com.jingdong.app.pad.utils.InflateUtil;
@@ -39,12 +42,15 @@ import com.octo.android.robospice.SpiceManager;
 import net.oschina.app.AppContext;
 
 import java.lang.ref.WeakReference;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
 import roboguice.RoboGuice;
 import roboguice.inject.RoboInjector;
 import roboguice.util.RoboContext;
+import uk.co.senab.photoview.PhotoView;
+import uk.co.senab.photoview.PhotoViewAttacher;
 
 /**
  * 应用程序Activity的基类
@@ -60,6 +66,8 @@ public class BaseActivity extends ActionBarActivity implements RoboContext {
     protected ActionBar actionBar;
     protected ImageView backimage;
     protected TextView titletext;
+    private PhotoViewAttacher mAttacher;
+    private PopupWindow popWin;
 
     @Override
     public Map<Key<?>, Object> getScopedObjectMap() {
@@ -301,15 +309,14 @@ public class BaseActivity extends ActionBarActivity implements RoboContext {
     public  void showPop(View view,String bigImgPath) {
         View popView = this.getLayoutInflater().inflate(
                 R.layout.layout_popwindwos, null);
-        final PopupWindow popWin = new PopupWindow(popView, RelativeLayout.LayoutParams.MATCH_PARENT,
-                RelativeLayout.LayoutParams.MATCH_PARENT);
-        ImageView imageback=(ImageView)popView.findViewById(R.id.imageback);
-        imageback.setOnClickListener(new View.OnClickListener() {
+        popView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 popWin.dismiss();
             }
         });
+        popWin = new PopupWindow(popView, RelativeLayout.LayoutParams.MATCH_PARENT,
+                RelativeLayout.LayoutParams.MATCH_PARENT);
         // 需要设置一下此参数，点击外边可消失
         popWin.setBackgroundDrawable(new BitmapDrawable());
         //设置点击窗口外边窗口消失
@@ -319,6 +326,14 @@ public class BaseActivity extends ActionBarActivity implements RoboContext {
         popWin.setTouchable(true);
         popWin.showAtLocation(view,Gravity.CENTER, 0, 0);
         ImageView imageview = (ImageView)popView.findViewById(R.id.pop_img);
+        mAttacher=new PhotoViewAttacher(imageview);
+        mAttacher.setOnPhotoTapListener(new PhotoTapListener());
+        mAttacher.setOnViewTapListener(new PhotoViewAttacher.OnViewTapListener() {
+            @Override
+            public void onViewTap(View view, float x, float y) {
+                popWin.dismiss();
+            }
+        });
        /* popView.findViewById(R.id.scroll_iv).setOnClickListener(new View.OnClickListener() {
 
             private boolean isRotation;
@@ -418,5 +433,42 @@ public class BaseActivity extends ActionBarActivity implements RoboContext {
         return localBitmapDigest;
     }
 
+    private class PhotoTapListener implements PhotoViewAttacher.OnPhotoTapListener {
 
+        @Override
+        public void onPhotoTap(View view, float x, float y) {
+            popWin.dismiss();
+        }
+    }
+
+    public void showPop2(View view,ArrayList<String> imageurls,int postion,Context context) {
+        View popView = this.getLayoutInflater().inflate(
+                R.layout.layout_popwindwos2, null);
+        popView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                popWin.dismiss();
+            }
+        });
+        popWin = new PopupWindow(popView, RelativeLayout.LayoutParams.MATCH_PARENT,
+                RelativeLayout.LayoutParams.MATCH_PARENT);
+        // 需要设置一下此参数，点击外边可消失
+        popWin.setBackgroundDrawable(new BitmapDrawable());
+        //设置点击窗口外边窗口消失
+        popWin.setOutsideTouchable(true);
+        // 设置此参数获得焦点，否则无法点击
+        popWin.setFocusable(true);
+        popWin.setTouchable(true);
+        popWin.showAtLocation(view,Gravity.CENTER, 0, 0);
+        HackyViewPager mViewPager = (HackyViewPager)popView.findViewById(R.id.pop_img);
+        ArrayList<PhotoView> imageViews = new ArrayList<PhotoView>();
+        for(int i=0;i<imageurls.size();i++){
+            PhotoView imageView = new PhotoView(context);
+            imageView.setScaleType(ImageView.ScaleType.CENTER_CROP);
+            imageViews.add(imageView);
+            showDetailImage(imageurls.get(i), imageView, false);
+        }
+        mViewPager.setAdapter(new ImageAdapter(imageViews));
+        mViewPager.setCurrentItem(postion);
+    }
 }

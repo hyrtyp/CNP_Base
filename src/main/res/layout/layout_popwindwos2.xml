@@ -17,7 +17,7 @@
         />
 
 
-    <uk.co.senab.photoview.PhotoView
+    <com.hyrt.cnp.view.HackyViewPager
         android:id="@+id/pop_img"
         android:layout_width="match_parent"
         android:layout_centerInParent="true"
