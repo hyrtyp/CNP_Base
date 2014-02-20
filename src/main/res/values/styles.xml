@@ -86,7 +86,7 @@
     </style>
 
     <style name="small_tv_2" parent="base_tv">
-        <item name="android:textSize">18sp</item>
+        <item name="android:textSize">16sp</item>
         <item name="android:textColor">#474747</item>
     </style>
 

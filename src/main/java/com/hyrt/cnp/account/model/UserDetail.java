@@ -20,6 +20,7 @@ public class UserDetail implements Serializable{
     private String nurseryName;
     private String logo;
     private String back;
+    private String timeText;
 
     @Override
     public boolean equals(Object o) {
@@ -44,6 +45,8 @@ public class UserDetail implements Serializable{
             return false;
         if (renname != null ? !renname.equals(that.renname) : that.renname != null) return false;
         if (sex != null ? !sex.equals(that.sex) : that.sex != null) return false;
+        if (timeText != null ? !timeText.equals(that.timeText) : that.timeText != null)
+            return false;
 
         return true;
     }
@@ -61,7 +64,16 @@ public class UserDetail implements Serializable{
         result = 31 * result + (nurseryName != null ? nurseryName.hashCode() : 0);
         result = 31 * result + (logo != null ? logo.hashCode() : 0);
         result = 31 * result + (back != null ? back.hashCode() : 0);
+        result = 31 * result + (timeText != null ? timeText.hashCode() : 0);
         return result;
+    }
+
+    public String getTimeText() {
+        return timeText;
+    }
+
+    public void setTimeText(String timeText) {
+        this.timeText = timeText;
     }
 
     public String getBack() {
