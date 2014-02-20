@@ -9,7 +9,7 @@ import android.util.DisplayMetrics;
 import android.widget.ScrollView;
 
 public class MtScrollView extends ScrollView {
-    private static final int MAX_Y_OVERSCROLL_DISTANCE = 200;
+    private static final int MAX_Y_OVERSCROLL_DISTANCE = 50;
 
     private Context mContext;
     private int mMaxYOverscrollDistance;

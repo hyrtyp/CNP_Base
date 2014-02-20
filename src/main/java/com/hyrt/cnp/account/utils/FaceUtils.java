@@ -56,7 +56,7 @@ public class FaceUtils {
         Float part1 = (float)nid/(float)1000;
         Float uppart1 = Float.valueOf((part1.intValue() + 1));
         return basePath.append("/").append(Float.compare(part1+Float.valueOf(1),uppart1) == 0 ?part1.intValue() : part1.intValue()+1).append("/")
-                .append("/").append(nid).append(".jpg").toString();
+                .append("/").append(nid).append("_").append(type).append(".jpg").toString();
 
     }
 

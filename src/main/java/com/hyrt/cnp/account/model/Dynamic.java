@@ -289,6 +289,13 @@ public class Dynamic implements Serializable {
     public String getContent() {
         return content;
     }
+    public String getContent2() {
+        if(isTran==1){
+            return content;
+        }else{
+            return dContent;
+        }
+    }
 
     public void setContent(String content) {
         this.content = content;
@@ -297,6 +304,9 @@ public class Dynamic implements Serializable {
     public int getReview() {
         return review;
     }
+    public String getReview2() {
+        return "("+review+")";
+    }
 
     public void setReview(int review) {
         this.review = review;
@@ -304,6 +314,9 @@ public class Dynamic implements Serializable {
 
     public int getTransmit() {
         return transmit;
+    }
+    public String getTransmit2() {
+        return "("+transmit+")";
     }
 
     public void setTransmit(int transmit) {

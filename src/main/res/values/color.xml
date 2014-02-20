@@ -3,7 +3,7 @@
     <color name="base_background_2">#fff3f3f3</color>
     <color name="text">#1E1E1E</color>
     <color name="actionbar_bg">#6ecbd9</color>
-    <color name="cnp_text_color">#3f3f3f</color>
+    <color name="cnp_text_color">#333333</color>
     <color name="cnp_background">#fdfcf7</color>
     <color name="cnp_line_color">#d8d7d3</color>
     <color name="cnp_text_color_black">#000000</color>
