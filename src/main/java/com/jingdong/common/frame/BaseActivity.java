@@ -465,7 +465,7 @@ public class BaseActivity extends ActionBarActivity implements RoboContext {
             PhotoView imageView = new PhotoView(context);
             imageView.setScaleType(ImageView.ScaleType.CENTER_CROP);
             imageViews.add(imageView);
-            showDetailImage(imageurls.get(i), imageView, false);
+            showDetailImage1(imageurls.get(i), imageView, false);
         }
         mViewPager.setAdapter(new ImageAdapter(imageViews));
         mViewPager.setCurrentItem(postion);
