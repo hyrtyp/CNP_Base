@@ -117,7 +117,7 @@ public class AccountUtils {
      * @param context
      * @return account or null if none
      */
-    public static Account getAccount(final Context context) {
+        public static Account getAccount(final Context context) {
         final Account[] accounts = AccountManager.get(context)
                 .getAccountsByType(ACCOUNT_TYPE);
         return accounts.length > 0 ? accounts[0] : null;

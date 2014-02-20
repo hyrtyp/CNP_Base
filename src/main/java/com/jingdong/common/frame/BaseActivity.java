@@ -359,7 +359,6 @@ public class BaseActivity extends ActionBarActivity implements RoboContext {
     protected GlobalImageCache.BitmapDigest showDetailImage1(String facePath,final ImageView targetView,boolean isrefresh){
         final WeakReference<ImageView> weakImageView = new WeakReference<ImageView>(targetView);
         GlobalImageCache.BitmapDigest localBitmapDigest = new GlobalImageCache.BitmapDigest(facePath);
-
         localBitmapDigest.setWidth(targetView.getWidth());
         localBitmapDigest.setHeight(targetView.getHeight());
         Bitmap localBitmap = InflateUtil.loadImageWithCache(localBitmapDigest);
@@ -466,7 +465,7 @@ public class BaseActivity extends ActionBarActivity implements RoboContext {
             PhotoView imageView = new PhotoView(context);
             imageView.setScaleType(ImageView.ScaleType.CENTER_CROP);
             imageViews.add(imageView);
-            showDetailImage(imageurls.get(i), imageView, false);
+            showDetailImage1(imageurls.get(i), imageView, false);
         }
         mViewPager.setAdapter(new ImageAdapter(imageViews));
         mViewPager.setCurrentItem(postion);

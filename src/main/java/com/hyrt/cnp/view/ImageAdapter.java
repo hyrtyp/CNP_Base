@@ -2,8 +2,8 @@ package com.hyrt.cnp.view;
 
 import android.os.Parcelable;
 import android.support.v4.view.PagerAdapter;
-import android.support.v4.view.ViewPager;
 import android.view.View;
+import android.view.ViewGroup;
 
 import java.util.ArrayList;
 
@@ -22,8 +22,8 @@ public class ImageAdapter extends PagerAdapter {
     }
 
     @Override
-    public Object instantiateItem(View arg0, int arg1) {
-        ((ViewPager) arg0).addView(imageViews.get(arg1));
+    public Object instantiateItem(ViewGroup container, int arg1) {
+        container.addView(imageViews.get(arg1), ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
         return imageViews.get(arg1);
     }
 
@@ -33,8 +33,8 @@ public class ImageAdapter extends PagerAdapter {
     }
 
     @Override
-    public void destroyItem(View arg0, int arg1, Object arg2) {
-        ((ViewPager) arg0).removeView((View) arg2);
+    public void destroyItem(ViewGroup container, int arg1, Object arg2) {
+        container.removeView((View) arg2);
     }
 
     @Override
@@ -52,13 +52,4 @@ public class ImageAdapter extends PagerAdapter {
         return null;
     }
 
-    @Override
-    public void startUpdate(View arg0) {
-
-    }
-
-    @Override
-    public void finishUpdate(View arg0) {
-
-    }
 }
