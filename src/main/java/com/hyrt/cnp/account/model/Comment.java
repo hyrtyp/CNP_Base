@@ -14,18 +14,18 @@ import java.util.ArrayList;
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class Comment {
     private String _id;
-    private int infoID;
+    private String infoID;
     private String infoTitle;
-    private int infoUserId;
-    private int infoNurseryId;
-    private int infoClassroomId;
+    private String infoUserId;
+    private String infoNurseryId;
+    private String infoClassroomId;
     private String siteid;
     private String url;
     private int userid;
     private String username;
-    private int nursery_id;
+    private String nursery_id;
     private String nursery_name;
-    private int userGroup;
+    private String userGroup;
     private String creatdate;
     private String ip;
     private String lstatus;
@@ -37,6 +37,62 @@ public class Comment {
     private String redate;
     private String infoid2;
 
+    public void setInfoID(String infoID) {
+        this.infoID = infoID;
+    }
+
+    public String getInfoID() {
+        return infoID;
+    }
+
+    public String getInfoUserId() {
+        return infoUserId;
+    }
+
+    public void setInfoUserId(String infoUserId) {
+        this.infoUserId = infoUserId;
+    }
+
+    public String getInfoNurseryId() {
+        return infoNurseryId;
+    }
+
+    public void setInfoNurseryId(String infoNurseryId) {
+        this.infoNurseryId = infoNurseryId;
+    }
+
+    public String getInfoClassroomId() {
+        return infoClassroomId;
+    }
+
+    public void setInfoClassroomId(String infoClassroomId) {
+        this.infoClassroomId = infoClassroomId;
+    }
+
+    public int getUserid() {
+        return userid;
+    }
+
+    public void setUserid(int userid) {
+        this.userid = userid;
+    }
+
+    public String getNursery_id() {
+        return nursery_id;
+    }
+
+    public void setNursery_id(String nursery_id) {
+        this.nursery_id = nursery_id;
+    }
+
+    public String getUserGroup() {
+        return userGroup;
+    }
+
+    public void setUserGroup(String userGroup) {
+        this.userGroup = userGroup;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -44,24 +100,27 @@ public class Comment {
 
         Comment comment = (Comment) o;
 
-        if (infoClassroomId != comment.infoClassroomId) return false;
-        if (infoID != comment.infoID) return false;
-        if (infoNurseryId != comment.infoNurseryId) return false;
-        if (infoUserId != comment.infoUserId) return false;
-        if (nursery_id != comment.nursery_id) return false;
-        if (userGroup != comment.userGroup) return false;
         if (userid != comment.userid) return false;
         if (_id != null ? !_id.equals(comment._id) : comment._id != null) return false;
         if (content != null ? !content.equals(comment.content) : comment.content != null)
             return false;
         if (creatdate != null ? !creatdate.equals(comment.creatdate) : comment.creatdate != null)
             return false;
+        if (infoClassroomId != null ? !infoClassroomId.equals(comment.infoClassroomId) : comment.infoClassroomId != null)
+            return false;
+        if (infoID != null ? !infoID.equals(comment.infoID) : comment.infoID != null) return false;
+        if (infoNurseryId != null ? !infoNurseryId.equals(comment.infoNurseryId) : comment.infoNurseryId != null)
+            return false;
         if (infoTitle != null ? !infoTitle.equals(comment.infoTitle) : comment.infoTitle != null)
+            return false;
+        if (infoUserId != null ? !infoUserId.equals(comment.infoUserId) : comment.infoUserId != null)
             return false;
         if (infoid2 != null ? !infoid2.equals(comment.infoid2) : comment.infoid2 != null)
             return false;
         if (ip != null ? !ip.equals(comment.ip) : comment.ip != null) return false;
         if (lstatus != null ? !lstatus.equals(comment.lstatus) : comment.lstatus != null)
+            return false;
+        if (nursery_id != null ? !nursery_id.equals(comment.nursery_id) : comment.nursery_id != null)
             return false;
         if (nursery_name != null ? !nursery_name.equals(comment.nursery_name) : comment.nursery_name != null)
             return false;
@@ -75,6 +134,8 @@ public class Comment {
             return false;
         if (siteid != null ? !siteid.equals(comment.siteid) : comment.siteid != null) return false;
         if (url != null ? !url.equals(comment.url) : comment.url != null) return false;
+        if (userGroup != null ? !userGroup.equals(comment.userGroup) : comment.userGroup != null)
+            return false;
         if (username != null ? !username.equals(comment.username) : comment.username != null)
             return false;
 
@@ -84,18 +145,18 @@ public class Comment {
     @Override
     public int hashCode() {
         int result = _id != null ? _id.hashCode() : 0;
-        result = 31 * result + infoID;
+        result = 31 * result + (infoID != null ? infoID.hashCode() : 0);
         result = 31 * result + (infoTitle != null ? infoTitle.hashCode() : 0);
-        result = 31 * result + infoUserId;
-        result = 31 * result + infoNurseryId;
-        result = 31 * result + infoClassroomId;
+        result = 31 * result + (infoUserId != null ? infoUserId.hashCode() : 0);
+        result = 31 * result + (infoNurseryId != null ? infoNurseryId.hashCode() : 0);
+        result = 31 * result + (infoClassroomId != null ? infoClassroomId.hashCode() : 0);
         result = 31 * result + (siteid != null ? siteid.hashCode() : 0);
         result = 31 * result + (url != null ? url.hashCode() : 0);
         result = 31 * result + userid;
         result = 31 * result + (username != null ? username.hashCode() : 0);
-        result = 31 * result + nursery_id;
+        result = 31 * result + (nursery_id != null ? nursery_id.hashCode() : 0);
         result = 31 * result + (nursery_name != null ? nursery_name.hashCode() : 0);
-        result = 31 * result + userGroup;
+        result = 31 * result + (userGroup != null ? userGroup.hashCode() : 0);
         result = 31 * result + (creatdate != null ? creatdate.hashCode() : 0);
         result = 31 * result + (ip != null ? ip.hashCode() : 0);
         result = 31 * result + (lstatus != null ? lstatus.hashCode() : 0);
@@ -241,13 +302,7 @@ public class Comment {
         this._id = _id;
     }
 
-    public int getInfoID() {
-        return infoID;
-    }
 
-    public void setInfoID(int infoID) {
-        this.infoID = infoID;
-    }
 
     public String getInfoTitle() {
         return infoTitle;
@@ -257,29 +312,7 @@ public class Comment {
         this.infoTitle = infoTitle;
     }
 
-    public int getInfoUserId() {
-        return infoUserId;
-    }
 
-    public void setInfoUserId(int infoUserId) {
-        this.infoUserId = infoUserId;
-    }
-
-    public int getInfoNurseryId() {
-        return infoNurseryId;
-    }
-
-    public void setInfoNurseryId(int infoNurseryId) {
-        this.infoNurseryId = infoNurseryId;
-    }
-
-    public int getInfoClassroomId() {
-        return infoClassroomId;
-    }
-
-    public void setInfoClassroomId(int infoClassroomId) {
-        this.infoClassroomId = infoClassroomId;
-    }
 
     public String getSiteid() {
         return siteid;
@@ -297,13 +330,7 @@ public class Comment {
         this.url = url;
     }
 
-    public int getUserid() {
-        return userid;
-    }
 
-    public void setUserid(int userid) {
-        this.userid = userid;
-    }
 
     public String getUsername() {
         return username;
@@ -313,13 +340,7 @@ public class Comment {
         this.username = username;
     }
 
-    public int getNursery_id() {
-        return nursery_id;
-    }
 
-    public void setNursery_id(int nursery_id) {
-        this.nursery_id = nursery_id;
-    }
 
     public String getNursery_name() {
         return nursery_name;
@@ -329,16 +350,18 @@ public class Comment {
         this.nursery_name = nursery_name;
     }
 
-    public int getUserGroup() {
-        return userGroup;
-    }
 
-    public void setUserGroup(int userGroup) {
-        this.userGroup = userGroup;
-    }
 
     public String getCreatdate() {
         return creatdate;
+    }
+    public String getCreatdate2() {
+        try {
+            return StringUtils.friendly_time(StringUtils.millTimeToNormalTime(creatdate+""));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
     }
 
     public void setCreatdate(String creatdate) {
@@ -407,7 +430,7 @@ public class Comment {
 
     public String getRedate2(){
         try {
-            return StringUtils.millTimeToNormalTime2(redate + "");
+            return StringUtils.friendly_time(StringUtils.millTimeToNormalTime(redate+""));
         } catch (Exception e) {
             e.printStackTrace();
         }

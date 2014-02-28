@@ -24,5 +24,5 @@
     <string name="babayword">童言稚语</string>
     <string name="setcommit">发评论</string>
     <string name="setzfcommit">转发动态</string>
-
+    <string name="commitlist">评论信息</string>
 </resources>

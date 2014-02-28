@@ -18,11 +18,17 @@ package com.hyrt.cnp.account.ui;
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.graphics.Bitmap;
+import android.graphics.Canvas;
+import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.Drawable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.TextView;
 
 import com.hyrt.cnp.R;
+import com.jingdong.app.pad.utils.InflateUtil;
+import com.jingdong.common.utils.cache.GlobalImageCache;
 
 import static android.os.Build.VERSION.SDK_INT;
 import static android.os.Build.VERSION_CODES.FROYO;
@@ -64,8 +70,17 @@ public class LightProgressDialog extends ProgressDialog {
             dialog.setMessage(message);
             dialog.setIndeterminate(true);
             dialog.setProgressStyle(STYLE_SPINNER);
-            dialog.setIndeterminateDrawable(context.getResources().getDrawable(
-                    R.drawable.spinner));
+            GlobalImageCache.BitmapDigest localBitmapDigest = new GlobalImageCache.BitmapDigest("spinner");
+            localBitmapDigest.setWidth(50);
+            localBitmapDigest.setHeight(50);
+            Bitmap localBitmap = InflateUtil.loadImageWithCache(localBitmapDigest);
+            if(localBitmap == null){
+                Drawable drawable = context.getResources().getDrawable(R.drawable.spinner);
+                GlobalImageCache.getLruBitmapCache().put(localBitmapDigest,drawableLayerToBitmap(drawable));
+                dialog.setIndeterminateDrawable(drawable);
+            }else{
+                dialog.setIndeterminateDrawable(new BitmapDrawable(localBitmap));
+            }
             return dialog;
         } else {
             AlertDialog dialog = LightAlertDialog.create(context);
@@ -80,5 +95,15 @@ public class LightProgressDialog extends ProgressDialog {
 
     private LightProgressDialog(Context context, CharSequence message) {
         super(context, THEME_HOLO_LIGHT);
+    }
+
+    private static Bitmap drawableLayerToBitmap(Drawable drawable){
+        int width = drawable.getIntrinsicWidth();
+        int height = drawable.getIntrinsicHeight();
+        Bitmap bitmap = Bitmap.createBitmap(width, height, Bitmap.Config.ARGB_8888);
+        Canvas canvas = new Canvas(bitmap);
+        drawable.setBounds(0, 0, canvas.getWidth(), canvas.getHeight());
+        drawable.draw(canvas);
+        return bitmap;
     }
 }

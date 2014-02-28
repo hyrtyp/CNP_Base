@@ -7,7 +7,6 @@ import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
 import android.os.Build;
 import android.os.Bundle;
-import android.os.StrictMode;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarActivity;
 import android.view.Gravity;
@@ -138,12 +137,12 @@ public class BaseActivity extends ActionBarActivity implements RoboContext {
                 e.printStackTrace();
             }
             //效率观察
-            StrictMode.setThreadPolicy(new StrictMode.ThreadPolicy.Builder()
-                    .detectDiskReads().detectDiskWrites().detectNetwork()
-                    .penaltyLog().build());
-            StrictMode.setVmPolicy(new StrictMode.VmPolicy.Builder()
-                    .detectLeakedSqlLiteObjects().detectLeakedClosableObjects()
-                    .penaltyLog().penaltyDeath().build());
+//            StrictMode.setThreadPolicy(new StrictMode.ThreadPolicy.Builder()
+//                    .detectDiskReads().detectDiskWrites().detectNetwork()
+//                    .penaltyLog().build());
+//            StrictMode.setVmPolicy(new StrictMode.VmPolicy.Builder()
+//                    .detectLeakedSqlLiteObjects().detectLeakedClosableObjects()
+//                    .penaltyLog().penaltyDeath().build());
 
         }
         if(!(this.getLocalClassName().contains("FullscreenActivity"))){
@@ -169,6 +168,10 @@ public class BaseActivity extends ActionBarActivity implements RoboContext {
         }finally {
             super.onDestroy();
             AppContext.getInstance().setBaseActivity(null);
+        }
+
+        if(mAttacher!=null){
+            mAttacher.cleanup();
         }
     }
 
@@ -275,7 +278,7 @@ public class BaseActivity extends ActionBarActivity implements RoboContext {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
 
-        if(!this.getTitle().equals("转发动态")){
+        if(!this.getTitle().equals("转发动态")||!this.getTitle().equals("评论信息")){
             menu.add("abc")
                     .setIcon(R.drawable.actionbar_right)
                     .setShowAsAction(
@@ -326,28 +329,6 @@ public class BaseActivity extends ActionBarActivity implements RoboContext {
         popWin.setTouchable(true);
         popWin.showAtLocation(view,Gravity.CENTER, 0, 0);
         ImageView imageview = (ImageView)popView.findViewById(R.id.pop_img);
-        mAttacher=new PhotoViewAttacher(imageview);
-        mAttacher.setOnPhotoTapListener(new PhotoTapListener());
-        mAttacher.setOnViewTapListener(new PhotoViewAttacher.OnViewTapListener() {
-            @Override
-            public void onViewTap(View view, float x, float y) {
-                popWin.dismiss();
-            }
-        });
-       /* popView.findViewById(R.id.scroll_iv).setOnClickListener(new View.OnClickListener() {
-
-            private boolean isRotation;
-
-            @Override
-            public void onClick(View v) {
-                if(!isRotation){
-                    ((PhotoView)imageview).setPhotoViewRotation(90);
-                }else{
-                    ((PhotoView)imageview).setPhotoViewRotation(0);
-                }
-                isRotation = !isRotation;
-            }
-        });*/
         showDetailImage1(bigImgPath, imageview, false);
     }
 
@@ -358,29 +339,65 @@ public class BaseActivity extends ActionBarActivity implements RoboContext {
      */
     protected GlobalImageCache.BitmapDigest showDetailImage1(String facePath,final ImageView targetView,boolean isrefresh){
         final WeakReference<ImageView> weakImageView = new WeakReference<ImageView>(targetView);
+        HandlerRecycleBitmapDrawable localHandlerRecycleBitmapDrawable = new HandlerRecycleBitmapDrawable(null, this);
+        targetView.setImageDrawable(localHandlerRecycleBitmapDrawable);
         GlobalImageCache.BitmapDigest localBitmapDigest = new GlobalImageCache.BitmapDigest(facePath);
         localBitmapDigest.setWidth(targetView.getWidth());
         localBitmapDigest.setHeight(targetView.getHeight());
         Bitmap localBitmap = InflateUtil.loadImageWithCache(localBitmapDigest);
         if (localBitmap == null) {
-            InflateUtil.loadImageWithUrl(getHttpGroupaAsynPool(), localBitmapDigest,isrefresh, new InflateUtil.ImageLoadListener() {
-                public void onError(GlobalImageCache.BitmapDigest paramAnonymousBitmapDigest) {
+            InflateUtil.loadImageWithUrl(getHttpGroupaAsynPool(),
+                    localBitmapDigest, isrefresh, new InflateUtil.ImageLoadListener() {
+                @Override
+                public void onError(GlobalImageCache.BitmapDigest paramBitmapDigest) {
+
                 }
 
-                public void onProgress(GlobalImageCache.BitmapDigest paramAnonymousBitmapDigest, int paramAnonymousInt1, int paramAnonymousInt2) {
+                @Override
+                public void onProgress(GlobalImageCache.BitmapDigest paramBitmapDigest, int paramInt1, int paramInt2) {
+
                 }
 
-                public void onStart(GlobalImageCache.BitmapDigest paramAnonymousBitmapDigest) {
+                @Override
+                public void onStart(GlobalImageCache.BitmapDigest paramBitmapDigest) {
+
                 }
 
-                public void onSuccess(GlobalImageCache.BitmapDigest paramAnonymousBitmapDigest, Bitmap paramAnonymousBitmap) {
+                @Override
+                public void onSuccess(GlobalImageCache.BitmapDigest paramBitmapDigest, Bitmap paramAnonymousBitmap) {
                     if (weakImageView != null && weakImageView.get() != null) {
                         ImageView targetIv = weakImageView.get();
                         targetIv.setImageBitmap(paramAnonymousBitmap);
+                        mAttacher = new PhotoViewAttacher(targetIv);
+                        targetIv.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View view) {
+                                if (popWin != null) {
+                                    popWin.dismiss();
+                                }
+                            }
+                        }
+                        );
+                        mAttacher.setOnViewTapListener(new PhotoViewAttacher.OnViewTapListener() {
+                            @Override
+                            public void onViewTap(View view, float x, float y) {
+                                if (popWin != null) {
+                                    popWin.dismiss();
+                                }
+                            }
+                        });
+                        mAttacher.setOnPhotoTapListener(new PhotoViewAttacher.OnPhotoTapListener() {
+                            @Override
+                            public void onPhotoTap(View view, float x, float y) {
+                                if (popWin != null) {
+                                    popWin.dismiss();
+                                }
+                            }
+                        });
                     }
                 }
             });
-        } else {
+        }else {
             targetView.setImageBitmap(localBitmap);
         }
         return localBitmapDigest;
@@ -443,12 +460,6 @@ public class BaseActivity extends ActionBarActivity implements RoboContext {
     public void showPop2(View view,ArrayList<String> imageurls,int postion,Context context) {
         View popView = this.getLayoutInflater().inflate(
                 R.layout.layout_popwindwos2, null);
-        popView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                popWin.dismiss();
-            }
-        });
         popWin = new PopupWindow(popView, RelativeLayout.LayoutParams.MATCH_PARENT,
                 RelativeLayout.LayoutParams.MATCH_PARENT);
         // 需要设置一下此参数，点击外边可消失
@@ -460,10 +471,14 @@ public class BaseActivity extends ActionBarActivity implements RoboContext {
         popWin.setTouchable(true);
         popWin.showAtLocation(view,Gravity.CENTER, 0, 0);
         HackyViewPager mViewPager = (HackyViewPager)popView.findViewById(R.id.pop_img);
+        ViewGroup.LayoutParams linearParams =  mViewPager.getLayoutParams();
+        linearParams.height=ViewGroup.LayoutParams.WRAP_CONTENT;
+        linearParams.width=ViewGroup.LayoutParams.MATCH_PARENT;
         ArrayList<PhotoView> imageViews = new ArrayList<PhotoView>();
         for(int i=0;i<imageurls.size();i++){
             PhotoView imageView = new PhotoView(context);
-            imageView.setScaleType(ImageView.ScaleType.CENTER_CROP);
+            imageView.setScaleType(ImageView.ScaleType.CENTER_INSIDE);
+            imageView.setLayoutParams(linearParams);
             imageViews.add(imageView);
             showDetailImage1(imageurls.get(i), imageView, false);
         }
