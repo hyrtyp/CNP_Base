@@ -30,6 +30,8 @@ import com.hyrt.cnp.R;
 import com.jingdong.app.pad.utils.InflateUtil;
 import com.jingdong.common.utils.cache.GlobalImageCache;
 
+import java.lang.ref.SoftReference;
+
 import static android.os.Build.VERSION.SDK_INT;
 import static android.os.Build.VERSION_CODES.FROYO;
 import static android.os.Build.VERSION_CODES.ICE_CREAM_SANDWICH;
@@ -39,6 +41,8 @@ import static android.os.Build.VERSION_CODES.ICE_CREAM_SANDWICH;
  * Progress dialog in Holo Light theme
  */
 public class LightProgressDialog extends ProgressDialog {
+
+    private static SoftReference<Drawable> layerDrawable;
 
     /**
      * Create progress dialog
@@ -70,17 +74,10 @@ public class LightProgressDialog extends ProgressDialog {
             dialog.setMessage(message);
             dialog.setIndeterminate(true);
             dialog.setProgressStyle(STYLE_SPINNER);
-            GlobalImageCache.BitmapDigest localBitmapDigest = new GlobalImageCache.BitmapDigest("spinner");
-            localBitmapDigest.setWidth(50);
-            localBitmapDigest.setHeight(50);
-            Bitmap localBitmap = InflateUtil.loadImageWithCache(localBitmapDigest);
-            if(localBitmap == null){
-                Drawable drawable = context.getResources().getDrawable(R.drawable.spinner);
-                GlobalImageCache.getLruBitmapCache().put(localBitmapDigest,drawableLayerToBitmap(drawable));
-                dialog.setIndeterminateDrawable(drawable);
-            }else{
-                dialog.setIndeterminateDrawable(new BitmapDrawable(localBitmap));
+            if(layerDrawable == null || layerDrawable.get() == null){
+                layerDrawable = new SoftReference<Drawable>(context.getResources().getDrawable(R.drawable.spinner));
             }
+            dialog.setIndeterminateDrawable(layerDrawable.get());
             return dialog;
         } else {
             AlertDialog dialog = LightAlertDialog.create(context);

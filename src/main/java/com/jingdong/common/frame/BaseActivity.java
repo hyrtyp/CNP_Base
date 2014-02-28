@@ -398,7 +398,9 @@ public class BaseActivity extends ActionBarActivity implements RoboContext {
                 }
             });
         }else {
-            targetView.setImageBitmap(localBitmap);
+            //targetView.setImageBitmap(localBitmap);
+            localHandlerRecycleBitmapDrawable.setBitmap(localBitmap);
+            localHandlerRecycleBitmapDrawable.invalidateSelf();
         }
         return localBitmapDigest;
     }
