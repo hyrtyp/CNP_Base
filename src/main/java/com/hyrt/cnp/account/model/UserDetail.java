@@ -21,6 +21,8 @@ public class UserDetail implements Serializable{
     private String logo;
     private String back;
     private String timeText;
+    //显示用户签名
+    private String intro;
 
     @Override
     public boolean equals(Object o) {
@@ -36,6 +38,7 @@ public class UserDetail implements Serializable{
         if (bloodType != null ? !bloodType.equals(that.bloodType) : that.bloodType != null)
             return false;
         if (ethnic != null ? !ethnic.equals(that.ethnic) : that.ethnic != null) return false;
+        if (intro != null ? !intro.equals(that.intro) : that.intro != null) return false;
         if (logo != null ? !logo.equals(that.logo) : that.logo != null) return false;
         if (nationality != null ? !nationality.equals(that.nationality) : that.nationality != null)
             return false;
@@ -65,7 +68,16 @@ public class UserDetail implements Serializable{
         result = 31 * result + (logo != null ? logo.hashCode() : 0);
         result = 31 * result + (back != null ? back.hashCode() : 0);
         result = 31 * result + (timeText != null ? timeText.hashCode() : 0);
+        result = 31 * result + (intro != null ? intro.hashCode() : 0);
         return result;
+    }
+
+    public String getIntro() {
+        return intro;
+    }
+
+    public void setIntro(String intro) {
+        this.intro = intro;
     }
 
     public String getTimeText() {

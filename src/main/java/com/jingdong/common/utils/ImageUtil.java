@@ -12,10 +12,8 @@ import android.graphics.drawable.Drawable;
 import com.jingdong.common.http.HttpResponse;
 import com.jingdong.common.utils.cache.GlobalImageCache;
 import com.novoda.imageloader.core.bitmap.BitmapUtil;
-import java.io.File;
-import java.io.InputStream;
 
-import net.oschina.app.AppContext;
+import java.io.File;
 
 public class ImageUtil {
 

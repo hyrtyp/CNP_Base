@@ -228,19 +228,23 @@ public class StringUtils
         return dayForWeek;
     }
 
-
-
     /**
-     * 将毫秒数转换为时间
-     * yyyy-MM-dd HH:mm:ss
-     * */
-
-    public static String millTimeToNormalTime(String stime)throws Exception{
-        Calendar calendar = Calendar.getInstance();
-        calendar.setTimeInMillis(Integer.parseInt(stime));
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-        String days=sdf.format(calendar.getTime());
-        return days;
+     * 根据日期获得星期
+     * @param pTime
+     * @return
+     */
+    public static String getWeekOfDate(String pTime) throws ParseException {
+        String[] weekDaysName = { "星期一", "星期二", "星期三", "星期四", "星期五", "星期六" ,"星期日"};
+        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+        Calendar c = Calendar.getInstance();
+        c.setTime(format.parse(pTime));
+        int dayForWeek = 0;
+        if(c.get(Calendar.DAY_OF_WEEK) == 1){
+            dayForWeek = 7;
+        }else{
+            dayForWeek = c.get(Calendar.DAY_OF_WEEK) - 1;
+        }
+        return weekDaysName[dayForWeek-1];
     }
 
     /**
@@ -248,12 +252,32 @@ public class StringUtils
      * yyyy-MM-dd HH:mm:ss
      * */
 
+    public static String millTimeToNormalTime(String stime)throws Exception{
+        Long timestamp = Long.parseLong(stime)*1000;
+        String date = new java.text.SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new java.util.Date(timestamp));
+        return date;
+    }
+
+    /**
+     * 将毫秒数转换为时间
+     * yyyy-MM-dd
+     * */
+
     public static String millTimeToNormalTime2(String stime)throws Exception{
-        Calendar calendar = Calendar.getInstance();
-        calendar.setTimeInMillis(Integer.parseInt(stime));
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-        String days=sdf.format(calendar.getTime());
-        return days;
+        Long timestamp = Long.parseLong(stime)*1000;
+        String date = new java.text.SimpleDateFormat("yyyy-MM-dd").format(new java.util.Date(timestamp));
+        return date;
+    }
+
+    /**
+     * 将毫秒数转换为时间
+     * yyyy-MM-dd HH:mm:ss
+     * */
+
+    public static String millTimeToNormalTime3(String stime)throws Exception{
+        Long timestamp = Long.parseLong(stime)*1000;
+        String date = new java.text.SimpleDateFormat("yyyy-MM-dd").format(new java.util.Date(timestamp));
+        return date;
     }
 
  }

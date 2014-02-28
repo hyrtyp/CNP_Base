@@ -166,8 +166,8 @@ public class LruBitmapCache implements CacheManager {
 		if (capacity <= 0) {
 			capacity = 1024 * 1024 * 4;
 		}
-		if (capacity > 0x800000)
-			capacity = 0x800000;
+//		if (capacity > 0x800000)
+//			capacity = 0x800000;
 		return capacity;
 	}
 

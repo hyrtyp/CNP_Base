@@ -1,10 +1,12 @@
 package com.hyrt.cnp.account.model;
 
+import java.io.Serializable;
+
 /**
  * Created by GYH on 14-1-24.
  * 班级成员
  */
-public class BabyInfo {
+public class BabyInfo implements Serializable {
 
     private int user_id;
     private String renname;
@@ -18,6 +20,61 @@ public class BabyInfo {
     private String jobdate;
     private String bloodType;
     private String nationality;
+    private String timeText;// 问候语
+    private String intro;// 个性签名
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        BabyInfo babyInfo = (BabyInfo) o;
+
+        if (classroom != babyInfo.classroom) return false;
+        if (nursery_id != babyInfo.nursery_id) return false;
+        if (user_id != babyInfo.user_id) return false;
+        if (birthday != null ? !birthday.equals(babyInfo.birthday) : babyInfo.birthday != null)
+            return false;
+        if (bloodType != null ? !bloodType.equals(babyInfo.bloodType) : babyInfo.bloodType != null)
+            return false;
+        if (ethnic != null ? !ethnic.equals(babyInfo.ethnic) : babyInfo.ethnic != null)
+            return false;
+        if (intro != null ? !intro.equals(babyInfo.intro) : babyInfo.intro != null) return false;
+        if (jobdate != null ? !jobdate.equals(babyInfo.jobdate) : babyInfo.jobdate != null)
+            return false;
+        if (nationality != null ? !nationality.equals(babyInfo.nationality) : babyInfo.nationality != null)
+            return false;
+        if (nurseryName != null ? !nurseryName.equals(babyInfo.nurseryName) : babyInfo.nurseryName != null)
+            return false;
+        if (renname != null ? !renname.equals(babyInfo.renname) : babyInfo.renname != null)
+            return false;
+        if (roomName != null ? !roomName.equals(babyInfo.roomName) : babyInfo.roomName != null)
+            return false;
+        if (sex != null ? !sex.equals(babyInfo.sex) : babyInfo.sex != null) return false;
+        if (timeText != null ? !timeText.equals(babyInfo.timeText) : babyInfo.timeText != null)
+            return false;
+
+        return true;
+    }
+
+    @Override
+    public int hashCode() {
+        int result = user_id;
+        result = 31 * result + (renname != null ? renname.hashCode() : 0);
+        result = 31 * result + nursery_id;
+        result = 31 * result + (nurseryName != null ? nurseryName.hashCode() : 0);
+        result = 31 * result + classroom;
+        result = 31 * result + (roomName != null ? roomName.hashCode() : 0);
+        result = 31 * result + (sex != null ? sex.hashCode() : 0);
+        result = 31 * result + (birthday != null ? birthday.hashCode() : 0);
+        result = 31 * result + (ethnic != null ? ethnic.hashCode() : 0);
+        result = 31 * result + (jobdate != null ? jobdate.hashCode() : 0);
+        result = 31 * result + (bloodType != null ? bloodType.hashCode() : 0);
+        result = 31 * result + (nationality != null ? nationality.hashCode() : 0);
+        result = 31 * result + (timeText != null ? timeText.hashCode() : 0);
+        result = 31 * result + (intro != null ? intro.hashCode() : 0);
+        return result;
+    }
 
     public static class Model extends Base{
         private static final long serialVersionUID = -1;
@@ -58,52 +115,20 @@ public class BabyInfo {
         this.bloodType = bloodType;
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-
-        BabyInfo babyInfo = (BabyInfo) o;
-
-        if (classroom != babyInfo.classroom) return false;
-        if (nursery_id != babyInfo.nursery_id) return false;
-        if (user_id != babyInfo.user_id) return false;
-        if (birthday != null ? !birthday.equals(babyInfo.birthday) : babyInfo.birthday != null)
-            return false;
-        if (bloodType != null ? !bloodType.equals(babyInfo.bloodType) : babyInfo.bloodType != null)
-            return false;
-        if (ethnic != null ? !ethnic.equals(babyInfo.ethnic) : babyInfo.ethnic != null)
-            return false;
-        if (jobdate != null ? !jobdate.equals(babyInfo.jobdate) : babyInfo.jobdate != null)
-            return false;
-        if (nationality != null ? !nationality.equals(babyInfo.nationality) : babyInfo.nationality != null)
-            return false;
-        if (nurseryName != null ? !nurseryName.equals(babyInfo.nurseryName) : babyInfo.nurseryName != null)
-            return false;
-        if (renname != null ? !renname.equals(babyInfo.renname) : babyInfo.renname != null)
-            return false;
-        if (roomName != null ? !roomName.equals(babyInfo.roomName) : babyInfo.roomName != null)
-            return false;
-        if (sex != null ? !sex.equals(babyInfo.sex) : babyInfo.sex != null) return false;
-
-        return true;
+    public String getTimeText() {
+        return timeText;
     }
 
-    @Override
-    public int hashCode() {
-        int result = user_id;
-        result = 31 * result + (renname != null ? renname.hashCode() : 0);
-        result = 31 * result + nursery_id;
-        result = 31 * result + (nurseryName != null ? nurseryName.hashCode() : 0);
-        result = 31 * result + classroom;
-        result = 31 * result + (roomName != null ? roomName.hashCode() : 0);
-        result = 31 * result + (sex != null ? sex.hashCode() : 0);
-        result = 31 * result + (birthday != null ? birthday.hashCode() : 0);
-        result = 31 * result + (ethnic != null ? ethnic.hashCode() : 0);
-        result = 31 * result + (jobdate != null ? jobdate.hashCode() : 0);
-        result = 31 * result + (bloodType != null ? bloodType.hashCode() : 0);
-        result = 31 * result + (nationality != null ? nationality.hashCode() : 0);
-        return result;
+    public void setTimeText(String timeText) {
+        this.timeText = timeText;
+    }
+
+    public String getIntro() {
+        return intro;
+    }
+
+    public void setIntro(String intro) {
+        this.intro = intro;
     }
 
     public String getNationality() {

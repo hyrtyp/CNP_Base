@@ -30,6 +30,16 @@ public class CommentService {
                 Comment.Model.class,params);
     }
 
+    public Comment.Model getCommenthomeData(RestTemplate restTemplate,String infoid,String siteid){
+        cnpClient.configureRequest();
+        HashMap<String, String> params = cnpClient.getParamsforGet();
+        params.put("infoid",infoid);
+        params.put("siteid",siteid);
+        return  restTemplate.getForObject("http://api.chinaxueqian.com/home/comment?" +
+                "token={token}&uuid={uuid}&infoid={infoid}&siteid={siteid}",
+                Comment.Model.class,params);
+    }
+
     public Comment.Model3 addCommentData(Comment comment){
         cnpClient.configureRequest();
         MultiValueMap<String,Object> params = cnpClient.getParams();
