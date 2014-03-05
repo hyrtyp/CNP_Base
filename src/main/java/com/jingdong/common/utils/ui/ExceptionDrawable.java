@@ -66,7 +66,7 @@ public class ExceptionDrawable extends Drawable {
 		paramCanvas.drawText(this.text, x, y, this.paint);
 		if (bitmap != null){
 
-            RectF rectF = new RectF(centerX-centerY*3/4,centerY/4,centerX+centerY*3/4,centerY*7/4);
+            RectF rectF = new RectF(centerX*3/4,centerY-centerX*1/4,centerX*5/4,centerY+centerX*1/4);
             paramCanvas.drawBitmap(bitmap, null,
                     rectF,
                     this.paint);

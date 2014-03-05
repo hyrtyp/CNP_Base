@@ -5,6 +5,8 @@ import android.support.v4.view.PagerAdapter;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.jingdong.common.frame.BaseActivity;
+
 import java.util.ArrayList;
 
 import uk.co.senab.photoview.PhotoView;
@@ -16,15 +18,28 @@ import uk.co.senab.photoview.PhotoView;
 public class ImageAdapter extends PagerAdapter {
 
     private ArrayList<PhotoView> imageViews;
+    private ArrayList<String> imageurls;
+    private BaseActivity baseActivity;
+    private boolean isfirst=true;
 
-    public ImageAdapter(ArrayList<PhotoView> imageViews){
+    public ImageAdapter(ArrayList<PhotoView> imageViews,ArrayList<String> imageurls,BaseActivity baseActivity){
         this.imageViews=imageViews;
+        this.imageurls=imageurls;
+        this.baseActivity=baseActivity;
     }
 
     @Override
-    public Object instantiateItem(ViewGroup container, int arg1) {
-        container.addView(imageViews.get(arg1), ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
-        return imageViews.get(arg1);
+    public void setPrimaryItem(ViewGroup container, int position, Object object) {
+        super.setPrimaryItem(container, position, object);
+
+    }
+
+    @Override
+    public Object instantiateItem(ViewGroup container, int position) {
+        baseActivity.showDetailImage1(imageurls.get(position), imageViews.get(position), false,isfirst);
+        isfirst=false;
+        container.addView(imageViews.get(position), ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
+        return imageViews.get(position);
     }
 
     @Override
@@ -35,6 +50,7 @@ public class ImageAdapter extends PagerAdapter {
     @Override
     public void destroyItem(ViewGroup container, int arg1, Object arg2) {
         container.removeView((View) arg2);
+        imageViews.get(arg1).setImageBitmap(null);
     }
 
     @Override

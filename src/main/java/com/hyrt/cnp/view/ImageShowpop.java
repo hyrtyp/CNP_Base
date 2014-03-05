@@ -36,7 +36,7 @@ public class ImageShowpop extends BaseActivity{
         mCurrMatrixTv = (TextView) findViewById(R.id.tv_current_matrix);
 
         String bigImgPath=getIntent().getStringExtra("imageurl");
-        showDetailImage1(bigImgPath, mImageView, false);
+        showDetailImage1(bigImgPath, mImageView, false,true);
         // The MAGIC happens here!
 
 

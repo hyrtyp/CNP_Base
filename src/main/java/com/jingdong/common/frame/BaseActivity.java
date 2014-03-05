@@ -329,7 +329,7 @@ public class BaseActivity extends ActionBarActivity implements RoboContext {
         popWin.setTouchable(true);
         popWin.showAtLocation(view,Gravity.CENTER, 0, 0);
         ImageView imageview = (ImageView)popView.findViewById(R.id.pop_img);
-        showDetailImage1(bigImgPath, imageview, false);
+        showDetailImage1(bigImgPath, imageview, false,true);
     }
 
     /**
@@ -337,13 +337,15 @@ public class BaseActivity extends ActionBarActivity implements RoboContext {
      * facePath 头像图片地址
      * targetView 图片显示元素
      */
-    protected GlobalImageCache.BitmapDigest showDetailImage1(String facePath,final ImageView targetView,boolean isrefresh){
+    public GlobalImageCache.BitmapDigest showDetailImage1(String facePath,final ImageView targetView,boolean isrefresh,boolean isfirst){
         final WeakReference<ImageView> weakImageView = new WeakReference<ImageView>(targetView);
         HandlerRecycleBitmapDrawable localHandlerRecycleBitmapDrawable = new HandlerRecycleBitmapDrawable(null, this);
         targetView.setImageDrawable(localHandlerRecycleBitmapDrawable);
         GlobalImageCache.BitmapDigest localBitmapDigest = new GlobalImageCache.BitmapDigest(facePath);
         localBitmapDigest.setWidth(targetView.getWidth());
         localBitmapDigest.setHeight(targetView.getHeight());
+        if(isfirst)
+        localBitmapDigest.setLarge(true);
         Bitmap localBitmap = InflateUtil.loadImageWithCache(localBitmapDigest);
         if (localBitmap == null) {
             InflateUtil.loadImageWithUrl(getHttpGroupaAsynPool(),
@@ -398,9 +400,7 @@ public class BaseActivity extends ActionBarActivity implements RoboContext {
                 }
             });
         }else {
-            //targetView.setImageBitmap(localBitmap);
-            localHandlerRecycleBitmapDrawable.setBitmap(localBitmap);
-            localHandlerRecycleBitmapDrawable.invalidateSelf();
+            targetView.setImageBitmap(localBitmap);
         }
         return localBitmapDigest;
     }
@@ -482,9 +482,8 @@ public class BaseActivity extends ActionBarActivity implements RoboContext {
             imageView.setScaleType(ImageView.ScaleType.CENTER_INSIDE);
             imageView.setLayoutParams(linearParams);
             imageViews.add(imageView);
-            showDetailImage1(imageurls.get(i), imageView, false);
         }
-        mViewPager.setAdapter(new ImageAdapter(imageViews));
+        mViewPager.setAdapter(new ImageAdapter(imageViews,imageurls,this));
         mViewPager.setCurrentItem(postion);
     }
 }
