@@ -25,4 +25,5 @@
     <string name="setcommit">发评论</string>
     <string name="setzfcommit">转发动态</string>
     <string name="commitlist">评论信息</string>
+    <string name="homeinter">全部动态</string>
 </resources>

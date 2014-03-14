@@ -280,4 +280,15 @@ public class StringUtils
         return date;
     }
 
- }
+    /**
+     * 动态数据类型
+     * */
+
+    public String getDynamicType(int id){
+        switch (id){
+//            case
+        }
+        return null;
+    }
+
+  }

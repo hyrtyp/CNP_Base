@@ -59,6 +59,7 @@ public class BaseActivity extends ActionBarActivity implements RoboContext {
     private static final String TAG = "BaseActivity";
     private MyActivity currentMyActivity;
 
+
     protected HashMap<Key<?>,Object> scopedObjects = new HashMap<Key<?>, Object>();
 
     protected View viewTitleBar;
@@ -67,6 +68,8 @@ public class BaseActivity extends ActionBarActivity implements RoboContext {
     protected TextView titletext;
     private PhotoViewAttacher mAttacher;
     private PopupWindow popWin;
+
+    protected Menu mymenu;
 
     @Override
     public Map<Key<?>, Object> getScopedObjectMap() {
@@ -278,13 +281,13 @@ public class BaseActivity extends ActionBarActivity implements RoboContext {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
 
-        if(!this.getTitle().equals("转发动态")||!this.getTitle().equals("评论信息")){
+        if(!this.getTitle().equals("转发动态")||!this.getTitle().equals("评论信息")||!this.getTitle().equals("全部动态")){
             menu.add("abc")
                     .setIcon(R.drawable.actionbar_right)
                     .setShowAsAction(
                             MenuItem.SHOW_AS_ACTION_ALWAYS);
         }
-
+        this.mymenu=menu;
         return true;
     }
 
