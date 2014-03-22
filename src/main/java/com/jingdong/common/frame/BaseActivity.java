@@ -20,10 +20,10 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.google.inject.Key;
-import com.hyrt.cnp.R;
-import com.hyrt.cnp.service.MyService;
-import com.hyrt.cnp.view.HackyViewPager;
-import com.hyrt.cnp.view.ImageAdapter;
+import com.hyrt.cnp.base.R;
+import com.hyrt.cnp.base.service.MyService;
+import com.hyrt.cnp.base.view.HackyViewPager;
+import com.hyrt.cnp.base.view.ImageAdapter;
 import com.jingdong.app.pad.product.ProductListFragment;
 import com.jingdong.app.pad.product.drawable.HandlerRecycleBitmapDrawable;
 import com.jingdong.app.pad.utils.InflateUtil;

@@ -1,4 +1,4 @@
-package com.jingdong.common.utils;
+package com.hyrt.cnp.base.account.utils;
 
 import android.os.Environment;
 

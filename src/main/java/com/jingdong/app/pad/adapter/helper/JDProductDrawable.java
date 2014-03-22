@@ -10,7 +10,7 @@ import android.graphics.RectF;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 
-import com.hyrt.cnp.R;
+import com.hyrt.cnp.base.R;
 import com.jingdong.app.pad.adapter.SimpleBeanAdapter;
 import com.jingdong.common.utils.DPIUtil;
 import com.jingdong.common.utils.Log;

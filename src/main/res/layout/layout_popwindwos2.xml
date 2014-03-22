@@ -18,7 +18,7 @@
         />
 
 
-    <com.hyrt.cnp.view.HackyViewPager
+    <com.hyrt.cnp.base.view.HackyViewPager
         android:id="@+id/pop_img"
         android:layout_width="match_parent"
         android:layout_centerInParent="true"
