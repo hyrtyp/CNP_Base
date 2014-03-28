@@ -1,4 +1,4 @@
-package com.hyrt.cnp.account.service;
+package com.hyrt.cnp.base.account.service;
 
 import com.hyrt.cnp.base.account.CNPClient;
 import com.hyrt.cnp.base.account.model.ClassRoomBabay;

@@ -462,6 +462,9 @@ public class BaseActivity extends ActionBarActivity implements RoboContext {
         }
     }
 
+    /**
+     * 左右滑动显示大图
+     * */
     public void showPop2(View view,ArrayList<String> imageurls,int postion,Context context) {
         View popView = this.getLayoutInflater().inflate(
                 R.layout.layout_popwindwos2, null);
