@@ -11,7 +11,6 @@ import android.graphics.ColorFilter;
 import android.graphics.NinePatch;
 import android.graphics.PaintFlagsDrawFilter;
 import android.graphics.Rect;
-import com.jingdong.common.utils.Log;
 import com.jingdong.common.utils.ui.ExceptionDrawable;
 
 public class HandlerRecycleBitmapDrawable extends ExceptionDrawable {
@@ -32,18 +31,19 @@ public class HandlerRecycleBitmapDrawable extends ExceptionDrawable {
         paramCanvas.setDrawFilter(new PaintFlagsDrawFilter(0, 3));
         if (this.np != null)
             this.np.draw(paramCanvas, getBounds());
-        if ((this.bitmap != null) && (!this.bitmap.isRecycled()))
+        if ((this.bitmap != null) && (!this.bitmap.isRecycled())){
             try {
                 Rect localRect = copyBounds();
-                localRect.set(2 + localRect.left, 2 + localRect.top, -2 + localRect.right, -4 + localRect.bottom);
+                localRect.set(localRect.left, localRect.top, localRect.right, localRect.bottom);
                 this.bitmapRect.set(0, 0, this.bitmap.getWidth(), this.bitmap.getHeight());
                 paramCanvas.drawBitmap(this.bitmap, this.bitmapRect, localRect, this.paint);
             } catch (Throwable localThrowable) {
-                while (!Log.E) ;
                 localThrowable.printStackTrace();
-                return;
             }
-        super.draw(paramCanvas);
+        }else{
+            super.draw(paramCanvas);
+        }
+
     }
 
     public Bitmap getBitmap() {

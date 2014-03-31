@@ -2,12 +2,11 @@ package com.jingdong.common.utils;
 
 import android.os.Environment;
 
-import com.hyrt.cnp.BuildConfig;
+import com.hyrt.cnp.base.BuildConfig;
 
 import java.io.File;
 import java.io.IOException;
 import java.io.RandomAccessFile;
-import java.util.Date;
 
 public class Log {
 	

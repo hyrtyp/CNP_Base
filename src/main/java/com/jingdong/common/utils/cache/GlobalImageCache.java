@@ -288,7 +288,7 @@ public class GlobalImageCache {
 	 */
 	public static synchronized LruBitmapCache getLruBitmapCache() {
 		if (lruBitmapCache == null)
-			lruBitmapCache = new LruBitmapCache(AppContext.getInstance(), 0x3c);
+			lruBitmapCache = new LruBitmapCache(AppContext.getInstance(), 30);
 		return lruBitmapCache;
 	}
 }

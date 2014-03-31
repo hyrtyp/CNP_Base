@@ -94,12 +94,17 @@ public class LruBitmapCache implements CacheManager {
 									+ paramAnonymousBitmapDigest);
 				if (paramAnonymousBitmapDigest.isInUsing())
 					return;
-                if(Util.hasInBitmap()){
+                //if(Util.hasInBitmap()){
+                if(false){
                     // We're running on Honeycomb or later, so add the bitmap
                     //to a SoftReference set for possible use with inBitmap later.
                     mReusableBitmaps.add(new SoftReference<Bitmap>(newBitmap));
                 }else if (paramAnonymousBitmapDigest.isAllowRecycle()){
-					oldBitmp.recycle();
+                    try{
+                        oldBitmp.recycle();
+                    }catch (Throwable throwable){
+                        throwable.printStackTrace();
+                    }
                 }
 				if (isRemove)
 					GlobalImageCache.remove(paramAnonymousBitmapDigest);
@@ -166,8 +171,8 @@ public class LruBitmapCache implements CacheManager {
 		if (capacity <= 0) {
 			capacity = 1024 * 1024 * 4;
 		}
-		if (capacity > 0x800000)
-			capacity = 0x800000;
+//		if (capacity > 0x800000)
+//			capacity = 0x800000;
 		return capacity;
 	}
 
