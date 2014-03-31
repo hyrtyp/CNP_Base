@@ -60,7 +60,7 @@ public class BaseActivity extends ActionBarActivity implements RoboContext {
     private MyActivity currentMyActivity;
 
 
-    protected HashMap<Key<?>,Object> scopedObjects = new HashMap<Key<?>, Object>();
+    protected HashMap<Key<?>, Object> scopedObjects = new HashMap<Key<?>, Object>();
 
     protected View viewTitleBar;
     protected ActionBar actionBar;
@@ -117,22 +117,28 @@ public class BaseActivity extends ActionBarActivity implements RoboContext {
         if (true) {
             Log.d("MainActivity",
                     " -->> this.getResources().getDisplayMetrics().density:"
-                            + getResources().getDisplayMetrics().density);
+                            + getResources().getDisplayMetrics().density
+            );
             Log.d("MainActivity",
                     " -->> this.getResources().getDisplayMetrics().heightPixels:"
-                            + getResources().getDisplayMetrics().heightPixels);
+                            + getResources().getDisplayMetrics().heightPixels
+            );
             Log.d("MainActivity",
                     " -->> this.getResources().getDisplayMetrics().widthPixels:"
-                            + getResources().getDisplayMetrics().widthPixels);
+                            + getResources().getDisplayMetrics().widthPixels
+            );
             Log.d("MainActivity",
                     " -->> this.getResources().getDisplayMetrics().xdpi:"
-                            + getResources().getDisplayMetrics().xdpi);
+                            + getResources().getDisplayMetrics().xdpi
+            );
             Log.d("MainActivity",
                     " -->> this.getResources().getDisplayMetrics().ydpi:"
-                            + getResources().getDisplayMetrics().ydpi);
+                            + getResources().getDisplayMetrics().ydpi
+            );
             Log.d("MainActivity",
                     " -->> this.getResources().getDisplayMetrics().densityDpi:"
-                            + getResources().getDisplayMetrics().densityDpi);
+                            + getResources().getDisplayMetrics().densityDpi
+            );
             try {
                 Log.d("MainActivity",
                         "getSizeOfScreen() -->> " + DPIUtil.getSizeOfScreen());
@@ -148,8 +154,8 @@ public class BaseActivity extends ActionBarActivity implements RoboContext {
 //                    .penaltyLog().penaltyDeath().build());
 
         }
-        if(!(this.getLocalClassName().contains("FullscreenActivity"))){
-            actionBar  = getSupportActionBar();
+        if (!(this.getLocalClassName().contains("FullscreenActivity"))) {
+            actionBar = getSupportActionBar();
             actionBar.setDisplayShowTitleEnabled(false);
             actionBar.setHomeButtonEnabled(true);
             initTitleview();
@@ -168,12 +174,12 @@ public class BaseActivity extends ActionBarActivity implements RoboContext {
     protected void onDestroy() {
         try {
             RoboGuice.destroyInjector(this);
-        }finally {
+        } finally {
             super.onDestroy();
             AppContext.getInstance().setBaseActivity(null);
         }
 
-        if(mAttacher!=null){
+        if (mAttacher != null) {
             mAttacher.cleanup();
         }
     }
@@ -263,36 +269,40 @@ public class BaseActivity extends ActionBarActivity implements RoboContext {
 
     /**
      * 初始化顶部标题栏
-      */
-   protected void initTitleview(){
-       ActionBar.LayoutParams lp = new ActionBar.LayoutParams(
-               ActionBar.LayoutParams.MATCH_PARENT,
-               ActionBar.LayoutParams.MATCH_PARENT, Gravity.CENTER);
-       viewTitleBar = getLayoutInflater().inflate(R.layout.layout_actionbar_title, null);
-       backimage=(ImageView)viewTitleBar.findViewById(R.id.action_bar_title_back);
-       titletext=(TextView)viewTitleBar.findViewById(R.id.action_bar_title_text);
-       titletext.setText(this.getTitle());
-       actionBar.setCustomView(viewTitleBar, lp);
-       backimage.setVisibility(View.GONE);
-       actionBar.setIcon(R.drawable.actionbar_title_back);
-   }
+     */
+    protected void initTitleview() {
+        ActionBar.LayoutParams lp = new ActionBar.LayoutParams(
+                ActionBar.LayoutParams.MATCH_PARENT,
+                ActionBar.LayoutParams.MATCH_PARENT, Gravity.CENTER);
+        viewTitleBar = getLayoutInflater().inflate(R.layout.layout_actionbar_title, null);
+        backimage = (ImageView) viewTitleBar.findViewById(R.id.action_bar_title_back);
+        titletext = (TextView) viewTitleBar.findViewById(R.id.action_bar_title_text);
+        titletext.setText(this.getTitle());
+        actionBar.setCustomView(viewTitleBar, lp);
+        backimage.setVisibility(View.GONE);
+        actionBar.setIcon(R.drawable.actionbar_title_back);
+    }
 
     @TargetApi(Build.VERSION_CODES.HONEYCOMB)
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
 
-        if(!this.getTitle().equals("转发动态")||!this.getTitle().equals("评论信息")||!this.getTitle().equals("全部动态")){
+        if (!this.getTitle().equals("转发动态") ||
+                !this.getTitle().equals("评论信息") ||
+                !this.getTitle().equals("全部动态") ||
+                !this.getTitle().equals("发布动态")) {
             menu.add("abc")
                     .setIcon(R.drawable.actionbar_right)
                     .setShowAsAction(
                             MenuItem.SHOW_AS_ACTION_ALWAYS);
         }
-        this.mymenu=menu;
+        this.mymenu = menu;
         return true;
     }
 
     /**
      * 获取图片,并附加到视图上
+     *
      * @param imageUrl
      * @param onEndListener
      */
@@ -309,10 +319,11 @@ public class BaseActivity extends ActionBarActivity implements RoboContext {
 
     /**
      * 显示弹出大图
-     * @param view 窗口view
+     *
+     * @param view       窗口view
      * @param bigImgPath 大图路径
      */
-    public  void showPop(View view,String bigImgPath) {
+    public void showPop(View view, String bigImgPath) {
         View popView = this.getLayoutInflater().inflate(
                 R.layout.layout_popwindwos, null);
         popView.setOnClickListener(new View.OnClickListener() {
@@ -330,9 +341,9 @@ public class BaseActivity extends ActionBarActivity implements RoboContext {
         // 设置此参数获得焦点，否则无法点击
         popWin.setFocusable(true);
         popWin.setTouchable(true);
-        popWin.showAtLocation(view,Gravity.CENTER, 0, 0);
-        ImageView imageview = (ImageView)popView.findViewById(R.id.pop_img);
-        showDetailImage1(bigImgPath, imageview, false,true);
+        popWin.showAtLocation(view, Gravity.CENTER, 0, 0);
+        ImageView imageview = (ImageView) popView.findViewById(R.id.pop_img);
+        showDetailImage1(bigImgPath, imageview, false, true);
     }
 
     /**
@@ -340,69 +351,70 @@ public class BaseActivity extends ActionBarActivity implements RoboContext {
      * facePath 头像图片地址
      * targetView 图片显示元素
      */
-    public GlobalImageCache.BitmapDigest showDetailImage1(String facePath,final ImageView targetView,boolean isrefresh,boolean isfirst){
+    public GlobalImageCache.BitmapDigest showDetailImage1(String facePath, final ImageView targetView, boolean isrefresh, boolean isfirst) {
         final WeakReference<ImageView> weakImageView = new WeakReference<ImageView>(targetView);
         HandlerRecycleBitmapDrawable localHandlerRecycleBitmapDrawable = new HandlerRecycleBitmapDrawable(null, this);
         targetView.setImageDrawable(localHandlerRecycleBitmapDrawable);
         GlobalImageCache.BitmapDigest localBitmapDigest = new GlobalImageCache.BitmapDigest(facePath);
         localBitmapDigest.setWidth(targetView.getWidth());
         localBitmapDigest.setHeight(targetView.getHeight());
-        if(isfirst)
-        localBitmapDigest.setLarge(true);
+        if (isfirst)
+            localBitmapDigest.setLarge(true);
         Bitmap localBitmap = InflateUtil.loadImageWithCache(localBitmapDigest);
         if (localBitmap == null) {
             InflateUtil.loadImageWithUrl(getHttpGroupaAsynPool(),
                     localBitmapDigest, isrefresh, new InflateUtil.ImageLoadListener() {
-                @Override
-                public void onError(GlobalImageCache.BitmapDigest paramBitmapDigest) {
+                        @Override
+                        public void onError(GlobalImageCache.BitmapDigest paramBitmapDigest) {
 
-                }
+                        }
 
-                @Override
-                public void onProgress(GlobalImageCache.BitmapDigest paramBitmapDigest, int paramInt1, int paramInt2) {
+                        @Override
+                        public void onProgress(GlobalImageCache.BitmapDigest paramBitmapDigest, int paramInt1, int paramInt2) {
 
-                }
+                        }
 
-                @Override
-                public void onStart(GlobalImageCache.BitmapDigest paramBitmapDigest) {
+                        @Override
+                        public void onStart(GlobalImageCache.BitmapDigest paramBitmapDigest) {
 
-                }
+                        }
 
-                @Override
-                public void onSuccess(GlobalImageCache.BitmapDigest paramBitmapDigest, Bitmap paramAnonymousBitmap) {
-                    if (weakImageView != null && weakImageView.get() != null) {
-                        ImageView targetIv = weakImageView.get();
-                        targetIv.setImageBitmap(paramAnonymousBitmap);
-                        mAttacher = new PhotoViewAttacher(targetIv);
-                        targetIv.setOnClickListener(new View.OnClickListener() {
-                            @Override
-                            public void onClick(View view) {
-                                if (popWin != null) {
-                                    popWin.dismiss();
-                                }
+                        @Override
+                        public void onSuccess(GlobalImageCache.BitmapDigest paramBitmapDigest, Bitmap paramAnonymousBitmap) {
+                            if (weakImageView != null && weakImageView.get() != null) {
+                                ImageView targetIv = weakImageView.get();
+                                targetIv.setImageBitmap(paramAnonymousBitmap);
+                                mAttacher = new PhotoViewAttacher(targetIv);
+                                targetIv.setOnClickListener(new View.OnClickListener() {
+                                                                @Override
+                                                                public void onClick(View view) {
+                                                                    if (popWin != null) {
+                                                                        popWin.dismiss();
+                                                                    }
+                                                                }
+                                                            }
+                                );
+                                mAttacher.setOnViewTapListener(new PhotoViewAttacher.OnViewTapListener() {
+                                    @Override
+                                    public void onViewTap(View view, float x, float y) {
+                                        if (popWin != null) {
+                                            popWin.dismiss();
+                                        }
+                                    }
+                                });
+                                mAttacher.setOnPhotoTapListener(new PhotoViewAttacher.OnPhotoTapListener() {
+                                    @Override
+                                    public void onPhotoTap(View view, float x, float y) {
+                                        if (popWin != null) {
+                                            popWin.dismiss();
+                                        }
+                                    }
+                                });
                             }
                         }
-                        );
-                        mAttacher.setOnViewTapListener(new PhotoViewAttacher.OnViewTapListener() {
-                            @Override
-                            public void onViewTap(View view, float x, float y) {
-                                if (popWin != null) {
-                                    popWin.dismiss();
-                                }
-                            }
-                        });
-                        mAttacher.setOnPhotoTapListener(new PhotoViewAttacher.OnPhotoTapListener() {
-                            @Override
-                            public void onPhotoTap(View view, float x, float y) {
-                                if (popWin != null) {
-                                    popWin.dismiss();
-                                }
-                            }
-                        });
                     }
-                }
-            });
-        }else {
+            );
+        } else {
             targetView.setImageBitmap(localBitmap);
         }
         return localBitmapDigest;
@@ -414,7 +426,7 @@ public class BaseActivity extends ActionBarActivity implements RoboContext {
      * facePath 头像图片地址
      * targetView 图片显示元素
      */
-    protected GlobalImageCache.BitmapDigest showDetailImage(String facePath,final ImageView targetView,boolean isrefresh){
+    protected GlobalImageCache.BitmapDigest showDetailImage(String facePath, final ImageView targetView, boolean isrefresh) {
         final WeakReference<ImageView> weakImageView = new WeakReference<ImageView>(targetView);
         HandlerRecycleBitmapDrawable localHandlerRecycleBitmapDrawable = new HandlerRecycleBitmapDrawable(null, this);
         targetView.setImageDrawable(localHandlerRecycleBitmapDrawable);
@@ -426,7 +438,7 @@ public class BaseActivity extends ActionBarActivity implements RoboContext {
             HandlerRecycleBitmapDrawable localHandlerRecycleBitmapDrawable2 = (HandlerRecycleBitmapDrawable) targetView.getDrawable();
             localHandlerRecycleBitmapDrawable2.setBitmap(null);
             localHandlerRecycleBitmapDrawable.invalidateSelf();
-            InflateUtil.loadImageWithUrl(getHttpGroupaAsynPool(), localBitmapDigest,isrefresh, new InflateUtil.ImageLoadListener() {
+            InflateUtil.loadImageWithUrl(getHttpGroupaAsynPool(), localBitmapDigest, isrefresh, new InflateUtil.ImageLoadListener() {
                 public void onError(GlobalImageCache.BitmapDigest paramAnonymousBitmapDigest) {
                 }
 
@@ -437,7 +449,7 @@ public class BaseActivity extends ActionBarActivity implements RoboContext {
                 }
 
                 public void onSuccess(GlobalImageCache.BitmapDigest paramAnonymousBitmapDigest, Bitmap paramAnonymousBitmap) {
-                    if (weakImageView != null  && weakImageView.get() != null)  {
+                    if (weakImageView != null && weakImageView.get() != null) {
                         ImageView targetIv = weakImageView.get();
                         if (targetIv != null) {
                             HandlerRecycleBitmapDrawable localHandlerRecycleBitmapDrawable = (HandlerRecycleBitmapDrawable) targetIv.getDrawable();
@@ -464,8 +476,8 @@ public class BaseActivity extends ActionBarActivity implements RoboContext {
 
     /**
      * 左右滑动显示大图
-     * */
-    public void showPop2(View view,ArrayList<String> imageurls,int postion,Context context) {
+     */
+    public void showPop2(View view, ArrayList<String> imageurls, int postion, Context context) {
         View popView = this.getLayoutInflater().inflate(
                 R.layout.layout_popwindwos2, null);
         popWin = new PopupWindow(popView, RelativeLayout.LayoutParams.MATCH_PARENT,
@@ -477,19 +489,19 @@ public class BaseActivity extends ActionBarActivity implements RoboContext {
         // 设置此参数获得焦点，否则无法点击
         popWin.setFocusable(true);
         popWin.setTouchable(true);
-        popWin.showAtLocation(view,Gravity.CENTER, 0, 0);
-        HackyViewPager mViewPager = (HackyViewPager)popView.findViewById(R.id.pop_img);
-        ViewGroup.LayoutParams linearParams =  mViewPager.getLayoutParams();
-        linearParams.height=ViewGroup.LayoutParams.WRAP_CONTENT;
-        linearParams.width=ViewGroup.LayoutParams.MATCH_PARENT;
+        popWin.showAtLocation(view, Gravity.CENTER, 0, 0);
+        HackyViewPager mViewPager = (HackyViewPager) popView.findViewById(R.id.pop_img);
+        ViewGroup.LayoutParams linearParams = mViewPager.getLayoutParams();
+        linearParams.height = ViewGroup.LayoutParams.WRAP_CONTENT;
+        linearParams.width = ViewGroup.LayoutParams.MATCH_PARENT;
         ArrayList<PhotoView> imageViews = new ArrayList<PhotoView>();
-        for(int i=0;i<imageurls.size();i++){
+        for (int i = 0; i < imageurls.size(); i++) {
             PhotoView imageView = new PhotoView(context);
             imageView.setScaleType(ImageView.ScaleType.CENTER_INSIDE);
             imageView.setLayoutParams(linearParams);
             imageViews.add(imageView);
         }
-        mViewPager.setAdapter(new ImageAdapter(imageViews,imageurls,this));
+        mViewPager.setAdapter(new ImageAdapter(imageViews, imageurls, this));
         mViewPager.setCurrentItem(postion);
     }
 }
