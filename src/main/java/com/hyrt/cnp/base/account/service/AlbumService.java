@@ -2,6 +2,7 @@ package com.hyrt.cnp.base.account.service;
 
 import com.hyrt.cnp.base.account.CNPClient;
 import com.hyrt.cnp.base.account.model.Album;
+import com.hyrt.cnp.base.account.model.Comment;
 
 import org.springframework.web.client.RestTemplate;
 
@@ -42,6 +43,16 @@ public class AlbumService {
         HashMap<String, String> params = cnpClient.getParamsforGet();
         return  restTemplate.getForObject(
                 "http://api.chinaxueqian.com/home/album_list?"+
-                        "token={token}&uuid={uuid}&uid={uid}",Album.Model.class, params);
+                        "token={token}&uuid={uuid}",Album.Model.class, params);
+    }
+
+    public Comment.Model3 AddMyAlbumData(RestTemplate restTemplate,String albumName,String describes){
+        cnpClient.configureRequest();
+        HashMap<String, String> params = cnpClient.getParamsforGet();
+        params.put("albumName",albumName);
+        params.put("describes",describes);
+        return  restTemplate.getForObject(
+                "http://api.chinaxueqian.com/home/album_add/?"+
+                        "token={token}&uuid={uuid}&albumName={albumName}&describes={describes}",Comment.Model3.class, params);
     }
 }
