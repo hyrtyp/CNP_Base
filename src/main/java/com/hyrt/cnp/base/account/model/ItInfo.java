@@ -212,4 +212,5 @@ public class ItInfo implements Serializable {
     public void setKey(String key) {
         this.key = key;
     }
+
 }
