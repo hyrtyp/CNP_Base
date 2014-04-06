@@ -426,7 +426,7 @@ public class BaseActivity extends ActionBarActivity implements RoboContext {
      * facePath 头像图片地址
      * targetView 图片显示元素
      */
-    protected GlobalImageCache.BitmapDigest showDetailImage(String facePath, final ImageView targetView, boolean isrefresh) {
+    public GlobalImageCache.BitmapDigest showDetailImage(String facePath, final ImageView targetView, boolean isrefresh) {
         final WeakReference<ImageView> weakImageView = new WeakReference<ImageView>(targetView);
         HandlerRecycleBitmapDrawable localHandlerRecycleBitmapDrawable = new HandlerRecycleBitmapDrawable(null, this);
         targetView.setImageDrawable(localHandlerRecycleBitmapDrawable);

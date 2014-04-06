@@ -35,4 +35,13 @@ public class AlbumService {
                 "http://api.chinaxueqian.com/home/album_list?"+
                 "token={token}&uuid={uuid}&uid={uid}",Album.Model.class, params);
     }
+
+
+    public Album.Model getMyAlbumData(RestTemplate restTemplate){
+        cnpClient.configureRequest();
+        HashMap<String, String> params = cnpClient.getParamsforGet();
+        return  restTemplate.getForObject(
+                "http://api.chinaxueqian.com/home/album_list?"+
+                        "token={token}&uuid={uuid}&uid={uid}",Album.Model.class, params);
+    }
 }

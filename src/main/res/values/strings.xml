@@ -27,4 +27,6 @@
     <string name="commitlist">评论信息</string>
     <string name="homeinter">全部动态</string>
     <string name="adddynamic">发布动态</string>
+    <string name="itmylist">我的</string>
+    <string name="commentdy">评论动态</string>
 </resources>
