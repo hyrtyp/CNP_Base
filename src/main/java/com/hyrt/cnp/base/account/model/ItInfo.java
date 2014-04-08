@@ -117,6 +117,7 @@ public class ItInfo implements Serializable {
         }
         return "";
     }
+
     public String getPosttime2() {
         try {
             return StringUtils.millTimeToNormalTime2(ptime);
@@ -125,6 +126,8 @@ public class ItInfo implements Serializable {
         }
         return "";
     }
+
+
     public int getFromUid() {
         return fromUid;
     }
