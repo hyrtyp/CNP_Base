@@ -27,6 +27,7 @@
     <dimen name="imageview_medium">110dp</dimen>
     <dimen name="imageview_small">90dp</dimen>
     <dimen name="imageview_smallest">80dp</dimen>
+    <dimen name="imageview_super_small">50dp</dimen>
 
     <dimen name="cnp_school_text_margin">15dp</dimen>
     <dimen name="cnp_school_text_size">15sp</dimen>

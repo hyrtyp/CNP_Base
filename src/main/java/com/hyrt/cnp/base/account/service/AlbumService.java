@@ -2,6 +2,7 @@ package com.hyrt.cnp.base.account.service;
 
 import com.hyrt.cnp.base.account.CNPClient;
 import com.hyrt.cnp.base.account.model.Album;
+import com.hyrt.cnp.base.account.model.Base;
 
 import org.springframework.web.client.RestTemplate;
 
@@ -43,5 +44,9 @@ public class AlbumService {
         return  restTemplate.getForObject(
                 "http://api.chinaxueqian.com/home/album_list?"+
                         "token={token}&uuid={uuid}&uid={uid}",Album.Model.class, params);
+    }
+
+    public Base AddMyAlbumData(RestTemplate restTemplate, String albumName, String describes){
+        return null;
     }
 }
