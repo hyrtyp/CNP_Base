@@ -9,7 +9,7 @@ import org.springframework.web.client.RestTemplate;
 import java.util.HashMap;
 
 /**
- * Created by GYH on 14-1-16.
+ * Created by GYH on 14-4-6.
  */
 public class AlbumService {
 
