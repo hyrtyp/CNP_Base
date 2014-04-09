@@ -7,6 +7,9 @@ import com.hyrt.cnp.base.account.utils.StringUtils;
 import org.codehaus.jackson.annotate.JsonIgnoreProperties;
 
 import java.io.Serializable;
+import java.io.UnsupportedEncodingException;
+import java.net.URLDecoder;
+import java.net.URLEncoder;
 import java.util.ArrayList;
 
 /**
@@ -190,7 +193,15 @@ public class Dynamic implements Serializable {
     }
 
     public String gettContent() {
-        return tContent;
+        String result = tContent;
+        for(int i=0; i<4; i++){
+            try{
+                result = URLDecoder.decode(result, "UTF-8");
+            }catch (UnsupportedEncodingException e){
+
+            }
+        }
+        return result;
     }
 
     public void settContent(String tContent) {
@@ -287,14 +298,31 @@ public class Dynamic implements Serializable {
     }
 
     public String getContent() {
-        return content;
+        String result = content;
+        for(int i=0; i<4; i++){
+            try{
+                result = URLDecoder.decode(result, "UTF-8");
+            }catch (UnsupportedEncodingException e){
+
+            }
+        }
+        return result;
     }
     public String getContent2() {
+        String result = "";
         if(isTran==1){
-            return content;
+            result = content;
         }else{
-            return dContent;
+            result = dContent;
         }
+        for(int i=0; i<4; i++){
+            try{
+                result = URLDecoder.decode(result, "UTF-8");
+            }catch (UnsupportedEncodingException e){
+
+            }
+        }
+        return result;
     }
 
     public void setContent(String content) {
