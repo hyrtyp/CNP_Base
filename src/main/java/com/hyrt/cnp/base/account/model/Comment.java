@@ -6,13 +6,14 @@ import com.hyrt.cnp.base.account.utils.StringUtils;
 
 import org.codehaus.jackson.annotate.JsonIgnoreProperties;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
 /**
  * Created by GYH on 14-1-7.
  */
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class Comment {
+public class Comment implements Serializable{
     private String _id;
     private String infoID;
     private String infoTitle;

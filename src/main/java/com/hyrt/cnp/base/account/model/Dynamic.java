@@ -194,6 +194,9 @@ public class Dynamic implements Serializable {
 
     public String gettContent() {
         String result = tContent;
+        if(result == null){
+            return "";
+        }
         for(int i=0; i<4; i++){
             try{
                 result = URLDecoder.decode(result, "UTF-8");
@@ -299,6 +302,9 @@ public class Dynamic implements Serializable {
 
     public String getContent() {
         String result = content;
+        if(result == null){
+            return "";
+        }
         for(int i=0; i<4; i++){
             try{
                 result = URLDecoder.decode(result, "UTF-8");
@@ -314,6 +320,9 @@ public class Dynamic implements Serializable {
             result = content;
         }else{
             result = dContent;
+        }
+        if(result == null){
+            return "";
         }
         for(int i=0; i<4; i++){
             try{
