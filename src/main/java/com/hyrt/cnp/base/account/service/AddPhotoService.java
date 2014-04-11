@@ -10,39 +10,33 @@ import org.springframework.util.MultiValueMap;
 import org.springframework.web.client.RestTemplate;
 
 import java.io.File;
-import java.util.HashMap;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Map;
 
 /**
- * Created by HY on 2014-04-10.
+ * Created by Zoe on 2014-04-11.
  */
-public class SendDynamicService{
+public class AddPhotoService {
 
     private CNPClient cnpClient;
 
-    public SendDynamicService(CNPClient cnpClient) {
+    public AddPhotoService(CNPClient cnpClient) {
         this.cnpClient = cnpClient;
     }
 
-    public BaseTest addDynamic(String content, File picUrl, String toUid, String toName){
+    public BaseTest addPhoto(
+            String paid, String photoname,
+            String introduce, File photo_add){
+
         cnpClient.configureRequest();
         MultiValueMap<String, Object> params = cnpClient.getParams();
-        params.set("content", content);
-        if(picUrl != null){
-            Resource face = new FileSystemResource(picUrl);
-            params.set("picUrl", face);
-        }
-        if(toUid != null){
-            params.set("toUid", toUid);
-        }
-        if(toName != null){
-            params.set("toName", toName);
-        }
+        params.set("paid", paid);
+        params.set("photoname", photoname);
+        params.set("introduce", introduce);
+        Resource face = new FileSystemResource(photo_add);
+        params.set("photo_add", face);
         BaseTest result =  getRestTemplate().postForObject(
-                "http://api.chinaxueqian.com/home/dynamic_add/",
-                cnpClient.getParams(),BaseTest.class);
+                "http://api.chinaxueqian.com/home/photo_add/",
+                cnpClient.getParams(), BaseTest.class);
+
         return result;
     }
 

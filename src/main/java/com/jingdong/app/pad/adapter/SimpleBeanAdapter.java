@@ -52,8 +52,10 @@ public class SimpleBeanAdapter extends BaseAdapter {
     public SimpleBeanAdapter(BaseActivity context, List data, int layoutId,
                              String[] resKeys, int[] reses) {
         baseActivity=context;
-        inflater = (LayoutInflater) context
-                .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        if(context != null){
+            inflater = (LayoutInflater) context
+                    .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        }
         this.layoutId = layoutId;
         this.data = data;
         this.resKeys = resKeys;

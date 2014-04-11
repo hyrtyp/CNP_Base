@@ -89,4 +89,8 @@ public class FaceUtils {
         return imagepath;
 
     }
+
+    public static String getImage(String photoUrl){
+        return "http://img.chinaxueqian.com/"+photoUrl;
+    }
 }

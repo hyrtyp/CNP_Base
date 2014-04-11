@@ -3,8 +3,11 @@ package com.hyrt.cnp.base.account.service;
 import com.hyrt.cnp.base.account.CNPClient;
 import com.hyrt.cnp.base.account.model.Album;
 import com.hyrt.cnp.base.account.model.Base;
+import com.hyrt.cnp.base.account.model.BaseTest;
 import com.hyrt.cnp.base.account.model.Comment;
 
+import org.springframework.http.client.HttpComponentsClientHttpRequestFactory;
+import org.springframework.util.MultiValueMap;
 import org.springframework.web.client.RestTemplate;
 
 import java.util.HashMap;
@@ -55,5 +58,33 @@ public class AlbumService {
         return  restTemplate.getForObject(
                 "http://api.chinaxueqian.com/home/album_add/?"+
                         "token={token}&uuid={uuid}&albumName={albumName}&describes={describes}",Comment.Model3.class, params);
+    }
+
+    public BaseTest delAlbum(String paid){
+        cnpClient.configureRequest();
+        MultiValueMap<String, Object> params = cnpClient.getParams();
+        params.set("paid", paid);
+        BaseTest result =  getRestTemplate().postForObject(
+                "http://api.chinaxueqian.com/home/album_del/",
+                cnpClient.getParams(), BaseTest.class);
+
+        return result;
+    }
+
+    public BaseTest alterAlbum(String paid, String albumName, String describes){
+        cnpClient.configureRequest();
+        MultiValueMap<String, Object> params = cnpClient.getParams();
+        params.set("paid", paid);
+        params.set("albumName", albumName);
+        params.set("describes", describes);
+        BaseTest result =  getRestTemplate().postForObject(
+                "http://api.chinaxueqian.com/home/album_edit/",
+                cnpClient.getParams(), BaseTest.class);
+
+        return result;
+    }
+
+    protected RestTemplate getRestTemplate() {
+        return new RestTemplate(true, new HttpComponentsClientHttpRequestFactory());
     }
 }
