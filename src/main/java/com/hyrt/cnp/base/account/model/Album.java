@@ -214,6 +214,10 @@ public class Album implements Serializable {
         return "照片描述："+albumDesc;
     }
 
+    public String getSimpleAlbumDesc(){
+        return albumDesc;
+    }
+
     public void setAlbumDesc(String albumDesc) {
         this.albumDesc = albumDesc;
     }

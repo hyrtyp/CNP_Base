@@ -440,4 +440,33 @@ public class Comment implements Serializable{
     public void setRedate(String redate) {
         this.redate = redate;
     }
+
+    @Override
+    public String toString() {
+        return "Comment{" +
+                "_id='" + _id + '\'' +
+                ", infoID='" + infoID + '\'' +
+                ", infoTitle='" + infoTitle + '\'' +
+                ", infoUserId='" + infoUserId + '\'' +
+                ", infoNurseryId='" + infoNurseryId + '\'' +
+                ", infoClassroomId='" + infoClassroomId + '\'' +
+                ", siteid='" + siteid + '\'' +
+                ", url='" + url + '\'' +
+                ", userid=" + userid +
+                ", username='" + username + '\'' +
+                ", nursery_id='" + nursery_id + '\'' +
+                ", nursery_name='" + nursery_name + '\'' +
+                ", userGroup='" + userGroup + '\'' +
+                ", creatdate='" + creatdate + '\'' +
+                ", ip='" + ip + '\'' +
+                ", lstatus='" + lstatus + '\'' +
+                ", content='" + content + '\'' +
+                ", reply='" + reply + '\'' +
+                ", recontent='" + recontent + '\'' +
+                ", reuserId='" + reuserId + '\'' +
+                ", reusername='" + reusername + '\'' +
+                ", redate='" + redate + '\'' +
+                ", infoid2='" + infoid2 + '\'' +
+                '}';
+    }
 }

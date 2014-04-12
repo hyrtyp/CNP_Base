@@ -11,6 +11,7 @@ import org.springframework.util.MultiValueMap;
 import org.springframework.web.client.RestTemplate;
 
 import java.util.HashMap;
+import java.util.Map;
 
 /**
  * Created by GYH on 14-4-6.
@@ -62,11 +63,14 @@ public class AlbumService {
 
     public BaseTest delAlbum(String paid){
         cnpClient.configureRequest();
-        MultiValueMap<String, Object> params = cnpClient.getParams();
-        params.set("paid", paid);
-        BaseTest result =  getRestTemplate().postForObject(
-                "http://api.chinaxueqian.com/home/album_del/",
-                cnpClient.getParams(), BaseTest.class);
+//        MultiValueMap<String, Object> params = cnpClient.getParams();
+        Map<String, String> params = cnpClient.getParamsforGet();
+        params.put("paid", paid);
+        BaseTest result =  getRestTemplate().getForObject(
+                "http://api.chinaxueqian.com/home/album_del/?" +
+                        "token={token}&uuid={uuid}&paid={paid}",
+                BaseTest.class, params
+        );
 
         return result;
     }

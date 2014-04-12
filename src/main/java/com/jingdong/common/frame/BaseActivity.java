@@ -67,7 +67,7 @@ public class BaseActivity extends ActionBarActivity implements RoboContext {
     protected ImageView backimage;
     protected TextView titletext;
     private PhotoViewAttacher mAttacher;
-    private PopupWindow popWin;
+    protected PopupWindow popWin;
 
     protected Menu mymenu;
 

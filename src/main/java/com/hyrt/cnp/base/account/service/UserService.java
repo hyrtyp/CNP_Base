@@ -34,6 +34,28 @@ public class UserService{
                 UtilVar.class, params);
     }
 
+    public UtilVar getUtilvar(String name, String provinceName){
+        cnpClient.configureRequest();
+        HashMap<String, String> params = cnpClient.getParamsforGet();
+        params.put("name",name);
+        params.put("provinceName", provinceName);
+        android.util.Log.i("tag", "name:"+name+" provinceName:"+provinceName);
+        return  getRestTemplate().getForObject("http://api.chinaxueqian.com/var/get_var?" +
+                        "name={name}&provinceName={provinceName}",
+                UtilVar.class, params);
+    }
+
+    public UtilVar getUtilvar(String name, int province){
+        cnpClient.configureRequest();
+        HashMap<String, String> params = cnpClient.getParamsforGet();
+        params.put("name",name);
+        params.put("province", province+"");
+        android.util.Log.i("tag", "name:"+name+" province:"+province);
+        return  getRestTemplate().getForObject("http://api.chinaxueqian.com/var/get_var?" +
+                        "name={name}&province={province}",
+                UtilVar.class, params);
+    }
+
     public UserDetail.UserDetailModel getUser(){
         cnpClient.configureRequest();
         return  getRestTemplate().getForObject("http://api.chinaxueqian.com/user/info?token={token}&uuid={uuid}",UserDetail.UserDetailModel.class,cnpClient.getParamsforGet());

@@ -1,6 +1,8 @@
 package com.hyrt.cnp.base.account.service;
 
 import com.hyrt.cnp.base.account.CNPClient;
+import com.hyrt.cnp.base.account.model.Dynamic;
+import com.hyrt.cnp.base.account.model.DynamicPhoto;
 import com.hyrt.cnp.base.account.model.Photo;
 
 import org.springframework.web.client.RestTemplate;
@@ -42,5 +44,15 @@ public class PhotoService {
         return  restTemplate.getForObject("http://api.chinaxueqian.com/classroom/photo_album/?" +
                 "token={token}&uuid={uuid}&cid={cid}&paid={paid}",
                 Photo.Model.class, params);
+    }
+
+    public DynamicPhoto.Model getDynamicAlbumphotolistData(RestTemplate restTemplate, int paid){
+        cnpClient.configureRequest();
+        HashMap<String, String> params = cnpClient.getParamsforGet();
+        params.put("paid",paid+"");
+        android.util.Log.i("tag", "paid"+paid);
+        return  restTemplate.getForObject("http://api.chinaxueqian.com/home/photo_list/?" +
+                        "token={token}&uuid={uuid}&cid={cid}&paid={paid}",
+                DynamicPhoto.Model.class, params);
     }
 }

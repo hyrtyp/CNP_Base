@@ -30,6 +30,16 @@ public class CommentService {
                 Comment.Model.class,params);
     }
 
+    public Comment.Model getDynamicCommentlistData(RestTemplate restTemplate,String infoid,String siteid){
+        cnpClient.configureRequest();
+        HashMap<String, String> params = cnpClient.getParamsforGet();
+        params.put("infoid",infoid);
+        params.put("siteid",siteid);
+        return  restTemplate.getForObject("http://api.chinaxueqian.com/home/comment/?" +
+                        "token={token}&uuid={uuid}&infoid={infoid}&siteid={siteid}",
+                Comment.Model.class,params);
+    }
+
     public Comment.Model getCommenthomeData(RestTemplate restTemplate,String infoid,String siteid){
         cnpClient.configureRequest();
         HashMap<String, String> params = cnpClient.getParamsforGet();
@@ -78,6 +88,9 @@ public class CommentService {
         params.set("ruid", comment.getReuserId());
         params.set("rename", comment.getReusername());
         params.set("redate", comment.getRedate());
+
+        android.util.Log.i("tag", comment.toString()+"");
+
         return  getRestTemplate().postForObject(
                 "http://api.chinaxueqian.com/classroom/comment_add", params, Comment.Model3.class);
     }

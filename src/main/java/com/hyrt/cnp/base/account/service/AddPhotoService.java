@@ -31,8 +31,9 @@ public class AddPhotoService {
         params.set("paid", paid);
         params.set("photoname", photoname);
         params.set("introduce", introduce);
+        android.util.Log.i("tag", "photo:"+photo_add);
         Resource face = new FileSystemResource(photo_add);
-        params.set("photo_add", face);
+        params.set("file", face);
         BaseTest result =  getRestTemplate().postForObject(
                 "http://api.chinaxueqian.com/home/photo_add/",
                 cnpClient.getParams(), BaseTest.class);
