@@ -31,7 +31,7 @@ public class AddPhotoService {
         params.set("paid", paid);
         params.set("photoname", photoname);
         params.set("introduce", introduce);
-        android.util.Log.i("tag", "photo:"+photo_add);
+        android.util.Log.i("tag", "paid:"+paid+" photoname:"+photoname+" introduce："+introduce);
         Resource face = new FileSystemResource(photo_add);
         params.set("file", face);
         BaseTest result =  getRestTemplate().postForObject(

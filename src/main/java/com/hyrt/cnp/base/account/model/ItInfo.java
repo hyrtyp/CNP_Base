@@ -4,6 +4,8 @@ import com.hyrt.cnp.base.account.utils.FaceUtils;
 import com.hyrt.cnp.base.account.utils.StringUtils;
 
 import java.io.Serializable;
+import java.io.UnsupportedEncodingException;
+import java.net.URLDecoder;
 import java.util.ArrayList;
 
 /**
@@ -177,7 +179,18 @@ public class ItInfo implements Serializable {
     }
 
     public String getMsgData() {
-        return msgData;
+        String result = msgData;
+        if(result == null){
+            return "";
+        }
+        for(int i=0; i<4; i++){
+            try{
+                result = URLDecoder.decode(result, "UTF-8");
+            }catch (UnsupportedEncodingException e){
+
+            }
+        }
+        return result;
     }
 
     public void setMsgData(String msgData) {

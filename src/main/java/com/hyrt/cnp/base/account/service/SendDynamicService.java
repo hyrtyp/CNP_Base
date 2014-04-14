@@ -10,6 +10,9 @@ import org.springframework.util.MultiValueMap;
 import org.springframework.web.client.RestTemplate;
 
 import java.io.File;
+import java.io.UnsupportedEncodingException;
+import java.net.URLDecoder;
+import java.net.URLEncoder;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
@@ -29,7 +32,19 @@ public class SendDynamicService{
     public BaseTest addDynamic(String content, File picUrl, String toUid, String toName){
         cnpClient.configureRequest();
         MultiValueMap<String, Object> params = cnpClient.getParams();
-        params.set("content", content);
+        try{
+            StringBuilder sbContent = new StringBuilder(URLEncoder.encode(content, "UTF-8"));
+            params.set("content", sbContent.toString());
+            if(toName != null){
+                StringBuilder sbToName = new StringBuilder(URLEncoder.encode(toName, "UTF-8"));
+                params.set("toName", sbToName.toString());
+            }
+        }catch (UnsupportedEncodingException e){
+            params.set("content", content);
+            if(toName != null){
+                params.set("toName", toName);
+            }
+        }
         if(picUrl != null){
             Resource face = new FileSystemResource(picUrl);
             params.set("picUrl", face);
@@ -37,9 +52,7 @@ public class SendDynamicService{
         if(toUid != null){
             params.set("toUid", toUid);
         }
-        if(toName != null){
-            params.set("toName", toName);
-        }
+
         BaseTest result =  getRestTemplate().postForObject(
                 "http://api.chinaxueqian.com/home/dynamic_add/",
                 cnpClient.getParams(),BaseTest.class);

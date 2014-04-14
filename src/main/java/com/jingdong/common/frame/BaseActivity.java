@@ -250,7 +250,9 @@ public class BaseActivity extends ActionBarActivity implements RoboContext {
 
     @Override
     protected void onStop() {
-        spiceManager.shouldStop();
+        if(spiceManager.isStarted()){
+            spiceManager.shouldStop();
+        }
         super.onStop();
     }
 
