@@ -55,7 +55,7 @@ public class CommentService {
         MultiValueMap<String,Object> params = cnpClient.getParams();
         params.set("infoid", comment.getInfoID()+"");
         params.set("title", comment.getInfoTitle());
-        params.set("userid", comment.get_id() + "");
+        params.set("userid", comment.getUserid() + "");
         params.set("nid", comment.getInfoNurseryId() + "");
         params.set("infocid", comment.getInfoClassroomId() + "");
         params.set("siteid", comment.getSiteid());

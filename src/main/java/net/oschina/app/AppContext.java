@@ -8,9 +8,13 @@ import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Process;
 
+import com.hyrt.cnp.base.R;
 import com.jingdong.common.frame.BaseActivity;
 import com.jingdong.common.frame.IMyActivity;
 import com.jingdong.common.utils.DPIUtil;
+import com.nostra13.universalimageloader.core.DisplayImageOptions;
+import com.nostra13.universalimageloader.core.ImageLoader;
+import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
 
 import roboguice.RoboGuice;
 
@@ -26,6 +30,8 @@ public class AppContext extends Application {
 	private static AppContext app;
 	private BaseActivity baseActivity;
 
+    public DisplayImageOptions mImageloaderoptions;
+
 	public static AppContext getInstance() {
 		return app;
 	}
@@ -37,7 +43,19 @@ public class AppContext extends Application {
 		Process.setThreadPriority(-20);
 		//获取屏幕密度
 		DPIUtil.setDensity(getResources().getDisplayMetrics().density);
+        initImageLoader();
 	}
+
+    public void initImageLoader(){
+        ImageLoader.getInstance().init(ImageLoaderConfiguration.createDefault(this));
+
+        mImageloaderoptions = new DisplayImageOptions.Builder()
+                .showImageOnLoading(R.drawable.cnp_default_img)
+                .showImageOnFail(R.drawable.cnp_default_img)
+                .showImageForEmptyUri(R.drawable.cnp_default_img)
+                .cacheInMemory(true)
+                .build();
+    }
 
 	/**
 	 * 获取App安装包信息

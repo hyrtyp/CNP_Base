@@ -1,10 +1,18 @@
 package com.hyrt.cnp.base.account.utils;
 
 import android.app.AlertDialog;
+import android.app.Dialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.graphics.Rect;
 import android.net.Uri;
+import android.util.DisplayMetrics;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.widget.LinearLayout;
+import android.widget.PopupWindow;
+import android.widget.TextView;
 
 import com.hyrt.cnp.base.R;
 import com.jingdong.common.frame.BaseActivity;
@@ -23,6 +31,8 @@ public class PhotoUpload {
     private BaseActivity baseActivity;
     private Uri uri;
     private boolean isRang;
+
+    private Dialog mPhotoSelctDialog;
 
     public void setRang(boolean isRang) {
         this.isRang = isRang;
@@ -92,7 +102,36 @@ public class PhotoUpload {
      * 选择两种图片方式，最终需要在活动中监听forresult方法
      */
     public void choiceItem(){
-        AlertDialog.Builder builder =  Builder.create(baseActivity);
+        if(mPhotoSelctDialog == null){
+            mPhotoSelctDialog = new Dialog(baseActivity, R.style.MyDialog);
+            mPhotoSelctDialog.setContentView(R.layout.layout_photo_upload_pop);
+            mPhotoSelctDialog.getWindow().setLayout(
+                    LinearLayout.LayoutParams.MATCH_PARENT,
+                    LinearLayout.LayoutParams.MATCH_PARENT);
+            LinearLayout layout_dialog_parent = (LinearLayout) mPhotoSelctDialog.findViewById(R.id.layout_dialog_parent);
+            TextView tv_select_from_album = (TextView) mPhotoSelctDialog.findViewById(R.id.tv_select_from_album);
+            TextView tv_select_from_camera = (TextView) mPhotoSelctDialog.findViewById(R.id.tv_select_from_camera);
+            TextView tv_cancle_dialog = (TextView) mPhotoSelctDialog.findViewById(R.id.tv_cancle_dialog);
+
+            View.OnClickListener mLayoutOnClickListener = new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    if(view.getId() == R.id.tv_select_from_album){
+                        getFromLocal();
+                    }else if(view.getId() == R.id.tv_select_from_camera){
+                        getFromCamera(uri);
+                    }
+                    mPhotoSelctDialog.dismiss();
+                }
+            };
+            layout_dialog_parent.setOnClickListener(mLayoutOnClickListener);
+            tv_select_from_album.setOnClickListener(mLayoutOnClickListener);
+            tv_select_from_camera.setOnClickListener(mLayoutOnClickListener);
+            tv_cancle_dialog.setOnClickListener(mLayoutOnClickListener);
+        }
+        mPhotoSelctDialog.show();
+
+       /* AlertDialog.Builder builder =  Builder.create(baseActivity);
         builder.setTitle(R.string.picupload_title);
         builder.setItems(R.array.upload_type,new DialogInterface.OnClickListener() {
             @Override
@@ -108,7 +147,7 @@ public class PhotoUpload {
             }
         });
         builder.create();
-        builder.show();
+        builder.show();*/
     }
 
     /**
