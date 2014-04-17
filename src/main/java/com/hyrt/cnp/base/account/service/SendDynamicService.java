@@ -53,6 +53,8 @@ public class SendDynamicService{
             params.set("toUid", toUid);
         }
 
+        android.util.Log.i("tag",  "content:"+params.get("content"));
+
         BaseTest result =  getRestTemplate().postForObject(
                 "http://api.chinaxueqian.com/home/dynamic_add/",
                 cnpClient.getParams(),BaseTest.class);

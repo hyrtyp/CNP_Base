@@ -444,9 +444,14 @@ public class FileUtils
 		return status;
 	}
 
-    private File compressImage(Bitmap image) {
+    /**
+     *
+     * @param image
+     * @param maxSize 图片kb最大值
+     * @return
+     */
+    private File compressImage(Bitmap image, int maxSize) {
         File result = null;
-        int maxSize = 1024*20;//最大值
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
         image.compress(Bitmap.CompressFormat.JPEG, 100, baos);//质量压缩方法，这里100表示压缩率，100为不压缩，把压缩后的数据存放到baos中
         int options = 100;

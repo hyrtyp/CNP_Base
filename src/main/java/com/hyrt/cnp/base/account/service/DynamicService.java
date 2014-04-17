@@ -21,22 +21,34 @@ public class DynamicService {
     }
 
     //TODO MODIFY UID
-    public Dynamic.Model getBabayDynamicData(RestTemplate restTemplate,String uid){
+    public Dynamic.Model getBabayDynamicData(RestTemplate restTemplate,String uid, boolean isAll){
         cnpClient.configureRequest();
         HashMap<String, String> params = cnpClient.getParamsforGet();
         params.put("uid",uid);
 //        params.put("uid","222");
-        return  restTemplate.getForObject("http://api.chinaxueqian.com/home/dynamic_user/?" +
+        String urlKey = "";
+        if(isAll){
+            urlKey = "dynamic_all";
+        }else{
+            urlKey = "dynamic_user";
+        }
+        return  restTemplate.getForObject("http://api.chinaxueqian.com/home/"+urlKey+"/?" +
                 "token={token}&uuid={uuid}&uid={uid}",
                 Dynamic.Model.class, params);
     }
-    public Dynamic.Model getBabayDynamicMoreData(RestTemplate restTemplate,String uid,String more){
+    public Dynamic.Model getBabayDynamicMoreData(RestTemplate restTemplate,String uid,String more, boolean isAll){
         cnpClient.configureRequest();
         HashMap<String, String> params = cnpClient.getParamsforGet();
         params.put("uid",uid);
 //        params.put("uid","222");
         params.put("more",more);
-        return  restTemplate.getForObject("http://api.chinaxueqian.com/home/dynamic_user/?" +
+        String urlKey = "";
+        if(isAll){
+            urlKey = "dynamic_all";
+        }else{
+            urlKey = "dynamic_user";
+        }
+        return  restTemplate.getForObject("http://api.chinaxueqian.com/home/"+urlKey+"/?" +
                 "token={token}&uuid={uuid}&uid={uid}&more={more}",
                 Dynamic.Model.class, params);
     }

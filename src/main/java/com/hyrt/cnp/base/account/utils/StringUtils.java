@@ -1,9 +1,22 @@
 package com.hyrt.cnp.base.account.utils;
 
+import android.content.Context;
+import android.graphics.drawable.Drawable;
+import android.text.Spannable;
+import android.text.SpannableString;
+import android.text.Spanned;
+import android.text.style.DynamicDrawableSpan;
+import android.text.style.ForegroundColorSpan;
+import android.text.style.ImageSpan;
+
+import com.hyrt.cnp.base.R;
+
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.regex.Pattern;
 
 /** 
@@ -289,6 +302,113 @@ public class StringUtils
 //            case
         }
         return null;
+    }
+
+    private static Map<String, Integer> brows = new HashMap<String, Integer>();
+
+    private static void loadBrow(){
+        brows.put("[img]哈哈[/img]", R.drawable.laugh);
+
+        brows.put("[img]鄙视[/img]", R.drawable.bs2_thumb);
+
+        brows.put("[img]闭嘴[/img]", R.drawable.bz_thumb);
+
+        brows.put("[img]偷笑[/img]", R.drawable.heia_thumb);
+
+        brows.put("[img]吃惊[/img]", R.drawable.cj_thumb);
+
+        brows.put("[img]可怜[/img]", R.drawable.kl_thumb);
+
+        brows.put("[img]懒得理你[/img]", R.drawable.ldln_thumb);
+
+        brows.put("[img]太开心[/img]", R.drawable.mb_thumb);
+
+        brows.put("[img]爱你[/img]", R.drawable.lovea_thumb);
+
+        brows.put("[img]亲亲[/img]", R.drawable.qq_thumb);
+
+        brows.put("[img]泪[/img]", R.drawable.sada_thumb);
+
+        brows.put("[img]生病[/img]", R.drawable.sb_thumb);
+
+        brows.put("[img]害羞[/img]", R.drawable.shamea_thumb);
+
+        brows.put("[img]呵呵[/img]", R.drawable.smilea_thumb);
+
+        brows.put("[img]嘻嘻[/img]", R.drawable.tootha_thumb);
+
+        brows.put("[img]可爱[/img]", R.drawable.tza_thumb);
+
+        brows.put("[img]挤眼[/img]", R.drawable.zy_thumb);
+
+        brows.put("[img]阴险[/img]", R.drawable.yx_thumb);
+
+        brows.put("[img]右哼哼[/img]", R.drawable.yhh_thumb);
+
+        brows.put("[img]来[/img]", R.drawable.come_thumb);
+    }
+
+    public static SpannableString getSpannableString(String string, final Context context){
+        SpannableString spannable = new SpannableString(string+" ");
+        loadBrow();
+        String tempStr = string;
+
+        while ((tempStr.indexOf("[img]") >= 0 && tempStr.indexOf("[/img]") >= 0)
+                || (tempStr.indexOf("@") >= 0 && tempStr.indexOf("//") >= 0)) {
+            if(tempStr.indexOf("@") < 0 || tempStr.indexOf("//") < 0){
+                tempStr = tempStr.replace("@", "");
+                tempStr = tempStr.replace("//", "");
+            }
+            if(tempStr.indexOf("[img]") < 0 || tempStr.indexOf("[/img]") < 0){
+                tempStr = tempStr.replace("[img]", "");
+                tempStr = tempStr.replace("[/img]", "");
+            }
+            int aboutStart = tempStr.lastIndexOf("@");
+            int aboutEnd = tempStr.lastIndexOf("//");
+            int browStart = tempStr.lastIndexOf("[img]");
+            int browEnd = tempStr.lastIndexOf("[/img]");
+
+
+//            android.util.Log.i("tag", "aboutStart:" + aboutStart + " aboutEnd:" + aboutEnd + " browStart:" + browStart + " browEnd:" + browEnd);
+
+            if (aboutStart >= browEnd) {
+                if (aboutStart < aboutEnd){
+                    String str = tempStr.substring(aboutStart, aboutEnd);
+//                android.util.Log.i("tag", "str:" + str);
+                    tempStr = tempStr.substring(0, aboutStart);
+
+                    spannable.setSpan(new ForegroundColorSpan(
+                                    context.getResources().getColor(R.color.actionbar_bg)),
+                            aboutStart, aboutEnd,
+                            Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+                }else{
+                    tempStr = tempStr.substring(0, tempStr.length()-1);
+                }
+
+            } else if (browStart >= aboutEnd) {
+                if(browStart < browEnd){
+                    final String str = tempStr.substring(browStart, browEnd+6);
+//                android.util.Log.i("tag", "str:" + str);
+                    tempStr = tempStr.substring(0, browStart);
+
+                    Drawable drawable = context.getResources().getDrawable((brows.get(str)));
+                    drawable.setBounds(0, 0, drawable.getIntrinsicWidth(), drawable.getIntrinsicHeight());
+                    ImageSpan span = new ImageSpan(drawable, ImageSpan.ALIGN_BASELINE);
+                    spannable.setSpan(
+                            span,
+                            browStart,
+                            browEnd+6,
+                            Spannable.SPAN_INCLUSIVE_EXCLUSIVE);
+                }else{
+                    tempStr = tempStr.substring(0, tempStr.length()-1);
+                }
+
+            }else{
+                tempStr = tempStr.substring(0, tempStr.length()-1);
+            }
+        }
+
+        return spannable;
     }
 
   }

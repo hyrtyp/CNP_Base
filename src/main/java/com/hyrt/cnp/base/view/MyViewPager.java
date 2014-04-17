@@ -27,9 +27,9 @@ public class MyViewPager extends ViewPager{
     @Override
     public boolean onInterceptTouchEvent(MotionEvent ev) {
 //        if(scrollable){
-//            return super.onInterceptTouchEvent(ev);
+            return super.onInterceptTouchEvent(ev);
 //        }else{
-            return false;
+//            return false;
 //        }
     }
 

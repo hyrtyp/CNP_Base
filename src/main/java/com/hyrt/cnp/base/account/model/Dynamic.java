@@ -1,6 +1,8 @@
 package com.hyrt.cnp.base.account.model;
 
 
+import android.text.SpannableString;
+
 import com.hyrt.cnp.base.account.utils.FaceUtils;
 import com.hyrt.cnp.base.account.utils.StringUtils;
 
@@ -47,6 +49,29 @@ public class Dynamic implements Serializable {
     private ArrayList<String> sPicAry;
     private ArrayList<String> bPicAry;
 
+    /*public String getType(){
+        int type = dataType;
+        if(isTran == 2){
+            type = tranType;
+        }else{
+            type = dataType;
+        }
+        switch (type){
+            case 1: return "来自教案";
+            case 2: return "活动剪影";
+            case 3: return "观察日记";
+            case 4: return "宝宝作品";
+            case 5: return "宝宝相册";
+            case 6: return "教育随笔";
+//            case 7: return "教育随笔";
+//            case 8: return "教育随笔";
+//            case 9: return "教育随笔";
+//            case 10: return "教育随笔";
+            case 11: return "家长日记";
+            case 12: return "观察日记";
+        }
+        return null;
+    }*/
 
     public String getUserphoto(){
         return FaceUtils.getAvatar(userId,FaceUtils.FACE_BIG);
