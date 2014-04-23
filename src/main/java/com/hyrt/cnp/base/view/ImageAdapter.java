@@ -1,11 +1,19 @@
 package com.hyrt.cnp.base.view;
 
+import android.content.Context;
+import android.graphics.Bitmap;
 import android.os.Parcelable;
 import android.support.v4.view.PagerAdapter;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 
 import com.jingdong.common.frame.BaseActivity;
+import com.nostra13.universalimageloader.core.ImageLoader;
+import com.nostra13.universalimageloader.core.assist.FailReason;
+import com.nostra13.universalimageloader.core.assist.ImageLoadingListener;
+
+import net.oschina.app.AppContext;
 
 import java.util.ArrayList;
 
@@ -17,15 +25,17 @@ import uk.co.senab.photoview.PhotoView;
  */
 public class ImageAdapter extends PagerAdapter {
 
-    private ArrayList<PhotoView> imageViews;
+    private ArrayList<ImageView> imageViews;
     private ArrayList<String> imageurls;
-    private BaseActivity baseActivity;
+    private Context context;
     private boolean isfirst=true;
+    private int curPosition = 0;
+    private ImageAdapterCallback mCallback;
 
-    public ImageAdapter(ArrayList<PhotoView> imageViews,ArrayList<String> imageurls,BaseActivity baseActivity){
+    public ImageAdapter(ArrayList<ImageView> imageViews,ArrayList<String> imageurls,Context context){
         this.imageViews=imageViews;
         this.imageurls=imageurls;
-        this.baseActivity=baseActivity;
+        this.context=context;
     }
 
     @Override
@@ -36,11 +46,39 @@ public class ImageAdapter extends PagerAdapter {
 
     @Override
     public Object instantiateItem(ViewGroup container, int position) {
-        baseActivity.showDetailImage1(imageurls.get(position), imageViews.get(position), false,isfirst);
-        isfirst=false;
-        container.addView(imageViews.get(position), ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
+        ImageLoader.getInstance().displayImage(
+                imageurls.get(position),
+                imageViews.get(position),
+                AppContext.getInstance().mImageloaderoptions, imageLoadingListener);
+//        baseActivity.showDetailImage1(imageurls.get(position), imageViews.get(position), false,isfirst);
+//        isfirst=false;
+        container.addView(imageViews.get(position), ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
         return imageViews.get(position);
     }
+
+    ImageLoadingListener imageLoadingListener = new ImageLoadingListener() {
+        @Override
+        public void onLoadingStarted(String s, View view) {
+
+        }
+
+        @Override
+        public void onLoadingFailed(String s, View view, FailReason failReason) {
+
+        }
+
+        @Override
+        public void onLoadingComplete(String s, View view, Bitmap bitmap) {
+            if(mCallback != null){
+                mCallback.onLoadingComplete(s, bitmap);
+            }
+        }
+
+        @Override
+        public void onLoadingCancelled(String s, View view) {
+
+        }
+    };
 
     @Override
     public int getCount() {
@@ -68,4 +106,11 @@ public class ImageAdapter extends PagerAdapter {
         return null;
     }
 
+    public void setCallback(ImageAdapterCallback callback){
+        this.mCallback = callback;
+    }
+
+    public static interface ImageAdapterCallback{
+        public void onLoadingComplete(String url, Bitmap bitmap);
+    }
 }

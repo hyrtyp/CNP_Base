@@ -25,5 +25,6 @@
     <color name="classroomindex_teacher">#44d7ec</color>
     <color name="text_bottom">#797454</color>
     <color name="dialog_bg">#99000000</color>
+    <color name="cnp_bg_color">#fffee6</color>
 
 </resources>

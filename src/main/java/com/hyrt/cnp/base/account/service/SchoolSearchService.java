@@ -22,11 +22,10 @@ public class SchoolSearchService {
     public SchoolSearch.Model getSchoolSearchData(
             RestTemplate restTemplate, String keytName,
             String keytDistrict, String keytProperty, String keytScale, Double lng, Double lat, String province){
-        mCnpClient.configureRequest();
         HashMap<String, String> params = mCnpClient.getParamsforGet();
         params.put("name", keytName);
         StringBuffer path = new StringBuffer("http://api.chinaxueqian.com/school/search/?"
-                + "token={token}&uuid={uuid}&name={name}");
+                + "name={name}");
         if (keytDistrict.length() > 0) {
             path.append("&city="+keytDistrict);
         }

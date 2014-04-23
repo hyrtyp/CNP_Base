@@ -49,29 +49,46 @@ public class Dynamic implements Serializable {
     private ArrayList<String> sPicAry;
     private ArrayList<String> bPicAry;
 
-    /*public String getType(){
+    public String getType(){
         int type = dataType;
         if(isTran == 2){
             type = tranType;
         }else{
             type = dataType;
         }
+        String typeStr = "";
         switch (type){
-            case 1: return "来自教案";
-            case 2: return "活动剪影";
-            case 3: return "观察日记";
-            case 4: return "宝宝作品";
-            case 5: return "宝宝相册";
-            case 6: return "教育随笔";
-//            case 7: return "教育随笔";
-//            case 8: return "教育随笔";
-//            case 9: return "教育随笔";
-//            case 10: return "教育随笔";
-            case 11: return "家长日记";
-            case 12: return "观察日记";
+            case 1: typeStr = "来自教案";
+                break;
+            case 2: typeStr = "活动剪影";
+                break;
+            case 3: typeStr = "观察日记";
+                break;
+            case 4: typeStr = "宝宝作品";
+                break;
+            case 5: typeStr = "宝宝相册";
+                break;
+            case 6: typeStr = "教育随笔";
+                break;
+            case 11: typeStr = "家长日记";
+                break;
+            case 12: typeStr = "观察日记";
+                break;
+            case 15: typeStr = "班级相册";
+                break;
+            case 16: typeStr = "工作计划";
+                break;
+            case 17: typeStr = "班级视频";
+                break;
+            case 50: typeStr = "我的动态";
+                break;
+            case 51: typeStr = "动感相册";
+                break;
+            default:
+                typeStr = "我的动态";
         }
-        return null;
-    }*/
+        return "来自"+typeStr;
+    }
 
     public String getUserphoto(){
         return FaceUtils.getAvatar(userId,FaceUtils.FACE_BIG);

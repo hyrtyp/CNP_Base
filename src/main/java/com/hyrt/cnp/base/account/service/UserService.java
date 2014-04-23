@@ -1,5 +1,7 @@
 package com.hyrt.cnp.base.account.service;
 
+import android.util.Log;
+
 import com.hyrt.cnp.base.account.CNPClient;
 import com.hyrt.cnp.base.account.model.BaseTest;
 import com.hyrt.cnp.base.account.model.UserDetail;
@@ -58,7 +60,9 @@ public class UserService{
 
     public UserDetail.UserDetailModel getUser(){
         cnpClient.configureRequest();
-        return  getRestTemplate().getForObject("http://api.chinaxueqian.com/user/info?token={token}&uuid={uuid}",UserDetail.UserDetailModel.class,cnpClient.getParamsforGet());
+        HashMap<String, String> params = cnpClient.getParamsforGet();
+        Log.i("Fulls", "token:"+params.get("token")+" uuid:"+params.get("uuid"));
+        return  getRestTemplate().getForObject("http://api.chinaxueqian.com/user/info?token={token}&uuid={uuid}",UserDetail.UserDetailModel.class,params);
     }
 
     public BaseTest modifyUserFace(File faceFile){

@@ -22,7 +22,7 @@
             android:gravity="center_horizontal"
             android:textColor="@color/actionbar_bg"
             />
-        <ImageView
+        <!--<ImageView
             android:layout_width="fill_parent"
             android:layout_height="1dp"
             android:background="@android:color/darker_gray"/>
@@ -36,7 +36,7 @@
             android:layout_marginBottom="@dimen/view_margin"
             android:gravity="center_horizontal"
             android:textColor="@color/actionbar_bg"
-            />
+            />-->
         </LinearLayout>
 
     <LinearLayout

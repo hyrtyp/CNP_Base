@@ -1,21 +1,18 @@
 package com.hyrt.cnp.base.account.utils;
 
-import android.app.AlertDialog;
 import android.app.Dialog;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
-import android.graphics.Rect;
 import android.net.Uri;
-import android.util.DisplayMetrics;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.LinearLayout;
-import android.widget.PopupWindow;
 import android.widget.TextView;
 
 import com.hyrt.cnp.base.R;
+import com.hyrt.cnp.base.account.ui.AlbumBrowserActivity;
 import com.jingdong.common.frame.BaseActivity;
+
+import net.oschina.app.AppContext;
 
 import static com.hyrt.cnp.base.account.ui.LightAlertDialog.Builder;
 
@@ -92,7 +89,7 @@ public class PhotoUpload {
      * 获取照相的图片 需要在活动中监听forresult方法
      * @param uri 照片保存路径
      */
-    private void getFromCamera(Uri uri){
+    public void getFromCamera(Uri uri){
         Intent intent = new Intent("android.media.action.IMAGE_CAPTURE");
         intent.putExtra("output",uri);
         baseActivity.startActivityForResult(intent, FROM_CAMERA);
@@ -110,7 +107,7 @@ public class PhotoUpload {
                     LinearLayout.LayoutParams.MATCH_PARENT);
             LinearLayout layout_dialog_parent = (LinearLayout) mPhotoSelctDialog.findViewById(R.id.layout_dialog_parent);
             TextView tv_select_from_album = (TextView) mPhotoSelctDialog.findViewById(R.id.tv_select_from_album);
-            TextView tv_select_from_camera = (TextView) mPhotoSelctDialog.findViewById(R.id.tv_select_from_camera);
+//            TextView tv_select_from_camera = (TextView) mPhotoSelctDialog.findViewById(R.id.tv_select_from_camera);
             TextView tv_cancle_dialog = (TextView) mPhotoSelctDialog.findViewById(R.id.tv_cancle_dialog);
 
             View.OnClickListener mLayoutOnClickListener = new View.OnClickListener() {
@@ -118,15 +115,15 @@ public class PhotoUpload {
                 public void onClick(View view) {
                     if(view.getId() == R.id.tv_select_from_album){
                         getFromLocal();
-                    }else if(view.getId() == R.id.tv_select_from_camera){
+                    }/*else if(view.getId() == R.id.tv_select_from_camera){
                         getFromCamera(uri);
-                    }
+                    }*/
                     mPhotoSelctDialog.dismiss();
                 }
             };
             layout_dialog_parent.setOnClickListener(mLayoutOnClickListener);
             tv_select_from_album.setOnClickListener(mLayoutOnClickListener);
-            tv_select_from_camera.setOnClickListener(mLayoutOnClickListener);
+//            tv_select_from_camera.setOnClickListener(mLayoutOnClickListener);
             tv_cancle_dialog.setOnClickListener(mLayoutOnClickListener);
         }
         mPhotoSelctDialog.show();
@@ -151,9 +148,18 @@ public class PhotoUpload {
     }
 
     /**
-     * 获取本地图片，并剪切
+     * 获取本地图片
      */
     public void getFromLocal(){
+        Intent intent = new Intent();
+        intent.setClass(baseActivity, AlbumBrowserActivity.class);
+        baseActivity.startActivityForResult(intent, AppContext.getInstance().RESULT_FOR_PHONE_ALBUM);
+    }
+
+    /**
+     * 获取本地图片，并剪切
+     */
+    public void getFromLocal2(){
         Intent intent = new Intent(Intent.ACTION_GET_CONTENT, null);
         intent.setType("image/*");
         intent.putExtra("crop", "true");

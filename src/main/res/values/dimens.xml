@@ -23,6 +23,7 @@
     <dimen name="container_margin">6dp</dimen>
 
     <!--图片的大小-->
+    <dimen name="imageview_face">275dp</dimen>
     <dimen name="imageview_biggest">180dp</dimen>
     <dimen name="imageview_big">130dp</dimen>
     <dimen name="imageview_medium">80dp</dimen>

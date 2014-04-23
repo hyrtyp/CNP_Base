@@ -3,6 +3,8 @@ package com.hyrt.cnp.base.account.service;
 import com.hyrt.cnp.base.account.CNPClient;
 import com.hyrt.cnp.base.account.model.BaseTest;
 
+import org.apache.commons.httpclient.methods.multipart.FilePart;
+import org.apache.commons.httpclient.methods.multipart.Part;
 import org.springframework.core.io.FileSystemResource;
 import org.springframework.core.io.Resource;
 import org.springframework.http.client.HttpComponentsClientHttpRequestFactory;
@@ -10,6 +12,7 @@ import org.springframework.util.MultiValueMap;
 import org.springframework.web.client.RestTemplate;
 
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.util.ArrayList;
 
 /**
@@ -33,7 +36,17 @@ public class AddPhotoService {
         params.set("photoname", photoname);
         params.set("introduce", introduce);
         android.util.Log.i("tag", "paid:"+paid+" photoname:"+photoname+" introduce："+introduce);
+        Part[] parts = null;
+        try{
+            parts = new Part[]{new FilePart("file1", photo_add)};
+        }catch (FileNotFoundException e){
+
+        }
+
         Resource face = new FileSystemResource(photo_add);
+        if(parts != null){
+
+        }
         params.set("file", face);
         BaseTest result =  getRestTemplate().postForObject(
                 "http://api.chinaxueqian.com/home/photo_add/",

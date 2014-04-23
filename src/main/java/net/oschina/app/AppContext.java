@@ -32,6 +32,8 @@ public class AppContext extends Application {
 
     public DisplayImageOptions mImageloaderoptions;
 
+    public static final int RESULT_FOR_PHONE_ALBUM = 102;
+
 	public static AppContext getInstance() {
 		return app;
 	}
