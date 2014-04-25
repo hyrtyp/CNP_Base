@@ -1,5 +1,7 @@
 package com.hyrt.cnp.base.account.service;
 
+import android.util.Log;
+
 import com.hyrt.cnp.base.account.CNPClient;
 import com.hyrt.cnp.base.account.model.Dynamic;
 import com.hyrt.cnp.base.account.model.DynamicPhoto;
@@ -41,6 +43,7 @@ public class PhotoService {
         HashMap<String, String> params = cnpClient.getParamsforGet();
 //        params.put("cid","117");
         params.put("paid",paid+"");
+         Log.i("tag", "cid:"+params.get("cid")+" paid:"+paid);
         return  restTemplate.getForObject("http://api.chinaxueqian.com/classroom/photo_album/?" +
                 "token={token}&uuid={uuid}&cid={cid}&paid={paid}",
                 Photo.Model.class, params);

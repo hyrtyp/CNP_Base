@@ -8,6 +8,7 @@ import org.springframework.util.MultiValueMap;
 import org.springframework.web.client.RestTemplate;
 
 import java.util.HashMap;
+import java.util.Map;
 
 /**
  * Created by GYH on 14-1-22.
@@ -71,28 +72,40 @@ public class CommentService {
                 "http://api.chinaxueqian.com/classroom/comment_add", params, Comment.Model3.class);
     }
 
-    public Comment.Model3 adddynamicCommentData(Comment comment){
+    public Comment.Model3 adddynamicCommentData(Comment comment, int type){
         cnpClient.configureRequest();
-        MultiValueMap<String,Object> params = cnpClient.getParams();
-        params.set("infoid", comment.getInfoid2()+"");
-        params.set("title", comment.getInfoTitle());
-        params.set("userid", comment.get_id() + "");
-        params.set("nid", comment.getInfoNurseryId() + "");
-        params.set("infocid", comment.getInfoClassroomId() + "");
-        params.set("siteid", comment.getSiteid());
-        params.set("url", comment.getUrl());
-        params.set("lstatus", comment.getLstatus());
-        params.set("con", comment.getContent());
-        params.set("reply", comment.getReply());
-        params.set("rcon", comment.getRecontent());
-        params.set("ruid", comment.getReuserId());
-        params.set("rename", comment.getReusername());
-        params.set("redate", comment.getRedate());
+        Map<String,String> params = cnpClient.getParamsforGet();
+        params.put("infoid", comment.getInfoid2() + "");
+        params.put("title", comment.getInfoTitle());
+        params.put("userid", comment.getInfoUserId());
+        params.put("nid", comment.getInfoNurseryId() + "");
+        params.put("infocid", comment.getInfoClassroomId() + "");
+        params.put("siteid", comment.getSiteid());
+        params.put("url", comment.getUrl());
+        params.put("lstatus", comment.getLstatus());
+        params.put("con", comment.getContent());
+        params.put("reply", comment.getReply());
+        if(type == 1){
+            params.put("rcon", comment.getRecontent());
+            params.put("ruid", comment.getReuserId());
+            params.put("rename", comment.getReusername());
+            params.put("redate", comment.getRedate());
+        }
 
         android.util.Log.i("tag", comment.toString()+"");
-
-        return  getRestTemplate().postForObject(
-                "http://api.chinaxueqian.com/classroom/comment_add", params, Comment.Model3.class);
+        String path = "";
+        if(type == 1){
+            path = "http://api.chinaxueqian.com/classroom/comment_add/?token={token}&uuid={uuid}" +
+                    "&infoid={infoid}&title={title}&userid={userid}&nid={nid}&infocid={infocid}" +
+                    "&siteid={siteid}&url={url}&lstatus={lstatus}&con={con}&reply={reply}" +
+                    "&rcon={rcon}&ruid={ruid}&rename={rename}&redate={redate}";
+        }else{
+            path = "http://api.chinaxueqian.com/classroom/comment_add/?token={token}&uuid={uuid}" +
+                    "&infoid={infoid}&title={title}&userid={userid}&nid={nid}&infocid={infocid}" +
+                    "&siteid={siteid}&url={url}&lstatus={lstatus}&con={con}&reply={reply}";
+        }
+        return  getRestTemplate().getForObject(
+                path, Comment.Model3.class, params);
     }
 
     protected RestTemplate getRestTemplate() {

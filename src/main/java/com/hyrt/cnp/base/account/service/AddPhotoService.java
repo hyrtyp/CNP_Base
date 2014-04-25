@@ -13,6 +13,8 @@ import org.springframework.web.client.RestTemplate;
 
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
 import java.util.ArrayList;
 
 /**
@@ -29,24 +31,19 @@ public class AddPhotoService {
     public BaseTest addPhoto(
             String paid, String photoname,
             String introduce, File photo_add){
-
         cnpClient.configureRequest();
         MultiValueMap<String, Object> params = cnpClient.getParams();
         params.set("paid", paid);
-        params.set("photoname", photoname);
-        params.set("introduce", introduce);
-        android.util.Log.i("tag", "paid:"+paid+" photoname:"+photoname+" introduce："+introduce);
-        Part[] parts = null;
-        try{
-            parts = new Part[]{new FilePart("file1", photo_add)};
-        }catch (FileNotFoundException e){
-
+        try {
+            StringBuilder sbPhotoname = new StringBuilder(URLEncoder.encode(photoname, "UTF-8"));
+            StringBuilder sbIntroduce = new StringBuilder(URLEncoder.encode(introduce, "UTF-8"));
+            params.set("photoname", sbPhotoname.toString());
+            params.set("introduce", sbIntroduce.toString());
+        }catch (UnsupportedEncodingException e){
+            params.set("photoname", photoname);
+            params.set("introduce", introduce);
         }
-
         Resource face = new FileSystemResource(photo_add);
-        if(parts != null){
-
-        }
         params.set("file", face);
         BaseTest result =  getRestTemplate().postForObject(
                 "http://api.chinaxueqian.com/home/photo_add/",

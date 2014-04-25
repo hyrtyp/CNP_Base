@@ -479,6 +479,14 @@ public class Dynamic implements Serializable {
         return bPicAry;
     }
 
+    public ArrayList<String> getbPicAry2() {
+        ArrayList<String> result = new ArrayList<String>();
+        for(int i=0,j=bPicAry.size(); i<j; i++){
+            result.add("http://img.chinaxueqian.com/"+bPicAry.get(i));
+        }
+        return result;
+    }
+
     public void setbPicAry(ArrayList<String> bPicAry) {
         this.bPicAry = bPicAry;
     }

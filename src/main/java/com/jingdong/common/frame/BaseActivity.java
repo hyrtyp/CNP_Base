@@ -7,6 +7,7 @@ import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
 import android.os.Build;
 import android.os.Bundle;
+import android.support.v4.view.ViewPager;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarActivity;
 import android.view.Gravity;
@@ -39,6 +40,7 @@ import com.jingdong.common.http.HttpSetting;
 import com.jingdong.common.utils.DPIUtil;
 import com.jingdong.common.utils.Log;
 import com.jingdong.common.utils.cache.GlobalImageCache;
+import com.nostra13.universalimageloader.core.ImageLoader;
 import com.octo.android.robospice.SpiceManager;
 
 import net.oschina.app.AppContext;
@@ -106,6 +108,7 @@ public class BaseActivity extends ActionBarActivity implements RoboContext {
             // Respond to the action bar's Up/Home button
             case android.R.id.home:
                 //ApplicationManager.back();
+                ImageLoader.getInstance().clearMemoryCache();
                 finish();
         }
         return super.onOptionsItemSelected(item);
@@ -484,7 +487,7 @@ public class BaseActivity extends ActionBarActivity implements RoboContext {
     /**
      * 左右滑动显示大图
      */
-    public void showPop2(View view, final ArrayList<String> imageurls, int postion, final Context context) {
+    public void showPop2(View view, final ArrayList<String> imageurls, final int postion, final Context context) {
         View popView = this.getLayoutInflater().inflate(
                 R.layout.layout_popwindwos2, null);
         popWin = new PopupWindow(popView, RelativeLayout.LayoutParams.MATCH_PARENT,
@@ -511,22 +514,25 @@ public class BaseActivity extends ActionBarActivity implements RoboContext {
             imageView.setScaleType(ImageView.ScaleType.FIT_CENTER);
             imageViews.add(imageView);
         }
+        final ViewGroup.LayoutParams mParams = mViewPager.getLayoutParams();
+        WindowManager wm = (WindowManager) context.getSystemService(context.WINDOW_SERVICE);
+        final int screenWidth = wm.getDefaultDisplay().getWidth();
+        mParams.width = screenWidth;
+        mParams.height = screenWidth;
 
         ImageAdapter mImageAdapter = new ImageAdapter(imageViews, imageurls, this);
         mImageAdapter.setCallback(new ImageAdapter.ImageAdapterCallback() {
             @Override
             public void onLoadingComplete(String url, Bitmap bitmap) {
-                android.util.Log.i("tag", "url:"+url);
                 int curPosition = mViewPager.getCurrentItem();
                 imageSizes.put(url, new int[]{bitmap.getWidth(), bitmap.getHeight()});
                 int[] imageSize = imageSizes.get(imageurls.get(curPosition));
                 if(imageSize != null){
                     int imgWidth = imageSize[0];
                     int imgHeight = imageSize[1];
-                    WindowManager wm = (WindowManager) context.getSystemService(context.WINDOW_SERVICE);
-                    int screenWidth = wm.getDefaultDisplay().getWidth();
+
                     float scale = (float)screenWidth/(float)imgWidth;
-                    ViewGroup.LayoutParams mParams = mViewPager.getLayoutParams();
+
                     mParams.width = screenWidth;
                     mParams.height = (int) (scale*imgHeight);
                     mViewPager.setLayoutParams(mParams);
@@ -535,5 +541,109 @@ public class BaseActivity extends ActionBarActivity implements RoboContext {
         });
         mViewPager.setAdapter(mImageAdapter);
         mViewPager.setCurrentItem(postion);
+    }
+
+    public void showPop3(
+            View view, final ArrayList<String> imageurls,
+            final int postion, final Context context, final showPop3Listener listener){
+        View popView = this.getLayoutInflater().inflate(
+                R.layout.layout_popwindow3, null);
+        popWin = new PopupWindow(popView, RelativeLayout.LayoutParams.MATCH_PARENT,
+                RelativeLayout.LayoutParams.MATCH_PARENT);
+
+
+
+
+        // 需要设置一下此参数，点击外边可消失
+        popWin.setBackgroundDrawable(new BitmapDrawable());
+        //设置点击窗口外边窗口消失
+        popWin.setOutsideTouchable(true);
+        // 设置此参数获得焦点，否则无法点击
+        popWin.setFocusable(true);
+        popWin.setTouchable(true);
+        popWin.showAtLocation(view, Gravity.CENTER, 0, 0);
+        final HackyViewPager mViewPager = (HackyViewPager) popView.findViewById(R.id.pop_img);
+
+        View.OnClickListener mOclickListener = new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if(view.getId() == R.id.layout_photo_forward){
+                    if(listener != null){
+                        listener.onClick(0, mViewPager.getCurrentItem());
+                    }
+                }else if(view.getId() == R.id.layout_photo_comment){
+                    if(listener != null){
+                        listener.onClick(1, mViewPager.getCurrentItem());
+                    }
+                }else if(view.getId() == R.id.tv_photo_detail){
+                    if(listener != null){
+                        listener.onClick(2, mViewPager.getCurrentItem());
+                    }
+                }else if(view.getId() == R.id.layout_photo_btn){
+
+                }else if(view.getId() == R.id.pop_bg){
+                    popWin.dismiss();
+                }
+            }
+        };
+
+        View pop_bg = popView.findViewById(R.id.pop_bg);
+        View layout_photo_forward = popView.findViewById(R.id.layout_photo_forward);
+        View layout_photo_comment = popView.findViewById(R.id.layout_photo_comment);
+        View tv_photo_detail = popView.findViewById(R.id.tv_photo_detail);
+        View layout_photo_btn = popView.findViewById(R.id.layout_photo_btn);
+
+        pop_bg.setOnClickListener(mOclickListener);
+        layout_photo_forward.setOnClickListener(mOclickListener);
+        layout_photo_comment.setOnClickListener(mOclickListener);
+        tv_photo_detail.setOnClickListener(mOclickListener);
+        layout_photo_btn.setOnClickListener(mOclickListener);
+
+        ArrayList<ImageView> imageViews = new ArrayList<ImageView>();
+        for (int i = 0; i < imageurls.size(); i++) {
+            ImageView imageView = new ImageView(context);
+            imageView.setScaleType(ImageView.ScaleType.FIT_CENTER);
+            imageViews.add(imageView);
+        }
+
+        final ViewGroup.LayoutParams mParams = mViewPager.getLayoutParams();
+        WindowManager wm = (WindowManager) context.getSystemService(context.WINDOW_SERVICE);
+        final int screenWidth = wm.getDefaultDisplay().getWidth();
+        mParams.width = screenWidth;
+        mParams.height = screenWidth;
+
+        ImageAdapter mImageAdapter = new ImageAdapter(imageViews, imageurls, this);
+        mImageAdapter.setCallback(new ImageAdapter.ImageAdapterCallback() {
+            @Override
+            public void onLoadingComplete(String url, Bitmap bitmap) {
+                android.util.Log.i(TAG, "url:"+url);
+                int curPosition = mViewPager.getCurrentItem();
+                imageSizes.put(url, new int[]{bitmap.getWidth(), bitmap.getHeight()});
+                int[] imageSize = imageSizes.get(imageurls.get(curPosition));
+                if(imageSize != null){
+                    int imgWidth = imageSize[0];
+                    int imgHeight = imageSize[1];
+                    android.util.Log.i(TAG, "imgWidth:"+imgWidth+" imgHeight:"+imgHeight);
+
+
+                    float scale = (float)screenWidth/(float)imgWidth;
+
+                    mParams.width = screenWidth;
+                    mParams.height = (int) (scale*imgHeight);
+                    android.util.Log.i(TAG, "paramsWidth:"+mParams.width+" paramsHeight:"+mParams.height);
+                    mViewPager.setLayoutParams(mParams);
+                }
+            }
+        });
+        mViewPager.setAdapter(mImageAdapter);
+        mViewPager.setCurrentItem(postion);
+    }
+
+    public static interface showPop3Listener{
+        /**
+         *
+         * @param type（0:转发；1:评论 2:详情）
+         */
+        public void onClick(int type, int position);
     }
 }

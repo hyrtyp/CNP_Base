@@ -4,6 +4,7 @@ import android.content.Context;
 import android.graphics.Bitmap;
 import android.os.Parcelable;
 import android.support.v4.view.PagerAdapter;
+import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
@@ -16,6 +17,8 @@ import com.nostra13.universalimageloader.core.assist.ImageLoadingListener;
 import net.oschina.app.AppContext;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 import uk.co.senab.photoview.PhotoView;
 
@@ -31,6 +34,8 @@ public class ImageAdapter extends PagerAdapter {
     private boolean isfirst=true;
     private int curPosition = 0;
     private ImageAdapterCallback mCallback;
+    private Map<String, Bitmap> images = new HashMap<String, Bitmap>();
+    private String positionValue = "";
 
     public ImageAdapter(ArrayList<ImageView> imageViews,ArrayList<String> imageurls,Context context){
         this.imageViews=imageViews;
@@ -38,21 +43,28 @@ public class ImageAdapter extends PagerAdapter {
         this.context=context;
     }
 
+
     @Override
     public void setPrimaryItem(ViewGroup container, int position, Object object) {
         super.setPrimaryItem(container, position, object);
-
+        if(images.get(imageurls.get(position)) != null
+                && mCallback != null
+                && !positionValue.equals(imageurls.get(position))){
+            mCallback.onLoadingComplete(imageurls.get(position), images.get(imageurls.get(position)));
+            positionValue = imageurls.get(position);
+        }
     }
 
     @Override
     public Object instantiateItem(ViewGroup container, int position) {
+
         ImageLoader.getInstance().displayImage(
                 imageurls.get(position),
                 imageViews.get(position),
                 AppContext.getInstance().mImageloaderoptions, imageLoadingListener);
 //        baseActivity.showDetailImage1(imageurls.get(position), imageViews.get(position), false,isfirst);
 //        isfirst=false;
-        container.addView(imageViews.get(position), ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+        container.addView(imageViews.get(position), ViewGroup.LayoutParams.FILL_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
         return imageViews.get(position);
     }
 
@@ -69,6 +81,7 @@ public class ImageAdapter extends PagerAdapter {
 
         @Override
         public void onLoadingComplete(String s, View view, Bitmap bitmap) {
+            images.put(s, bitmap);
             if(mCallback != null){
                 mCallback.onLoadingComplete(s, bitmap);
             }

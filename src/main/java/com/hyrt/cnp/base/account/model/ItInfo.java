@@ -22,6 +22,12 @@ public class ItInfo implements Serializable {
     private String msgUrl;
     private int status;
     private String ptime;
+    private String dContent;
+    private int tUserId;
+    private String tUserName;
+    private String tContent;
+    private ArrayList<String> sPicAry;
+    private ArrayList<String> bPicAry;
     private String key;
 
     public static class Model extends Base{
@@ -76,7 +82,12 @@ public class ItInfo implements Serializable {
         if (fromUid != itInfo.fromUid) return false;
         if (msgType != itInfo.msgType) return false;
         if (status != itInfo.status) return false;
+        if (tUserId != itInfo.tUserId) return false;
         if (toUid != itInfo.toUid) return false;
+        if (bPicAry != null ? !bPicAry.equals(itInfo.bPicAry) : itInfo.bPicAry != null)
+            return false;
+        if (dContent != null ? !dContent.equals(itInfo.dContent) : itInfo.dContent != null)
+            return false;
         if (fromName != null ? !fromName.equals(itInfo.fromName) : itInfo.fromName != null)
             return false;
         if (key != null ? !key.equals(itInfo.key) : itInfo.key != null) return false;
@@ -86,6 +97,12 @@ public class ItInfo implements Serializable {
             return false;
         if (msgUrl != null ? !msgUrl.equals(itInfo.msgUrl) : itInfo.msgUrl != null) return false;
         if (ptime != null ? !ptime.equals(itInfo.ptime) : itInfo.ptime != null) return false;
+        if (sPicAry != null ? !sPicAry.equals(itInfo.sPicAry) : itInfo.sPicAry != null)
+            return false;
+        if (tContent != null ? !tContent.equals(itInfo.tContent) : itInfo.tContent != null)
+            return false;
+        if (tUserName != null ? !tUserName.equals(itInfo.tUserName) : itInfo.tUserName != null)
+            return false;
         if (toName != null ? !toName.equals(itInfo.toName) : itInfo.toName != null) return false;
 
         return true;
@@ -103,6 +120,12 @@ public class ItInfo implements Serializable {
         result = 31 * result + (msgUrl != null ? msgUrl.hashCode() : 0);
         result = 31 * result + status;
         result = 31 * result + (ptime != null ? ptime.hashCode() : 0);
+        result = 31 * result + (dContent != null ? dContent.hashCode() : 0);
+        result = 31 * result + tUserId;
+        result = 31 * result + (tUserName != null ? tUserName.hashCode() : 0);
+        result = 31 * result + (tContent != null ? tContent.hashCode() : 0);
+        result = 31 * result + (sPicAry != null ? sPicAry.hashCode() : 0);
+        result = 31 * result + (bPicAry != null ? bPicAry.hashCode() : 0);
         result = 31 * result + (key != null ? key.hashCode() : 0);
         return result;
     }
@@ -229,4 +252,73 @@ public class ItInfo implements Serializable {
         this.key = key;
     }
 
+    public String getdContent() {
+        String result = dContent;
+        if(result == null){
+            return "";
+        }
+        for(int i=0; i<4; i++){
+            try{
+                result = URLDecoder.decode(result, "UTF-8");
+            }catch (UnsupportedEncodingException e){
+
+            }
+        }
+        return result;
+    }
+
+    public void setdContent(String dContent) {
+        this.dContent = dContent;
+    }
+
+    public int gettUserId() {
+        return tUserId;
+    }
+
+    public void settUserId(int tUserId) {
+        this.tUserId = tUserId;
+    }
+
+    public String gettUserName() {
+        return tUserName;
+    }
+
+    public void settUserName(String tUserName) {
+        this.tUserName = tUserName;
+    }
+
+    public String gettContent() {
+        String result = tContent;
+        if(result == null){
+            return "";
+        }
+        for(int i=0; i<4; i++){
+            try{
+                result = URLDecoder.decode(result, "UTF-8");
+            }catch (UnsupportedEncodingException e){
+
+            }
+        }
+        return result;
+    }
+
+    public void settContent(String tContent) {
+        this.tContent = tContent;
+    }
+
+    public ArrayList<String> getsPicAry() {
+        return sPicAry;
+    }
+
+    public void setsPicAry(ArrayList<String> sPicAry) {
+        this.sPicAry = sPicAry;
+    }
+
+    public ArrayList<String> getbPicAry() {
+        return bPicAry;
+    }
+
+    public void setbPicAry(ArrayList<String> bPicAry) {
+        this.bPicAry = bPicAry;
+    }
 }

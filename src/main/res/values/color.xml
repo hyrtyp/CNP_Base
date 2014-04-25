@@ -26,5 +26,6 @@
     <color name="text_bottom">#797454</color>
     <color name="dialog_bg">#99000000</color>
     <color name="cnp_bg_color">#fffee6</color>
+    <color name="sendbtn_enable_color">#cfcfcf</color>
 
 </resources>

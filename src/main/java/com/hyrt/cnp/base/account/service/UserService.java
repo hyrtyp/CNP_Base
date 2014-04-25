@@ -7,6 +7,8 @@ import com.hyrt.cnp.base.account.model.BaseTest;
 import com.hyrt.cnp.base.account.model.UserDetail;
 import com.hyrt.cnp.base.account.model.UtilVar;
 
+import net.oschina.app.AppContext;
+
 import org.springframework.core.io.FileSystemResource;
 import org.springframework.core.io.Resource;
 import org.springframework.http.client.HttpComponentsClientHttpRequestFactory;
@@ -61,6 +63,12 @@ public class UserService{
     public UserDetail.UserDetailModel getUser(){
         cnpClient.configureRequest();
         HashMap<String, String> params = cnpClient.getParamsforGet();
+        try{
+            AppContext.getInstance().uuid = Integer.parseInt(params.get("uuid"));
+        }catch (NumberFormatException e){
+            AppContext.getInstance().uuid = -1;
+        }
+
         Log.i("Fulls", "token:"+params.get("token")+" uuid:"+params.get("uuid"));
         return  getRestTemplate().getForObject("http://api.chinaxueqian.com/user/info?token={token}&uuid={uuid}",UserDetail.UserDetailModel.class,params);
     }

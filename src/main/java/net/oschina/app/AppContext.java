@@ -29,6 +29,7 @@ public class AppContext extends Application {
 
 	private static AppContext app;
 	private BaseActivity baseActivity;
+    public int uuid = -1;
 
     public DisplayImageOptions mImageloaderoptions;
 
