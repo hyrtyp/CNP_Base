@@ -12,9 +12,13 @@ import com.hyrt.cnp.base.R;
 import com.jingdong.common.frame.BaseActivity;
 import com.jingdong.common.frame.IMyActivity;
 import com.jingdong.common.utils.DPIUtil;
+import com.nostra13.universalimageloader.cache.disc.impl.UnlimitedDiscCache;
 import com.nostra13.universalimageloader.core.DisplayImageOptions;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
+import com.nostra13.universalimageloader.utils.StorageUtils;
+
+import java.io.File;
 
 import roboguice.RoboGuice;
 
@@ -32,6 +36,7 @@ public class AppContext extends Application {
     public int uuid = -1;
 
     public DisplayImageOptions mImageloaderoptions;
+    public DisplayImageOptions mNoCacheOnDiscImageloadoptions;
 
     public static final int RESULT_FOR_PHONE_ALBUM = 102;
 
@@ -50,9 +55,22 @@ public class AppContext extends Application {
 	}
 
     public void initImageLoader(){
-        ImageLoader.getInstance().init(ImageLoaderConfiguration.createDefault(this));
+//        File cacheDir = StorageUtils.getCacheDirectory(this);
+//        UnlimitedDiscCache ud = new UnlimitedDiscCache(cacheDir);
+        ImageLoaderConfiguration config = new ImageLoaderConfiguration.Builder(this)
+                .discCacheFileCount(100)
+                .build();
+        ImageLoader.getInstance().init(config);
 
         mImageloaderoptions = new DisplayImageOptions.Builder()
+                .showImageOnLoading(R.drawable.cnp_default_img)
+                .showImageOnFail(R.drawable.cnp_default_img)
+                .showImageForEmptyUri(R.drawable.cnp_default_img)
+                .cacheInMemory(true)
+                .cacheOnDisc(true)
+                .build();
+
+        mNoCacheOnDiscImageloadoptions = new DisplayImageOptions.Builder()
                 .showImageOnLoading(R.drawable.cnp_default_img)
                 .showImageOnFail(R.drawable.cnp_default_img)
                 .showImageForEmptyUri(R.drawable.cnp_default_img)

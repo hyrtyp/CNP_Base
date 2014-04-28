@@ -262,19 +262,6 @@ public class BaseActivity extends ActionBarActivity implements RoboContext {
         super.onStop();
     }
 
-   /* @Override
-    public boolean dispatchKeyEvent(KeyEvent event) {
-        if (event.getKeyCode() == KeyEvent.KEYCODE_BACK) {
-            if (event.getAction() == KeyEvent.ACTION_UP){
-                ApplicationManager.back();
-                return true;
-            }
-
-        }
-        return super.dispatchKeyEvent(event);
-    }*/
-
-
     /**
      * 初始化顶部标题栏
      */
@@ -616,21 +603,21 @@ public class BaseActivity extends ActionBarActivity implements RoboContext {
         mImageAdapter.setCallback(new ImageAdapter.ImageAdapterCallback() {
             @Override
             public void onLoadingComplete(String url, Bitmap bitmap) {
-                android.util.Log.i(TAG, "url:"+url);
+//                android.util.Log.i(TAG, "url:"+url);
                 int curPosition = mViewPager.getCurrentItem();
                 imageSizes.put(url, new int[]{bitmap.getWidth(), bitmap.getHeight()});
                 int[] imageSize = imageSizes.get(imageurls.get(curPosition));
                 if(imageSize != null){
                     int imgWidth = imageSize[0];
                     int imgHeight = imageSize[1];
-                    android.util.Log.i(TAG, "imgWidth:"+imgWidth+" imgHeight:"+imgHeight);
+//                    android.util.Log.i(TAG, "imgWidth:"+imgWidth+" imgHeight:"+imgHeight);
 
 
                     float scale = (float)screenWidth/(float)imgWidth;
 
                     mParams.width = screenWidth;
                     mParams.height = (int) (scale*imgHeight);
-                    android.util.Log.i(TAG, "paramsWidth:"+mParams.width+" paramsHeight:"+mParams.height);
+//                    android.util.Log.i(TAG, "paramsWidth:"+mParams.width+" paramsHeight:"+mParams.height);
                     mViewPager.setLayoutParams(mParams);
                 }
             }

@@ -4,6 +4,7 @@ import android.app.Dialog;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.net.Uri;
+import android.util.*;
 import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -53,7 +54,6 @@ public class PhotoUpload {
         Intent intent = new Intent("com.android.camera.action.CROP");
         intent.setDataAndType(paramUri, "image/*");
         intent.putExtra("crop","true");
-        intent.putExtra("crop", "true");
         intent.putExtra("aspectX", 1);
         intent.putExtra("aspectY", 1);
         intent.putExtra("outputX", 200);
