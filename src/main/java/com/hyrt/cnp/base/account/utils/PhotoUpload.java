@@ -4,6 +4,7 @@ import android.app.Dialog;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.net.Uri;
+import android.provider.MediaStore;
 import android.util.*;
 import android.view.View;
 import android.widget.LinearLayout;
@@ -171,13 +172,38 @@ public class PhotoUpload {
         }else{
             intent.putExtra("aspectX", 1);
             intent.putExtra("aspectY", 1);
-            intent.putExtra("outputX", 200);
-            intent.putExtra("outputY", 200);
+            intent.putExtra("outputX", 50);
+            intent.putExtra("outputY", 50);
         }
         intent.putExtra("scale", true);
         intent.putExtra("return-data", true);
         intent.putExtra("outputFormat", Bitmap.CompressFormat.PNG.toString());
         intent.putExtra("noFaceDetection", true); // no face detection
+        System.gc();
         baseActivity.startActivityForResult(intent, PhotoUpload.PHOTO_ZOOM);
     }
+
+    /*public void getFromLocal2(Uri imageUri){
+        android.util.Log.i("tag", "getFromLocal2:"+imageUri);
+        Intent intent = new Intent(Intent.ACTION_GET_CONTENT, null);
+        intent.setType("image*//*");
+        intent.putExtra("crop", "true");
+        if(isRang){
+            intent.putExtra("aspectX", 7);
+            intent.putExtra("aspectY", 4);
+            intent.putExtra("outputX", 350);
+            intent.putExtra("outputY", 200);
+        }else{
+            intent.putExtra("aspectX", 1);
+            intent.putExtra("aspectY", 1);
+            intent.putExtra("outputX", 200);
+            intent.putExtra("outputY", 200);
+        }
+        intent.putExtra("scale", true);
+//        intent.putExtra("return-data", false);
+        intent.putExtra(MediaStore.EXTRA_OUTPUT, imageUri);
+        intent.putExtra("outputFormat", Bitmap.CompressFormat.PNG.toString());
+        intent.putExtra("noFaceDetection", true); // no face detection
+        baseActivity.startActivityForResult(intent, PhotoUpload.PHOTO_ZOOM);
+    }*/
 }
