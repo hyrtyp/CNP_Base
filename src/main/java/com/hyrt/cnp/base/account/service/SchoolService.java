@@ -43,7 +43,6 @@ public class SchoolService {
         cnpClient.configureRequest();
         HashMap<String, String> params = cnpClient.getParamsforGet();
         params.put("sid", sid+"");
-        android.util.Log.i("tag", "sid:"+params.get("sid"));
         return  restTemplate.getForObject("http://api.chinaxueqian.com/school/nursery_info/?" +
                         "token={token}&uuid={uuid}&sid={sid}",
                 School.Model2.class, params);
