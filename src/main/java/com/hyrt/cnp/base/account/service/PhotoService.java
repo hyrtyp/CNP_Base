@@ -25,10 +25,13 @@ public class PhotoService {
      * 获取学校图片
      * */
 
-    public Photo.Model getphotolistData(RestTemplate restTemplate,String pkind){
+    public Photo.Model getphotolistData(RestTemplate restTemplate,String pkind, int sid){
         cnpClient.configureRequest();
         HashMap<String, String> params = cnpClient.getParamsforGet();
         params.put("pkind",pkind);
+        if(sid != -1){
+            params.put("sid",sid+"");
+        }
         return  restTemplate.getForObject("http://api.chinaxueqian.com/school/photo/?" +
                 "token={token}&uuid={uuid}&sid={sid}&pkind={pkind}",
                 Photo.Model.class, params);

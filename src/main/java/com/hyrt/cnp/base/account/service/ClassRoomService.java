@@ -18,9 +18,12 @@ public class ClassRoomService {
         this.cnpClient = cnpClient;
     }
 
-    public ClassRoom.Model getClassRoomListData(RestTemplate restTemplate){
+    public ClassRoom.Model getClassRoomListData(RestTemplate restTemplate, int sid){
         cnpClient.configureRequest();
         HashMap<String, String> params = cnpClient.getParamsforGet();
+        if(sid != -1){
+            params.put("sid", sid+"");
+        }
         return  restTemplate.getForObject("http://api.chinaxueqian.com/school/classroom/?" +
                 "token={token}&uuid={uuid}&sid={sid}",
                 ClassRoom.Model.class, params);

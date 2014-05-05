@@ -31,16 +31,18 @@ public class UserService{
     }
 
     public UtilVar getUtilvar(String name){
-        cnpClient.configureRequest();
-        HashMap<String, String> params = cnpClient.getParamsforGet();
+//        cnpClient.configureRequest();
+//        HashMap<String, String> params = cnpClient.getParamsforGet();
+        HashMap<String, String> params = new HashMap<String, String>();
         params.put("name",name);
         return  getRestTemplate().getForObject("http://api.chinaxueqian.com/var/get_var?name={name}",
                 UtilVar.class, params);
     }
 
     public UtilVar getUtilvar(String name, String provinceName){
-        cnpClient.configureRequest();
-        HashMap<String, String> params = cnpClient.getParamsforGet();
+//        cnpClient.configureRequest();
+//        HashMap<String, String> params = cnpClient.getParamsforGet();
+        HashMap<String, String> params = new HashMap<String, String>();
         params.put("name",name);
         params.put("provinceName", provinceName);
         android.util.Log.i("tag", "name:"+name+" provinceName:"+provinceName);
@@ -50,8 +52,9 @@ public class UserService{
     }
 
     public UtilVar getUtilvar(String name, int province){
-        cnpClient.configureRequest();
-        HashMap<String, String> params = cnpClient.getParamsforGet();
+//        cnpClient.configureRequest();
+//        HashMap<String, String> params = cnpClient.getParamsforGet();
+        HashMap<String, String> params = new HashMap<String, String>();
         params.put("name",name);
         params.put("province", province+"");
         android.util.Log.i("tag", "name:"+name+" province:"+province);

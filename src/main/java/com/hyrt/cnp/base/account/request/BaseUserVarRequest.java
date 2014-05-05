@@ -5,15 +5,19 @@ import android.content.Context;
 import com.google.inject.Inject;
 import com.hyrt.cnp.base.account.model.UserDetail;
 import com.hyrt.cnp.base.account.model.UtilVar;
+import com.hyrt.cnp.base.account.service.NotNeedLoginService;
 import com.hyrt.cnp.base.account.service.UserService;
 
 /**
  * Created by yepeng on 14-1-3.
  */
-public class BaseUserVarRequest extends BaseRequest {
+public class BaseUserVarRequest extends NotNeedLoginBaseRequest {
 
+//    @Inject
+//    private UserService userService;
     @Inject
-    private UserService userService;
+    private NotNeedLoginService notNeedLoginService;
+
     private String name;
     private int province;
     private String provinceName;
@@ -41,11 +45,11 @@ public class BaseUserVarRequest extends BaseRequest {
     @Override
     public UtilVar run() {
         if(type == 1){
-            return userService.getUtilvar(name, provinceName);
+            return notNeedLoginService.getUtilvar(name, provinceName);
         }else if(type == 2){
-            return userService.getUtilvar(name, province);
+            return notNeedLoginService.getUtilvar(name, province);
         }else{
-            return userService.getUtilvar(name);
+            return notNeedLoginService.getUtilvar(name);
         }
 
     }

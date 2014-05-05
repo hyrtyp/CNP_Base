@@ -18,17 +18,24 @@ public class SchoolNoticeService {
         this.cnpClient = cnpClient;
     }
 
-    public Notice.Model getNoticelistData(RestTemplate restTemplate){
+    public Notice.Model getNoticelistData(RestTemplate restTemplate, int sid){
         cnpClient.configureRequest();
         HashMap<String, String> params = cnpClient.getParamsforGet();
+        if(sid != -1){
+            params.put("sid", sid+"");
+        }
         return  restTemplate.getForObject("http://api.chinaxueqian.com/school/notice?" +
                 "token={token}&uuid={uuid}&sid={sid}",
                 Notice.Model.class,params);
     }
-    public Notice.Model getNoticelistDatamore(RestTemplate restTemplate,String more){
+
+    public Notice.Model getNoticelistDatamore(RestTemplate restTemplate,String more, int sid){
         cnpClient.configureRequest();
         HashMap<String, String> params = cnpClient.getParamsforGet();
         params.put("more",more);
+        if(sid != -1){
+            params.put("sid", sid+"");
+        }
         return  restTemplate.getForObject("http://api.chinaxueqian.com/school/notice?" +
                 "token={token}&uuid={uuid}&sid={sid}&more={more}",
                 Notice.Model.class,params);

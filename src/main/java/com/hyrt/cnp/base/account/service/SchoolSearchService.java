@@ -22,7 +22,8 @@ public class SchoolSearchService {
     public SchoolSearch.Model getSchoolSearchData(
             RestTemplate restTemplate, String keytName,
             String keytDistrict, String keytProperty, String keytScale, Double lng, Double lat, String province){
-        HashMap<String, String> params = mCnpClient.getParamsforGet();
+//        HashMap<String, String> params = mCnpClient.getParamsforGet();
+        HashMap<String, String> params = new HashMap<String, String>();
         params.put("name", keytName);
         StringBuffer path = new StringBuffer("http://api.chinaxueqian.com/school/search/?"
                 + "name={name}");

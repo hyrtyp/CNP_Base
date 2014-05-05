@@ -17,9 +17,12 @@ public class SendwordService {
         this.cnpClient = cnpClient;
     }
 
-    public SendWord.Model getSendwordData(RestTemplate restTemplate){
+    public SendWord.Model getSendwordData(RestTemplate restTemplate, int sid){
         cnpClient.configureRequest();
         HashMap<String, String> params = cnpClient.getParamsforGet();
+        if(sid != -1){
+            params.put("sid", sid+"");
+        }
         return  restTemplate.getForObject("http://api.chinaxueqian.com/school/sendword/?" +
                 "token={token}&uuid={uuid}&sid={sid}",
                 SendWord.Model.class,params);
