@@ -8,7 +8,7 @@ import com.hyrt.cnp.base.account.model.Comment;
 import com.hyrt.cnp.base.account.service.CommentService;
 
 /**
- * Created by GYH on 14-1-22.
+ * Created by GYH on 14-1-22.change
  */
 public class BaseClassroomaddcommentRequest extends BaseRequest{
 
