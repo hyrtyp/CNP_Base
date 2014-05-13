@@ -20,23 +20,24 @@ public class TeacherService {
 
 
     public Teacher.Model getStarteacherData(RestTemplate restTemplate, int sid){
-        cnpClient.configureRequest();
-        HashMap<String, String> params = cnpClient.getParamsforGet();
-        if(sid != -1){
+        HashMap<String, String> params = null;
+        if(sid == -1){
+            cnpClient.configureRequest();
+            params = cnpClient.getParamsforGet();
+        }else{
+            params = new HashMap<String, String>();
             params.put("sid", sid+"");
         }
-        return  restTemplate.getForObject("http://api.chinaxueqian.com/school/teacher/?" +
-                "token={token}&uuid={uuid}&sid={sid}",
+        return  restTemplate.getForObject("http://api.chinaxueqian.com/school/teacher/?sid={sid}",
                 Teacher.Model.class, params);
     }
 
 
     public Teacher.Model2 getStarteacherinfoData(RestTemplate restTemplate,int userid){
-        cnpClient.configureRequest();
-        HashMap<String, String> params = cnpClient.getParamsforGet();
+        HashMap<String, String> params = new HashMap<String, String>();
         params.put("userid",userid+"");
         return  restTemplate.getForObject("http://api.chinaxueqian.com/school/teacher_info/?" +
-                "token={token}&uuid={uuid}&userid={userid}",
+                "userid={userid}",
                 Teacher.Model2.class, params);
     }
 

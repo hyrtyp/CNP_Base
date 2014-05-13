@@ -20,13 +20,15 @@ public class StarBabayService {
     }
 
     public StarBabay.Model getStarbabayData(RestTemplate restTemplate, int sid){
-        cnpClient.configureRequest();
-        HashMap<String, String> params = cnpClient.getParamsforGet();
-        if(sid != -1){
+        HashMap<String, String> params = null;
+        if(sid == -1){
+            cnpClient.configureRequest();
+            params = cnpClient.getParamsforGet();
+        }else{
+            params = new HashMap<String, String>();
             params.put("sid", sid+"");
         }
-        return  restTemplate.getForObject("http://api.chinaxueqian.com/school/babay/?" +
-                        "token={token}&uuid={uuid}&sid={sid}",
+        return  restTemplate.getForObject("http://api.chinaxueqian.com/school/babay/?sid={sid}",
                 StarBabay.Model.class, params);
     }
 }

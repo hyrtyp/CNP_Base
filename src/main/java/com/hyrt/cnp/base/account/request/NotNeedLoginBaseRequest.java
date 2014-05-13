@@ -23,12 +23,12 @@ import roboguice.inject.ContextScope;
 public abstract class NotNeedLoginBaseRequest extends SpringAndroidSpiceRequest {
     private Context context;
 
-//    @Inject
-//    private AccountScope accountScope;
+    @Inject
+    private AccountScope accountScope;
     @Inject
     private Activity activity;
-//    @Inject
-//    private ContextScope contextScope;
+    @Inject
+    private ContextScope contextScope;
 
     public Context getContext() {
         return context;
@@ -42,39 +42,7 @@ public abstract class NotNeedLoginBaseRequest extends SpringAndroidSpiceRequest 
 
     @Override
     public Base loadDataFromNetwork() throws Exception {
-        Base base = null;
-        try{
-//            final AccountManager manager = AccountManager.get(activity);
-//            final Account account;
-//            try {
-//                account = AccountUtils.getAccount(manager, activity);
-//            } catch (IOException e) {
-//                return null;
-//            } catch (AccountsException e) {
-//                return null;
-//            }
-//            accountScope.enterWith(account, manager);
-            try {
-//                contextScope.enter(activity);
-                try {
-                    base = run();
-                } catch (Exception e) {
-                    // Retry task if authentication failure occurs and account is
-                    // successfully updated
-//                    if (AccountUtils.isUnauthorized(e)
-//                            && AccountUtils.updateAccount(account, activity))
-//                        return run();
-//                    else
-//                        throw e;
-                } finally {
-//                    contextScope.exit(activity);
-                }
-            } finally {
-//                accountScope.exit();
-            }
-        }catch(Exception e){
-            e.printStackTrace();
-        }
+        Base base = run();
         return base;
     }
 

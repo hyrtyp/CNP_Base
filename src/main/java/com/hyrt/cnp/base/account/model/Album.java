@@ -134,6 +134,7 @@ public class Album implements Serializable {
         private static final long serialVersionUID = -1;
 
         private ArrayList<Album> data;
+        private String more;
 
         @Override
         public boolean equals(Object o) {
@@ -161,6 +162,14 @@ public class Album implements Serializable {
 
         public void setData(ArrayList<Album> data) {
             this.data = data;
+        }
+
+        public String getMore() {
+            return more;
+        }
+
+        public void setMore(String more) {
+            this.more = more;
         }
     }
 

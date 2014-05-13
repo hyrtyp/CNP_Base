@@ -51,6 +51,17 @@ public class CommentService {
                 Comment.Model.class,params);
     }
 
+    public Comment.Model getCommenthomeData(RestTemplate restTemplate,String infoid,String siteid, String more){
+        cnpClient.configureRequest();
+        HashMap<String, String> params = cnpClient.getParamsforGet();
+        params.put("infoid",infoid);
+        params.put("siteid",siteid);
+        params.put("isMore", "old,"+more);
+        return  restTemplate.getForObject("http://api.chinaxueqian.com/home/comment?" +
+                        "token={token}&uuid={uuid}&infoid={infoid}&siteid={siteid}&isMore={isMore}",
+                Comment.Model.class,params);
+    }
+
     public Comment.Model3 addCommentData(Comment comment){
         cnpClient.configureRequest();
         MultiValueMap<String,Object> params = cnpClient.getParams();
@@ -95,15 +106,20 @@ public class CommentService {
         android.util.Log.i("tag", comment.toString()+"");
         String path = "";
         if(type == 1){
-            path = "http://api.chinaxueqian.com/classroom/comment_add/?token={token}&uuid={uuid}" +
+            path = "http://api.chinaxueqian.com/home/comment_add/?token={token}&uuid={uuid}" +
                     "&infoid={infoid}&title={title}&userid={userid}&nid={nid}&infocid={infocid}" +
                     "&siteid={siteid}&url={url}&lstatus={lstatus}&con={con}&reply={reply}" +
                     "&rcon={rcon}&ruid={ruid}&rename={rename}&redate={redate}";
         }else{
-            path = "http://api.chinaxueqian.com/classroom/comment_add/?token={token}&uuid={uuid}" +
+            path = "http://api.chinaxueqian.com/home/comment_add/?token={token}&uuid={uuid}" +
                     "&infoid={infoid}&title={title}&userid={userid}&nid={nid}&infocid={infocid}" +
                     "&siteid={siteid}&url={url}&lstatus={lstatus}&con={con}&reply={reply}";
         }
+        if(comment.getReusername() != null && comment.getReusername().trim().length() > 0){
+            params.put("uname", comment.getReusername());
+            path+="&uname={uname}";
+        }
+        android.util.Log.i("tag", "path:"+path+" uname:"+comment.getReusername());
         return  getRestTemplate().getForObject(
                 path, Comment.Model3.class, params);
     }

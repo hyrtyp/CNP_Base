@@ -51,6 +51,15 @@ public class AlbumService {
                         "token={token}&uuid={uuid}",Album.Model.class, params);
     }
 
+    public Album.Model getMyAlbumData(RestTemplate restTemplate, String more){
+        cnpClient.configureRequest();
+        HashMap<String, String> params = cnpClient.getParamsforGet();
+        params.put("isMore", "old,"+more);
+        return  restTemplate.getForObject(
+                "http://api.chinaxueqian.com/home/album_list?"+
+                        "token={token}&uuid={uuid}&isMore={isMore}",Album.Model.class, params);
+    }
+
     public Comment.Model3 AddMyAlbumData(RestTemplate restTemplate,String albumName,String describes){
         cnpClient.configureRequest();
         HashMap<String, String> params = cnpClient.getParamsforGet();

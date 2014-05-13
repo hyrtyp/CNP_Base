@@ -19,25 +19,22 @@ public class SchoolNoticeService {
     }
 
     public Notice.Model getNoticelistData(RestTemplate restTemplate, int sid){
-        cnpClient.configureRequest();
-        HashMap<String, String> params = cnpClient.getParamsforGet();
+        HashMap<String, String>  params = new HashMap<String, String>();
         if(sid != -1){
             params.put("sid", sid+"");
         }
-        return  restTemplate.getForObject("http://api.chinaxueqian.com/school/notice?" +
-                "token={token}&uuid={uuid}&sid={sid}",
+        return  restTemplate.getForObject("http://api.chinaxueqian.com/school/notice?sid={sid}",
                 Notice.Model.class,params);
     }
 
     public Notice.Model getNoticelistDatamore(RestTemplate restTemplate,String more, int sid){
-        cnpClient.configureRequest();
-        HashMap<String, String> params = cnpClient.getParamsforGet();
-        params.put("more",more);
+        HashMap<String, String>  params = new HashMap<String, String>();
+
+        params.put("isMore","old,"+more);
         if(sid != -1){
             params.put("sid", sid+"");
         }
-        return  restTemplate.getForObject("http://api.chinaxueqian.com/school/notice?" +
-                "token={token}&uuid={uuid}&sid={sid}&more={more}",
+        return  restTemplate.getForObject("http://api.chinaxueqian.com/school/notice?sid={sid}&isMore={isMore}",
                 Notice.Model.class,params);
     }
     /*
@@ -50,6 +47,7 @@ public class SchoolNoticeService {
 //        params.put("token", "e1ac72b3cf9902f6db8c88f42728db82");
 //        params.put("uuid", "104");
 //        params.put("cid","117");
+        android.util.Log.i("tag", "ckid:"+params.get("cid") +" token:"+params.get("token")+" uuid:"+params.get("uuid"));
         return  restTemplate.getForObject("http://api.chinaxueqian.com/classroom/notice/?" +
                 "token={token}&uuid={uuid}&cid={cid}",
                 Notice.Model.class,params);
@@ -60,25 +58,30 @@ public class SchoolNoticeService {
     public Notice.Model getClassroomNoticelistDatamore(RestTemplate restTemplate,String more){
         cnpClient.configureRequest();
         HashMap<String, String> params = cnpClient.getParamsforGet();
-        params.put("more",more);
+        params.put("isMore","old,"+more);
 //        HashMap<String, String> params = new HashMap<String, String>();
 //        params.put("token", "e1ac72b3cf9902f6db8c88f42728db82");
 //        params.put("uuid", "104");
 //        params.put("cid","117");
         return  restTemplate.getForObject("http://api.chinaxueqian.com/classroom/notice/?" +
-                "token={token}&uuid={uuid}&cid={cid}&more={more}",
+                "token={token}&uuid={uuid}&cid={cid}&isMore={isMore}",
                 Notice.Model.class,params);
     }
 
     /*
     * 获取学校公告详细信息
     * */
-    public Notice.Model2 getSchoolNoticeinfo(RestTemplate restTemplate,String annourceid){
-        cnpClient.configureRequest();
-        HashMap<String, String> params = cnpClient.getParamsforGet();
+    public Notice.Model2 getSchoolNoticeinfo(RestTemplate restTemplate, int sid, String annourceid){
+        HashMap<String, String> params = null;
+        if(sid == -1){
+            cnpClient.configureRequest();
+            params = cnpClient.getParamsforGet();
+        }else{
+            params = new HashMap<String, String>();
+            params.put("sid", sid+"");
+        }
         params.put("annourceid",annourceid);
-        return  restTemplate.getForObject("http://api.chinaxueqian.com/school/notice_info/?" +
-                "token={token}&uuid={uuid}&cid={cid}&annourceid={annourceid}",
+        return  restTemplate.getForObject("http://api.chinaxueqian.com/school/notice_info/?sid={sid}&annourceid={annourceid}",
                 Notice.Model2.class,params);
     }
 

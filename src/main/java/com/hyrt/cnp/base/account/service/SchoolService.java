@@ -20,7 +20,8 @@ public class SchoolService {
     //TODO after modify
     public School.Model getSchoolList(RestTemplate restTemplate){
         cnpClient.configureRequest();
-        HashMap<String, String> params = cnpClient.getParamsforGet();
+//        HashMap<String, String> params = cnpClient.getParamsforGet();
+        HashMap<String, String> params = new HashMap<String, String>();
         params.put("name","");
         params.put("property","");
         params.put("scale","");
@@ -35,16 +36,16 @@ public class SchoolService {
         cnpClient.configureRequest();
         HashMap<String, String> params = cnpClient.getParamsforGet();
         return  restTemplate.getForObject("http://api.chinaxueqian.com/school/nursery_info/?" +
-                        "token={token}&uuid={uuid}&sid={sid}",
+                        "sid={sid}",
                 School.Model2.class, params);
     }
 
     public School.Model2 getSchoolinfo(RestTemplate restTemplate, int sid){
-        cnpClient.configureRequest();
-        HashMap<String, String> params = cnpClient.getParamsforGet();
+//        cnpClient.configureRequest();
+//        HashMap<String, String> params = cnpClient.getParamsforGet();
+        HashMap<String, String> params = new HashMap<String, String>();
         params.put("sid", sid+"");
-        return  restTemplate.getForObject("http://api.chinaxueqian.com/school/nursery_info/?" +
-                        "token={token}&uuid={uuid}&sid={sid}",
+        return  restTemplate.getForObject("http://api.chinaxueqian.com/school/nursery_info/?sid={sid}",
                 School.Model2.class, params);
     }
 

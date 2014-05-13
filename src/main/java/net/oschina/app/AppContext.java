@@ -9,6 +9,7 @@ import android.net.NetworkInfo;
 import android.os.Process;
 
 import com.hyrt.cnp.base.R;
+import com.hyrt.cnp.base.account.model.UserDetail;
 import com.jingdong.common.frame.BaseActivity;
 import com.jingdong.common.frame.IMyActivity;
 import com.jingdong.common.utils.DPIUtil;
@@ -34,6 +35,7 @@ public class AppContext extends Application {
 	private static AppContext app;
 	private BaseActivity baseActivity;
     public int uuid = -1;
+    public UserDetail mUserDetail;
 
     public DisplayImageOptions mImageloaderoptions;
     public DisplayImageOptions mNoCacheOnDiscImageloadoptions;

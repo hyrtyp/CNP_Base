@@ -338,7 +338,10 @@ public class BaseActivity extends ActionBarActivity implements RoboContext {
         popWin.setTouchable(true);
         popWin.showAtLocation(view, Gravity.CENTER, 0, 0);
         ImageView imageview = (ImageView) popView.findViewById(R.id.pop_img);
-        showDetailImage1(bigImgPath, imageview, false, true);
+        ImageLoader.getInstance().displayImage(
+                bigImgPath,
+                imageview, AppContext.getInstance().mNoCacheOnDiscImageloadoptions);
+//        showDetailImage1(bigImgPath, imageview, false, true);
     }
 
     /**
@@ -623,6 +626,80 @@ public class BaseActivity extends ActionBarActivity implements RoboContext {
             }
         });
         mViewPager.setAdapter(mImageAdapter);
+        mViewPager.setCurrentItem(postion);
+    }
+
+    public void showPop4(View view, final ArrayList<String> imageurls, final ArrayList<String> names, final int postion, final Context context) {
+        View popView = this.getLayoutInflater().inflate(
+                R.layout.layout_popwindwos2, null);
+        final TextView tv_name = (TextView) popView.findViewById(R.id.tv_name);
+        tv_name.setVisibility(View.VISIBLE);
+        tv_name.setText(names.get(postion));
+        popWin = new PopupWindow(popView, RelativeLayout.LayoutParams.MATCH_PARENT,
+                RelativeLayout.LayoutParams.MATCH_PARENT);
+        View pop_bg = popView.findViewById(R.id.pop_bg);
+        pop_bg.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                popWin.dismiss();
+            }
+        });
+        // 需要设置一下此参数，点击外边可消失
+        popWin.setBackgroundDrawable(new BitmapDrawable());
+        //设置点击窗口外边窗口消失
+        popWin.setOutsideTouchable(true);
+        // 设置此参数获得焦点，否则无法点击
+        popWin.setFocusable(true);
+        popWin.setTouchable(true);
+        popWin.showAtLocation(view, Gravity.CENTER, 0, 0);
+        final HackyViewPager mViewPager = (HackyViewPager) popView.findViewById(R.id.pop_img);
+        ArrayList<ImageView> imageViews = new ArrayList<ImageView>();
+        for (int i = 0; i < imageurls.size(); i++) {
+            ImageView imageView = new ImageView(context);
+            imageView.setScaleType(ImageView.ScaleType.FIT_CENTER);
+            imageViews.add(imageView);
+        }
+        final ViewGroup.LayoutParams mParams = mViewPager.getLayoutParams();
+        WindowManager wm = (WindowManager) context.getSystemService(context.WINDOW_SERVICE);
+        final int screenWidth = wm.getDefaultDisplay().getWidth();
+        mParams.width = screenWidth;
+        mParams.height = screenWidth;
+
+        ImageAdapter mImageAdapter = new ImageAdapter(imageViews, imageurls, this);
+        mImageAdapter.setCallback(new ImageAdapter.ImageAdapterCallback() {
+            @Override
+            public void onLoadingComplete(String url, Bitmap bitmap) {
+                int curPosition = mViewPager.getCurrentItem();
+                imageSizes.put(url, new int[]{bitmap.getWidth(), bitmap.getHeight()});
+                int[] imageSize = imageSizes.get(imageurls.get(curPosition));
+                if(imageSize != null){
+                    int imgWidth = imageSize[0];
+                    int imgHeight = imageSize[1];
+
+                    float scale = (float)screenWidth/(float)imgWidth;
+
+                    mParams.width = screenWidth;
+                    mParams.height = (int) (scale*imgHeight);
+                    mViewPager.setLayoutParams(mParams);
+                }
+            }
+        });
+
+        mViewPager.setAdapter(mImageAdapter);
+        mViewPager.setOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+            @Override
+            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+            }
+
+            @Override
+            public void onPageSelected(int position) {
+                tv_name.setText(names.get(position));
+            }
+
+            @Override
+            public void onPageScrollStateChanged(int state) {
+            }
+        });
         mViewPager.setCurrentItem(postion);
     }
 

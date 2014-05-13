@@ -26,14 +26,18 @@ public class PhotoService {
      * */
 
     public Photo.Model getphotolistData(RestTemplate restTemplate,String pkind, int sid){
-        cnpClient.configureRequest();
-        HashMap<String, String> params = cnpClient.getParamsforGet();
-        params.put("pkind",pkind);
-        if(sid != -1){
+        HashMap<String, String> params = null;
+        if(sid == -1){
+            cnpClient.configureRequest();
+            params = cnpClient.getParamsforGet();
+        }else{
+            params = new HashMap<String, String>();
             params.put("sid",sid+"");
         }
+        android.util.Log.i("tag", "pkind:"+pkind+" sid:"+params.get("sid"));
+        params.put("pkind",pkind);
         return  restTemplate.getForObject("http://api.chinaxueqian.com/school/photo/?" +
-                "token={token}&uuid={uuid}&sid={sid}&pkind={pkind}",
+                "sid={sid}&pkind={pkind}",
                 Photo.Model.class, params);
     }
 
@@ -56,9 +60,18 @@ public class PhotoService {
         cnpClient.configureRequest();
         HashMap<String, String> params = cnpClient.getParamsforGet();
         params.put("paid",paid+"");
-        android.util.Log.i("tag", "paid"+paid);
         return  restTemplate.getForObject("http://api.chinaxueqian.com/home/photo_list/?" +
                         "token={token}&uuid={uuid}&cid={cid}&paid={paid}",
+                DynamicPhoto.Model.class, params);
+    }
+
+    public DynamicPhoto.Model getDynamicAlbumphotolistData(RestTemplate restTemplate, int paid, String more){
+        cnpClient.configureRequest();
+        HashMap<String, String> params = cnpClient.getParamsforGet();
+        params.put("paid",paid+"");
+        params.put("isMore", "old,"+more);
+        return  restTemplate.getForObject("http://api.chinaxueqian.com/home/photo_list/?" +
+                        "token={token}&uuid={uuid}&cid={cid}&paid={paid}&isMore={isMore}",
                 DynamicPhoto.Model.class, params);
     }
 }

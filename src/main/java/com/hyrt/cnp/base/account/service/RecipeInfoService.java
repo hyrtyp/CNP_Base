@@ -22,11 +22,12 @@ public class RecipeInfoService {
     //TODO after modify
     public RecipeInfo.Model2 getRecipeWeekData(RestTemplate restTemplate,Recipe recipe){
         cnpClient.configureRequest();
-        HashMap<String, String> params = cnpClient.getParamsforGet();
+        HashMap<String, String> params = new HashMap<String, String>();
         params.put("year",recipe.getYears());
         params.put("week",recipe.getWeekd());
+        params.put("week",recipe.getNurseryID());
         return  restTemplate.getForObject("http://api.chinaxueqian.com/school/week_recipe?"+
-                "token={token}&uuid={uuid}&sid={sid}&year={year}&week={week}",
+                "sid={sid}&year={year}&week={week}",
                 RecipeInfo.Model2.class, params);
     }
 
@@ -38,6 +39,7 @@ public class RecipeInfoService {
         cnpClient.configureRequest();
         HashMap<String, String> params = cnpClient.getParamsforGet();
         params.put("time",time);
+        android.util.Log.i("tag", "time:"+time+" sid:"+params.get("sid"));
         return  restTemplate.getForObject("http://api.chinaxueqian.com/school/recipe_info/?" +
                 "token={token}&uuid={uuid}&sid={sid}&time={time}",
                 RecipeInfo.Model.class, params);

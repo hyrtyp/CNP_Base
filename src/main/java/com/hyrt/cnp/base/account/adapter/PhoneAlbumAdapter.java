@@ -11,6 +11,7 @@ import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.hyrt.cnp.base.R;
+import com.hyrt.cnp.base.account.utils.AlertUtils;
 import com.jingdong.common.frame.BaseActivity;
 import com.nostra13.universalimageloader.core.ImageLoader;
 
@@ -70,6 +71,7 @@ public class PhoneAlbumAdapter extends BaseAdapter{
         }else{
             cb.setChecked(false);
         }
+        android.util.Log.i("tag", "data："+data);
         ImageLoader.getInstance().displayImage("file:///"+data, iv, AppContext.getInstance().mImageloaderoptions);
 
         View.OnClickListener mOnClickListener = new View.OnClickListener() {
@@ -91,7 +93,8 @@ public class PhoneAlbumAdapter extends BaseAdapter{
                             cb.setChecked(true);
                         }else{
                             cb.setChecked(false);
-                            Toast.makeText(mContext, "最多上传9张", Toast.LENGTH_SHORT).show();
+                            AlertUtils.getInstance().showCenterToast(mContext, "最多上传9张");
+//                            Toast.makeText(mContext, "最多上传9张", Toast.LENGTH_SHORT).show();
                         }
 
                     }

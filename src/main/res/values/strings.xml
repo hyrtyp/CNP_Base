@@ -30,7 +30,7 @@
     <string name="adddynamicphoto">上传照片</string>
     <string name="adddynamicphoto_success">上传成功</string>
     <string name="adddynamicphoto_fail">上传失败</string>
-    <string name="itmylist">我的</string>
+    <string name="itmylist">\@我的</string>
     <string name="commentdy">评论动态</string>
     <string name="school_search">幼儿园搜索</string>
     <string name="school_search_result">搜索结果</string>
