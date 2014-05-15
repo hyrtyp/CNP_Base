@@ -22,6 +22,7 @@ public class Photo implements Serializable {
     private int nurseryID;
     //班级id
     private int classroomID;
+    private int commentNum;
 
     /**
      * 获取缩略图
@@ -127,6 +128,14 @@ public class Photo implements Serializable {
 
     public void setPkind(int pkind) {
         this.pkind = pkind;
+    }
+
+    public int getCommentNum() {
+        return commentNum;
+    }
+
+    public void setCommentNum(int commentNum) {
+        this.commentNum = commentNum;
     }
 
     public static class Model extends Base {

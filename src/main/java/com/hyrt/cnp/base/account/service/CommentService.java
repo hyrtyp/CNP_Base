@@ -31,6 +31,17 @@ public class CommentService {
                 Comment.Model.class,params);
     }
 
+    public Comment.Model getCommentlistData(RestTemplate restTemplate,String infoid,String siteid, String more){
+        cnpClient.configureRequest();
+        HashMap<String, String> params = cnpClient.getParamsforGet();
+        params.put("infoid",infoid);
+        params.put("siteid",siteid);
+        params.put("isMore", "old,"+more);
+        return  restTemplate.getForObject("http://api.chinaxueqian.com/classroom/comment?" +
+                        "token={token}&uuid={uuid}&infoid={infoid}&siteid={siteid}&isMore={isMore}",
+                Comment.Model.class,params);
+    }
+
     public Comment.Model getDynamicCommentlistData(RestTemplate restTemplate,String infoid,String siteid){
         cnpClient.configureRequest();
         HashMap<String, String> params = cnpClient.getParamsforGet();

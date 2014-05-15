@@ -2,6 +2,8 @@ package com.hyrt.cnp.base.account.service;
 
 import com.hyrt.cnp.base.account.CNPClient;
 import com.hyrt.cnp.base.account.model.BaseTest;
+import com.hyrt.cnp.base.account.model.DynamicPhoto;
+import com.hyrt.cnp.base.account.model.Photo;
 
 import org.apache.commons.httpclient.methods.multipart.FilePart;
 import org.apache.commons.httpclient.methods.multipart.Part;
@@ -16,6 +18,7 @@ import java.io.FileNotFoundException;
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
 import java.util.ArrayList;
+import java.util.Map;
 
 /**
  * Created by Zoe on 2014-04-11.
@@ -49,6 +52,18 @@ public class AddPhotoService {
                 "http://api.chinaxueqian.com/home/photo_add/",
                 cnpClient.getParams(), BaseTest.class);
 
+        return result;
+    }
+
+    public BaseTest delDynamicPhoto(DynamicPhoto photo){
+        cnpClient.configureRequest();
+        Map<String, String> params = cnpClient.getParamsforGet();
+        android.util.Log.i("tag", "pid:"+photo.getPhotoID());
+        params.put("pid", photo.getPhotoID() + "");
+        BaseTest result =  getRestTemplate().getForObject(
+                "http://api.chinaxueqian.com/home/photo_del/?"
+                +"token={token}&uuid={uuid}&pid={pid}",
+                BaseTest.class, params);
         return result;
     }
 

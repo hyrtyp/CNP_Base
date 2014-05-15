@@ -71,6 +71,7 @@
                 android:layout_height="wrap_content"
                 android:background="@drawable/day_commit2"/>
             <TextView
+                android:id="@+id/iv_comment_text"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 style="@style/medium_tv"
@@ -92,5 +93,16 @@
             android:layout_centerVertical="true"
             />
     </RelativeLayout>
+
+    <ImageView
+        android:id="@+id/iv_photo_del"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/ic_photo_del"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentRight="true"
+        android:layout_marginTop="@dimen/view_bottom_margin"
+        android:layout_marginRight="@dimen/view_margin"
+        android:visibility="visible"/>
 
 </RelativeLayout>

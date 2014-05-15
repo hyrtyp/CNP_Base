@@ -533,16 +533,13 @@ public class BaseActivity extends ActionBarActivity implements RoboContext {
         mViewPager.setCurrentItem(postion);
     }
 
-    public void showPop3(
+    public View showPop3(
             View view, final ArrayList<String> imageurls,
-            final int postion, final Context context, final showPop3Listener listener){
+            final int postion, final Context context, final showPop3Listener listener, boolean needDelBtn){
         View popView = this.getLayoutInflater().inflate(
                 R.layout.layout_popwindow3, null);
         popWin = new PopupWindow(popView, RelativeLayout.LayoutParams.MATCH_PARENT,
                 RelativeLayout.LayoutParams.MATCH_PARENT);
-
-
-
 
         // 需要设置一下此参数，点击外边可消失
         popWin.setBackgroundDrawable(new BitmapDrawable());
@@ -553,6 +550,20 @@ public class BaseActivity extends ActionBarActivity implements RoboContext {
         popWin.setTouchable(true);
         popWin.showAtLocation(view, Gravity.CENTER, 0, 0);
         final HackyViewPager mViewPager = (HackyViewPager) popView.findViewById(R.id.pop_img);
+
+        if(needDelBtn){
+            ImageView iv_photo_del = (ImageView) popView.findViewById(R.id.iv_photo_del);
+            iv_photo_del.setVisibility(View.VISIBLE);
+            iv_photo_del.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    if(listener != null){
+                        listener.onClick(3, mViewPager.getCurrentItem());
+                        popWin.dismiss();
+                    }
+                }
+            });
+        }
 
         View.OnClickListener mOclickListener = new View.OnClickListener() {
             @Override
@@ -627,6 +638,34 @@ public class BaseActivity extends ActionBarActivity implements RoboContext {
         });
         mViewPager.setAdapter(mImageAdapter);
         mViewPager.setCurrentItem(postion);
+
+        return popView;
+    }
+
+    public View showPop3(
+            View view, final ArrayList<String> imageurls, final ArrayList<String> commentNums,
+            final int postion, final Context context, final showPop3Listener listener, boolean needDelBtn){
+        View popView = showPop3(view, imageurls, postion, context, listener, needDelBtn);
+        final HackyViewPager mViewPager = (HackyViewPager) popView.findViewById(R.id.pop_img);
+        final TextView iv_comment_text = (TextView) popView.findViewById(R.id.iv_comment_text);
+        iv_comment_text.setText("评论("+commentNums.get(postion)+")");
+        mViewPager.setOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+            @Override
+            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+
+            }
+
+            @Override
+            public void onPageSelected(int position) {
+                iv_comment_text.setText("评论("+commentNums.get(position)+")");
+            }
+
+            @Override
+            public void onPageScrollStateChanged(int state) {
+
+            }
+        });
+        return popView;
     }
 
     public void showPop4(View view, final ArrayList<String> imageurls, final ArrayList<String> names, final int postion, final Context context) {
@@ -706,7 +745,7 @@ public class BaseActivity extends ActionBarActivity implements RoboContext {
     public static interface showPop3Listener{
         /**
          *
-         * @param type（0:转发；1:评论 2:详情）
+         * @param type（0:转发；1:评论 2:详情 3:删除照片）
          */
         public void onClick(int type, int position);
     }

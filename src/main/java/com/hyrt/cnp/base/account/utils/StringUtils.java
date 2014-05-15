@@ -266,6 +266,9 @@ public class StringUtils
      * */
 
     public static String millTimeToNormalTime(String stime)throws Exception{
+        if(stime.length() <= 0){
+            return "";
+        }
         Long timestamp = Long.parseLong(stime)*1000;
         String date = new java.text.SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new java.util.Date(timestamp));
         return date;

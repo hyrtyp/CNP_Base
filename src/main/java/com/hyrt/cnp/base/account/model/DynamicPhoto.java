@@ -26,6 +26,7 @@ public class DynamicPhoto implements Serializable{
     private int isFocus;
     private String baby_id;
     private String bName;
+    private int commentNum;
 
     /**
      * 获取缩略图
@@ -192,6 +193,14 @@ public class DynamicPhoto implements Serializable{
         this.bName = bName;
     }
 
+    public int getCommentNum() {
+        return commentNum;
+    }
+
+    public void setCommentNum(int commentNum) {
+        this.commentNum = commentNum;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -200,6 +209,7 @@ public class DynamicPhoto implements Serializable{
         DynamicPhoto that = (DynamicPhoto) o;
 
         if (classroomID != that.classroomID) return false;
+        if (commentNum != that.commentNum) return false;
         if (groupID != that.groupID) return false;
         if (isFocus != that.isFocus) return false;
         if (nurseryID != that.nurseryID) return false;
@@ -242,6 +252,7 @@ public class DynamicPhoto implements Serializable{
         result = 31 * result + isFocus;
         result = 31 * result + (baby_id != null ? baby_id.hashCode() : 0);
         result = 31 * result + (bName != null ? bName.hashCode() : 0);
+        result = 31 * result + commentNum;
         return result;
     }
 

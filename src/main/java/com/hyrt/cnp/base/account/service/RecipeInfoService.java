@@ -21,11 +21,11 @@ public class RecipeInfoService {
 
     //TODO after modify
     public RecipeInfo.Model2 getRecipeWeekData(RestTemplate restTemplate,Recipe recipe){
-        cnpClient.configureRequest();
+//        cnpClient.configureRequest();
         HashMap<String, String> params = new HashMap<String, String>();
         params.put("year",recipe.getYears());
         params.put("week",recipe.getWeekd());
-        params.put("week",recipe.getNurseryID());
+        params.put("sid", recipe.getNurseryID());
         return  restTemplate.getForObject("http://api.chinaxueqian.com/school/week_recipe?"+
                 "sid={sid}&year={year}&week={week}",
                 RecipeInfo.Model2.class, params);
