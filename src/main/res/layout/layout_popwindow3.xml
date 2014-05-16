@@ -103,6 +103,6 @@
         android:layout_alignParentRight="true"
         android:layout_marginTop="@dimen/view_bottom_margin"
         android:layout_marginRight="@dimen/view_margin"
-        android:visibility="visible"/>
+        android:visibility="gone"/>
 
 </RelativeLayout>

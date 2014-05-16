@@ -6,6 +6,7 @@ import android.content.DialogInterface;
 
 import com.hyrt.cnp.base.account.ui.LightAlertDialog;
 import com.hyrt.cnp.base.account.ui.LightProgressDialog;
+import com.hyrt.cnp.base.account.utils.LogHelper;
 import com.octo.android.robospice.persistence.exception.SpiceException;
 import com.octo.android.robospice.request.listener.RequestListener;
 
@@ -84,6 +85,7 @@ public abstract class BaseRequestListener implements RequestListener {
 
     @Override
     public void onRequestFailure(SpiceException e) {
+        LogHelper.i("tag", "msg:" + e.getMessage());
         dismissProgress();
     }
 

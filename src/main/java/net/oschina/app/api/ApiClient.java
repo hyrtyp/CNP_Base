@@ -158,7 +158,10 @@ public class ApiClient {
             } finally {
 // 释放连接
                 try {
-                    inStream.close();
+                    if(inStream != null){
+                        inStream.close();
+                    }
+
                 } catch (IOException e) {
                     throw AppException.network(e);
                 }
