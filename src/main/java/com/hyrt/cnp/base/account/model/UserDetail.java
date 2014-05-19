@@ -21,6 +21,7 @@ public class UserDetail implements Serializable{
     private String logo;
     private String back;
     private String timeText;
+    private int groupID;
     //显示用户签名
     private String intro;
 
@@ -31,6 +32,7 @@ public class UserDetail implements Serializable{
 
         UserDetail that = (UserDetail) o;
 
+        if (groupID != that.groupID) return false;
         if (user_id != that.user_id) return false;
         if (back != null ? !back.equals(that.back) : that.back != null) return false;
         if (birthday != null ? !birthday.equals(that.birthday) : that.birthday != null)
@@ -68,8 +70,17 @@ public class UserDetail implements Serializable{
         result = 31 * result + (logo != null ? logo.hashCode() : 0);
         result = 31 * result + (back != null ? back.hashCode() : 0);
         result = 31 * result + (timeText != null ? timeText.hashCode() : 0);
+        result = 31 * result + groupID;
         result = 31 * result + (intro != null ? intro.hashCode() : 0);
         return result;
+    }
+
+    public int getGroupID() {
+        return groupID;
+    }
+
+    public void setGroupID(int groupID) {
+        this.groupID = groupID;
     }
 
     public String getIntro() {

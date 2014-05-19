@@ -2,6 +2,7 @@ package com.hyrt.cnp.base.account.service;
 
 import com.hyrt.cnp.base.account.CNPClient;
 import com.hyrt.cnp.base.account.model.ClassRoom;
+import com.hyrt.cnp.base.account.utils.LogHelper;
 
 import org.springframework.web.client.RestTemplate;
 

@@ -42,6 +42,29 @@ public class DynamicService {
                 "token={token}&uuid={uuid}&uid={uid}",
                 Dynamic.Model.class, params);
     }
+
+    public Dynamic.Model getRefreshDynamicData(
+            RestTemplate restTemplate,String uid,
+            String startPosttime, String endPosttime,
+            boolean isAll){
+        cnpClient.configureRequest();
+        HashMap<String, String> params = cnpClient.getParamsforGet();
+        params.put("uid",uid);
+        params.put("ptime", startPosttime+","+endPosttime);
+        String urlKey = "";
+        if(isAll){
+            urlKey = "dynamic_all";
+        }else{
+            urlKey = "dynamic_user";
+        }
+
+        Log.i("tag", "isAll:"+isAll+" token:"+params.get("token")+" uuid:"+params.get("uuid")+" uid:"+params.get("uid"));
+
+        return  restTemplate.getForObject("http://api.chinaxueqian.com/home/"+urlKey+"/?" +
+                        "token={token}&uuid={uuid}&uid={uid}&ptime={ptime}",
+                Dynamic.Model.class, params);
+    }
+
     public Dynamic.Model getBabayDynamicMoreData(RestTemplate restTemplate,String uid,String more, boolean isAll){
         cnpClient.configureRequest();
         HashMap<String, String> params = cnpClient.getParamsforGet();

@@ -90,6 +90,10 @@ public class FaceUtils {
 
     }
 
+    public static String getClassroomBanner(int classroomid){
+        return "http://img.chinaxueqian.com/classroom/1/"+classroomid+"_banner.jpg";
+    }
+
     public static String getImage(String photoUrl){
         return "http://img.chinaxueqian.com/"+photoUrl;
     }

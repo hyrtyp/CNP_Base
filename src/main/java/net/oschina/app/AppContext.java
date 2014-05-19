@@ -7,9 +7,11 @@ import android.content.pm.PackageManager.NameNotFoundException;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Process;
+import android.os.storage.StorageManager;
 
 import com.hyrt.cnp.base.R;
 import com.hyrt.cnp.base.account.model.UserDetail;
+import com.hyrt.cnp.base.account.utils.LogHelper;
 import com.jingdong.common.frame.BaseActivity;
 import com.jingdong.common.frame.IMyActivity;
 import com.jingdong.common.utils.DPIUtil;
