@@ -29,6 +29,7 @@ import android.text.TextUtils;
 import android.util.Log;
 
 import com.hyrt.cnp.base.account.model.User;
+import com.hyrt.cnp.base.account.utils.LogHelper;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -184,9 +185,9 @@ public class AccountUtils {
      */
     public static Account getAccount(final AccountManager manager,
             final Activity activity) throws IOException, AccountsException {
-        final boolean loggable = Log.isLoggable(TAG, DEBUG);
-        if (loggable)
-            Log.d(TAG, "Getting account");
+//        final boolean loggable = Log.isLoggable(TAG, DEBUG);
+//        if (loggable)
+        LogHelper.d(TAG, "Getting account");
 
         if (activity == null)
             throw new IllegalArgumentException("Activity cannot be null");
@@ -200,23 +201,23 @@ public class AccountUtils {
                 throw new AuthenticatorConflictException();
 
             while ((accounts = getAccounts(manager)).length == 0) {
-                if (loggable)
-                    Log.d(TAG, "No CNP accounts for activity=" + activity);
+//                if (loggable)
+                    LogHelper.d(TAG, "No CNP accounts for activity=" + activity);
 
                 Bundle result = manager.addAccount(ACCOUNT_TYPE, null, null,
                         null, activity, null, null).getResult();
 
-                if (loggable)
-                    Log.d(TAG,
+//                if (loggable)
+                    LogHelper.d(TAG,
                             "Added account "
                                     + result.getString(KEY_ACCOUNT_NAME));
             }
         } catch (OperationCanceledException e) {
-            Log.d(TAG, "Excepting retrieving account", e);
+            LogHelper.d(TAG, "Excepting retrieving account", e);
             activity.finish();
             throw e;
         } catch (AccountsException e) {
-            Log.d(TAG, "Excepting retrieving account", e);
+            LogHelper.d(TAG, "Excepting retrieving account", e);
             throw e;
         } catch (AuthenticatorConflictException e) {
             activity.runOnUiThread(new Runnable() {
@@ -227,12 +228,12 @@ public class AccountUtils {
             });
             throw e;
         } catch (IOException e) {
-            Log.d(TAG, "Excepting retrieving account", e);
+            LogHelper.d(TAG, "Excepting retrieving account", e);
             throw e;
         }
 
-        if (loggable)
-            Log.d(TAG, "Returning account " + accounts[0].name);
+//        if (loggable)
+        LogHelper.d(TAG, "Returning account " + accounts[0].name);
 
         return accounts[0];
     }
@@ -262,11 +263,11 @@ public class AccountUtils {
                 UPDATE_COUNT.incrementAndGet();
                 return true;
             } catch (OperationCanceledException e) {
-                Log.d(TAG, "Excepting retrieving account", e);
+                LogHelper.d(TAG, "Excepting retrieving account", e);
                 activity.finish();
                 return false;
             } catch (AccountsException e) {
-                Log.d(TAG, "Excepting retrieving account", e);
+                LogHelper.d(TAG, "Excepting retrieving account", e);
                 return false;
             } catch (AuthenticatorConflictException e) {
                 activity.runOnUiThread(new Runnable() {
@@ -277,7 +278,7 @@ public class AccountUtils {
                 });
                 return false;
             } catch (IOException e) {
-                Log.d(TAG, "Excepting retrieving account", e);
+                LogHelper.d(TAG, "Excepting retrieving account", e);
                 return false;
             }
         }
