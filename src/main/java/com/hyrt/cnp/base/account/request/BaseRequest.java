@@ -10,9 +10,20 @@ import com.google.inject.Inject;
 import com.hyrt.cnp.base.account.AccountScope;
 import com.hyrt.cnp.base.account.AccountUtils;
 import com.hyrt.cnp.base.account.model.Base;
+import com.hyrt.cnp.base.account.utils.AlertUtils;
+import com.hyrt.cnp.base.account.utils.LogHelper;
+import com.jingdong.common.frame.BaseActivity;
 import com.octo.android.robospice.request.springandroid.SpringAndroidSpiceRequest;
 
+import net.oschina.app.AppContext;
+
+import org.springframework.http.client.ClientHttpRequestFactory;
+import org.springframework.http.client.HttpComponentsClientHttpRequestFactory;
+import org.springframework.http.client.SimpleClientHttpRequestFactory;
+import org.springframework.web.client.RestTemplate;
+
 import java.io.IOException;
+import java.net.SocketTimeoutException;
 
 import roboguice.RoboGuice;
 import roboguice.inject.ContextScope;
@@ -31,6 +42,8 @@ public abstract class BaseRequest extends SpringAndroidSpiceRequest{
     @Inject
     private ContextScope contextScope;
 
+    private static final int WEBSERVICES_TIMEOUT = 1000*20;//请求超时时间
+
     public Context getContext() {
         return context;
     }
@@ -43,6 +56,7 @@ public abstract class BaseRequest extends SpringAndroidSpiceRequest{
 
     @Override
     public Base loadDataFromNetwork() throws Exception {
+        manageTimeOuts(getRestTemplate());
         Base base = null;
         try{
             final AccountManager manager = AccountManager.get(activity);
@@ -59,7 +73,18 @@ public abstract class BaseRequest extends SpringAndroidSpiceRequest{
                 contextScope.enter(activity);
                 try {
                     base = run();
-                } catch (Exception e) {
+                }catch (Exception e) {
+                    String msg = e.getMessage();
+                    if(msg.contains("java.net.SocketTimeoutException")){
+                        ((BaseActivity)context).runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                AlertUtils.getInstance().showCenterToast(AppContext.getInstance(), "请求超时！");
+                            }
+                        });
+
+                    }
+                    LogHelper.i("tag", "msg:"+msg.contains("java.net.SocketTimeoutException"));
                     // Retry task if authentication failure occurs and account is
                     // successfully updated
                     if (AccountUtils.isUnauthorized(e)
@@ -77,6 +102,27 @@ public abstract class BaseRequest extends SpringAndroidSpiceRequest{
             e.printStackTrace();
         }
         return base;
+    }
+
+    /**
+     * 管理请求超时
+     * @param restTemplate
+     */
+    private void manageTimeOuts(RestTemplate restTemplate) {
+        // set timeout for requests
+        if(restTemplate == null){
+            return;
+        }
+        ClientHttpRequestFactory factory = restTemplate.getRequestFactory();
+        if (factory instanceof HttpComponentsClientHttpRequestFactory) {
+            HttpComponentsClientHttpRequestFactory advancedFactory = (HttpComponentsClientHttpRequestFactory) factory;
+            advancedFactory.setConnectTimeout(WEBSERVICES_TIMEOUT);
+            advancedFactory.setReadTimeout(WEBSERVICES_TIMEOUT);
+        } else if (factory instanceof SimpleClientHttpRequestFactory) {
+            SimpleClientHttpRequestFactory advancedFactory = (SimpleClientHttpRequestFactory) factory;
+            advancedFactory.setConnectTimeout(WEBSERVICES_TIMEOUT);
+            advancedFactory.setReadTimeout(WEBSERVICES_TIMEOUT);
+        }
     }
 
     public abstract Base run();

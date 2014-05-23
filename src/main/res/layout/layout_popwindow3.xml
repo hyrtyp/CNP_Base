@@ -49,14 +49,35 @@
                 android:textColor="#80f0f0f0"
                 android:text="转发"/>
         </LinearLayout>
-        <ImageView
-            android:id="@+id/iv_line"
-            android:layout_width="1dp"
-            android:layout_height="@dimen/view_margin"
+
+        <LinearLayout
+            android:id="@+id/layout_photo_del"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
             android:layout_centerVertical="true"
-            android:background="#80f0f0f0"
-            android:layout_toRightOf="@id/layout_photo_forward"
-            android:visibility="gone"/>
+            android:visibility="gone">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                style="@style/medium_tv"
+                android:layout_marginTop="1dp"
+                android:layout_marginBottom="0dp"
+                android:layout_marginLeft="@dimen/view_margin_smallest"
+                android:textColor="@android:color/holo_red_dark"
+                android:text="删除"
+                android:visibility="visible"/>
+            <ImageView
+                android:id="@+id/iv_line"
+                android:layout_width="1dp"
+                android:layout_height="@dimen/view_margin"
+                android:layout_centerVertical="true"
+                android:background="#fff"
+                android:layout_toRightOf="@id/layout_photo_del"
+                android:layout_marginTop="5dp"
+                android:visibility="visible"/>
+        </LinearLayout>
+
         <LinearLayout
             android:id="@+id/layout_photo_comment"
             android:layout_width="wrap_content"
@@ -64,7 +85,7 @@
             android:orientation="horizontal"
             android:layout_centerVertical="true"
             android:layout_marginLeft="@dimen/view_margin"
-            android:layout_toRightOf="@id/iv_line"
+            android:layout_toRightOf="@id/layout_photo_del"
             android:gravity="center_vertical">
             <ImageView
                 android:layout_width="wrap_content"
@@ -94,7 +115,7 @@
             />
     </RelativeLayout>
 
-    <ImageView
+    <!--<ImageView
         android:id="@+id/iv_photo_del"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -103,6 +124,6 @@
         android:layout_alignParentRight="true"
         android:layout_marginTop="@dimen/view_bottom_margin"
         android:layout_marginRight="@dimen/view_margin"
-        android:visibility="gone"/>
+        android:visibility="gone"/>-->
 
 </RelativeLayout>

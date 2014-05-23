@@ -6,6 +6,7 @@ import android.content.DialogInterface;
 
 import com.hyrt.cnp.base.account.ui.LightAlertDialog;
 import com.hyrt.cnp.base.account.ui.LightProgressDialog;
+import com.hyrt.cnp.base.account.utils.AlertUtils;
 import com.hyrt.cnp.base.account.utils.LogHelper;
 import com.octo.android.robospice.persistence.exception.SpiceException;
 import com.octo.android.robospice.request.listener.RequestListener;
@@ -85,6 +86,10 @@ public abstract class BaseRequestListener implements RequestListener {
 
     @Override
     public void onRequestFailure(SpiceException e) {
+        String msg = e.getMessage();
+        if(msg.contains("Network is not available")){
+            AlertUtils.getInstance().showCenterToast(context.get(), "网络加载失败！");
+        }
         LogHelper.i("tag", "msg:" + e.getMessage());
         dismissProgress();
     }
@@ -94,6 +99,8 @@ public abstract class BaseRequestListener implements RequestListener {
         dismissProgress();
     }
 
+
+
     public abstract BaseRequestListener start();
 
     /**
@@ -101,12 +108,17 @@ public abstract class BaseRequestListener implements RequestListener {
      * @param titleId
      * @param contentId
      */
+    private AlertDialog mDialog;
     protected void showMessage(int titleId,int contentId) {
-        if(context != null && context.get() != null){
-            AlertDialog dialog = LightAlertDialog.create(context.get());
-            dialog.setTitle(titleId);
-            dialog.setMessage(context.get().getResources().getString(contentId));
-            dialog.setButton(BUTTON_POSITIVE, getString(android.R.string.ok),
+        if(context != null && context.get() != null && (mDialog == null || !mDialog.isShowing())){
+//            if(mDialog != null){
+//                mDialog.dismiss();
+//                mDialog = null;
+//            }
+            mDialog = LightAlertDialog.create(context.get());
+            mDialog.setTitle(titleId);
+            mDialog.setMessage(context.get().getResources().getString(contentId));
+            mDialog.setButton(BUTTON_POSITIVE, getString(android.R.string.ok),
                     new DialogInterface.OnClickListener() {
 
                         @Override
@@ -114,9 +126,9 @@ public abstract class BaseRequestListener implements RequestListener {
                             dialog.dismiss();
                         }
                     });
-            dialog.setCanceledOnTouchOutside(true);
+            mDialog.setCanceledOnTouchOutside(true);
             if(context.get()!=null&&!context.get().isFinishing())
-            dialog.show();
+            mDialog.show();
         }
     }
 

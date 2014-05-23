@@ -552,9 +552,9 @@ public class BaseActivity extends ActionBarActivity implements RoboContext {
         final HackyViewPager mViewPager = (HackyViewPager) popView.findViewById(R.id.pop_img);
 
         if(needDelBtn){
-            ImageView iv_photo_del = (ImageView) popView.findViewById(R.id.iv_photo_del);
-            iv_photo_del.setVisibility(View.VISIBLE);
-            iv_photo_del.setOnClickListener(new View.OnClickListener() {
+            LinearLayout layout_photo_del = (LinearLayout) popView.findViewById(R.id.layout_photo_del);
+            layout_photo_del.setVisibility(View.VISIBLE);
+            layout_photo_del.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
                     if(listener != null){

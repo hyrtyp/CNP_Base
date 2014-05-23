@@ -50,7 +50,7 @@ public class DynamicService {
         cnpClient.configureRequest();
         HashMap<String, String> params = cnpClient.getParamsforGet();
         params.put("uid",uid);
-        params.put("ptime", startPosttime+","+endPosttime);
+        params.put("ptime", endPosttime);
         String urlKey = "";
         if(isAll){
             urlKey = "dynamic_all";
